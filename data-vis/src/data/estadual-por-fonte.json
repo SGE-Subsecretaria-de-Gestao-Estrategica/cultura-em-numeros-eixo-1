@@ -1,0 +1,127 @@
+{
+  "keys": [
+    "Recurso Próprio (Estadual)",
+    "Emendas Parlamentares (Cultura)",
+    "Lei Aldir Blanc 1 (LAB 1)",
+    "Lei Paulo Gustavo (LPG)",
+    "PNAB (Aldir Blanc 2)"
+  ],
+  "unidade": "R$",
+  "anoBaseDeflator": 2024,
+  "nominal": [
+    {
+      "label": "2019",
+      "Recurso Próprio (Estadual)": 2507049249.32,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2020",
+      "Recurso Próprio (Estadual)": 3619834212.35,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 1471375462.34,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2021",
+      "Recurso Próprio (Estadual)": 3780053592.86,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2022",
+      "Recurso Próprio (Estadual)": 4643516931.03,
+      "Emendas Parlamentares (Cultura)": 3958316.84,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2023",
+      "Recurso Próprio (Estadual)": 4893558922.37,
+      "Emendas Parlamentares (Cultura)": 10143139.02,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 708425872.01,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2024",
+      "Recurso Próprio (Estadual)": 5734061583.62,
+      "Emendas Parlamentares (Cultura)": 15200110.18,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 1388350417.65,
+      "PNAB (Aldir Blanc 2)": 557625422.97
+    },
+    {
+      "label": "2025",
+      "Recurso Próprio (Estadual)": 7033082680.9,
+      "Emendas Parlamentares (Cultura)": 28818855.11,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 19055420.7,
+      "PNAB (Aldir Blanc 2)": 1216638322.54
+    }
+  ],
+  "real": [
+    {
+      "label": "2019",
+      "Recurso Próprio (Estadual)": 3342999394.65,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2020",
+      "Recurso Próprio (Estadual)": 4676636775.29,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 1900940262.39,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2021",
+      "Recurso Próprio (Estadual)": 4509289830.16,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2022",
+      "Recurso Próprio (Estadual)": 5068935823.36,
+      "Emendas Parlamentares (Cultura)": 4320960.67,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2023",
+      "Recurso Próprio (Estadual)": 5107281093.61,
+      "Emendas Parlamentares (Cultura)": 10586132.3,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 739365790.77,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2024",
+      "Recurso Próprio (Estadual)": 5734061583.62,
+      "Emendas Parlamentares (Cultura)": 15200110.18,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 1388350417.65,
+      "PNAB (Aldir Blanc 2)": 557625422.97
+    },
+    {
+      "label": "2025",
+      "Recurso Próprio (Estadual)": 6697105329.86,
+      "Emendas Parlamentares (Cultura)": 27442149.75,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 18145124.31,
+      "PNAB (Aldir Blanc 2)": 1158518300.45
+    }
+  ]
+}
