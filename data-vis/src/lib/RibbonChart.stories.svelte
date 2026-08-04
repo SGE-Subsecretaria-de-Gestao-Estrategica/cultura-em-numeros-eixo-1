@@ -1,9 +1,17 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { BRL, NUM, colorScales, downloadSvg, purple } from 'sniic-design-system';
+  import {
+    BRL,
+    NUM,
+    categorical8,
+    colorScales,
+    downloadSvg,
+    purple,
+  } from 'sniic-design-system';
   import RibbonChart from './RibbonChart.svelte';
   import estadual from '../data/estadual-por-fonte.json';
+  import federal from '../data/federal-por-fonte.json';
   import municipal from '../data/municipal-por-fonte.json';
 
   const { Story } = defineMeta({
@@ -49,6 +57,38 @@
     'PNAB (Aldir Blanc 2)': 'PNAB',
   };
 
+  /**
+   * Eight federal sources, so the ramp is the library's `categorical8` — the
+   * pillar ramp carries three hues, and the fonte palette above only stretches
+   * to five.
+   *
+   * The order is permuted, not invented: the two renúncia fiscal series take
+   * the warm pair (orange, red) so tax expenditure reads apart from money the
+   * União actually empenhou, and the residual `Outros órgãos` takes the muted
+   * mauve. The rest keep the ramp's own sequence.
+   */
+  const federalColors = [
+    categorical8[0], // MinC — blue, the permanent budget line
+    categorical8[1], // Rouanet — renúncia fiscal
+    categorical8[6], // ANCINE — renúncia fiscal
+    categorical8[2], // FSA
+    categorical8[3], // PNAB
+    categorical8[5], // LPG
+    categorical8[4], // LAB 1
+    categorical8[7], // Outros órgãos — residual
+  ];
+
+  const federalLabels: Record<string, string> = {
+    'Ministério da Cultura (órgão 42000)': 'MinC',
+    'Lei Rouanet': 'Rouanet',
+    'Incentivo (ANCINE)': 'ANCINE',
+    'FSA (UO 74912)': 'FSA',
+    'PNAB (UO 73120)': 'PNAB',
+    'Lei Paulo Gustavo': 'LPG',
+    'Lei Aldir Blanc 1': 'LAB 1',
+    'Outros órgãos (Cidadania/Turismo)': 'Outros órgãos',
+  };
+
   /** Ranks swap every year — the case the ribbon chart exists for. */
   const linguagens = [
     { label: '2019', Audiovisual: 320, Música: 280, Teatro: 210, Dança: 120, Literatura: 90 },
@@ -91,6 +131,21 @@
     fontScale: (3.175 / A4_TEXT_WIDTH_MM) * (1368 / 12),
     columnRatio: 0.6,
     // the legend and axis grow with the type, so the gutter under the plot has to
+    margin: { bottom: 132 },
+  };
+
+  /**
+   * The federal series runs 23 years against the sub-national seven, so it gets
+   * the landscape figure: at 170 mm the year ticks alone would need more than a
+   * band is wide. Same 9 pt target, measured against the 257 mm text width.
+   */
+  const A4_LANDSCAPE_TEXT_WIDTH_MM = 257;
+  const A4_LANDSCAPE = {
+    responsive: false,
+    width: 1900,
+    height: 760,
+    fontScale: (3.175 / A4_LANDSCAPE_TEXT_WIDTH_MM) * (1900 / 12),
+    columnRatio: 0.5,
     margin: { bottom: 132 },
   };
 </script>
@@ -162,6 +217,29 @@
   template={template as never}
 />
 
+<!--
+  23 columns against the others' 7, so the values come off the segments: at this
+  band width every one of them would fall out to a callout, and 8 series × 23
+  years of callouts bury the ribbons they point at. Ranks and volume are what
+  this chart is for — the numbers live in the table.
+-->
+<Story
+  name="Fontes de recurso (federal)"
+  args={{
+    data: federal.real,
+    keys: federal.keys,
+    labels: federalLabels,
+    colors: federalColors,
+    valueFormat: (v) => BRL.format(v),
+    showValues: false,
+    width: 1100,
+    height: 520,
+    columnRatio: 0.5,
+    segmentGap: 3,
+  }}
+  template={template as never}
+/>
+
 <Story
   name="Trocas de posição"
   args={{
@@ -223,6 +301,22 @@
     colors: fonteColors,
     valueFormat: (v) => BRL.format(v),
     ...A4,
+  }}
+  template={template as never}
+/>
+
+<Story
+  name="A4 paisagem · Fontes de recurso (federal)"
+  exportName="A4Federal"
+  args={{
+    data: federal.real,
+    keys: federal.keys,
+    labels: federalLabels,
+    colors: federalColors,
+    valueFormat: (v) => BRL.format(v),
+    showValues: false,
+    segmentGap: 3,
+    ...A4_LANDSCAPE,
   }}
   template={template as never}
 />
