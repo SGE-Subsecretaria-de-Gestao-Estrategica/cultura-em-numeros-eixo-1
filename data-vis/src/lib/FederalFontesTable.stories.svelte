@@ -12,14 +12,14 @@
   });
 
   const labels: Record<string, string> = {
-    'Ministério da Cultura (órgão 42000)': 'MinC',
+    'Ministério da Cultura (Órgão 42000)': 'MinC',
     'Lei Rouanet': 'Rouanet',
     'Incentivo (ANCINE)': 'ANCINE',
     'FSA (UO 74912)': 'FSA',
     'PNAB (UO 73120)': 'PNAB',
     'Lei Paulo Gustavo': 'LPG',
     'Lei Aldir Blanc 1': 'LAB 1',
-    'Outros órgãos (Cidadania/Turismo)': 'Outros órgãos',
+    'Outros Órgãos (Cidadania/Turismo)': 'Outros órgãos',
   };
 
   /** Mesmas cores do ribbon chart, para quem lê os dois lado a lado. */

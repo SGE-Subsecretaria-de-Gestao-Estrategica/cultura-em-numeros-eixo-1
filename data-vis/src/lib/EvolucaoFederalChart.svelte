@@ -286,13 +286,15 @@
             {@const nomeColuna = row.origemTransferencia ?? nome(serie)}
             <!-- centrado sobre a coluna, exceto junto à borda direita: lá o
                  rótulo centrado entraria na calha dos rótulos de ponta, então
-                 ele encosta na direita da coluna e cresce para dentro -->
+                 ele encosta na esquerda da coluna e cresce para dentro -->
             {@const larguraRotulo = Math.max(
               measureLabel(nomeColuna, fontSize.sm * fontScale, 700),
               measureLabel(valueFormat(v), fontSize.sm * fontScale, 500),
             )}
             {@const naBorda = centro(i) + larguraRotulo / 2 > innerWidth}
-            {@const xRotulo = naBorda ? centro(i) + larguraColuna / 2 : centro(i)}
+            {@const xRotulo = naBorda
+              ? centro(i) - larguraColuna / 2 - 4 * fontScale
+              : centro(i)}
             {@const ancora = naBorda ? 'end' : 'middle'}
             <!-- as folgas são medidas contra o corpo do texto, não fixas: o
                  rótulo é centrado verticalmente e desce metade da altura da
