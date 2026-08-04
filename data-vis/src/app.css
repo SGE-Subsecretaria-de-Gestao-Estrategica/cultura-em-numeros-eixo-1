@@ -1,3 +1,23 @@
+/* The chart theme asks for General Sans; the package ships the files but not
+   the @font-face, so the consuming app declares it. */
+@font-face {
+  font-family: 'General Sans Variable';
+  src: url('../node_modules/sniic-design-system/dist/typefaces/GeneralSans-Variable.ttf')
+    format('truetype-variations');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans Variable';
+  src: url('../node_modules/sniic-design-system/dist/typefaces/GeneralSans-VariableItalic.ttf')
+    format('truetype-variations');
+  font-weight: 200 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --text: #566573;
   --text-h: #1b2631;
@@ -51,6 +71,30 @@ h2 {
 h1 {
   font-size: 28px;
   margin: 0;
+}
+
+figure {
+  margin: 0;
+  position: relative;
+}
+
+/* Page chrome, deliberately outside the SVG so it never lands in an export. */
+.export {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font: 500 12px/1 'General Sans Variable', system-ui, sans-serif;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.export:hover {
+  color: var(--text-h);
+  border-color: var(--text);
 }
 
 .eyebrow {

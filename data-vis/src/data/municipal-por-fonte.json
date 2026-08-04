@@ -1,0 +1,127 @@
+{
+  "keys": [
+    "Recurso Próprio (Municipal)",
+    "Emendas Parlamentares (Cultura)",
+    "Lei Aldir Blanc 1 (LAB 1)",
+    "Lei Paulo Gustavo (LPG)",
+    "PNAB (Aldir Blanc 2)"
+  ],
+  "unidade": "R$",
+  "anoBaseDeflator": 2024,
+  "nominal": [
+    {
+      "label": "2019",
+      "Recurso Próprio (Municipal)": 5599601312.91,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2020",
+      "Recurso Próprio (Municipal)": 5474509503.23,
+      "Emendas Parlamentares (Cultura)": 6631082.16,
+      "Lei Aldir Blanc 1 (LAB 1)": 930658307.98,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2021",
+      "Recurso Próprio (Municipal)": 4518522622.89,
+      "Emendas Parlamentares (Cultura)": 3226266.15,
+      "Lei Aldir Blanc 1 (LAB 1)": 440324208.13,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2022",
+      "Recurso Próprio (Municipal)": 8387902592.97,
+      "Emendas Parlamentares (Cultura)": 36886317.2,
+      "Lei Aldir Blanc 1 (LAB 1)": 73462851.26,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2023",
+      "Recurso Próprio (Municipal)": 12027962658.02,
+      "Emendas Parlamentares (Cultura)": 76882199.97,
+      "Lei Aldir Blanc 1 (LAB 1)": 13593567.67,
+      "Lei Paulo Gustavo (LPG)": 579971510.0,
+      "PNAB (Aldir Blanc 2)": 1846965.92
+    },
+    {
+      "label": "2024",
+      "Recurso Próprio (Municipal)": 14910242486.0,
+      "Emendas Parlamentares (Cultura)": 184084568.04,
+      "Lei Aldir Blanc 1 (LAB 1)": 3195730.4,
+      "Lei Paulo Gustavo (LPG)": 782606281.44,
+      "PNAB (Aldir Blanc 2)": 583600362.53
+    },
+    {
+      "label": "2025",
+      "Recurso Próprio (Municipal)": 16727721268.38,
+      "Emendas Parlamentares (Cultura)": 172491134.56,
+      "Lei Aldir Blanc 1 (LAB 1)": 1823432.6,
+      "Lei Paulo Gustavo (LPG)": 215668841.48,
+      "PNAB (Aldir Blanc 2)": 676920013.16
+    }
+  ],
+  "real": [
+    {
+      "label": "2019",
+      "Recurso Próprio (Municipal)": 7466731578.74,
+      "Emendas Parlamentares (Cultura)": 0.0,
+      "Lei Aldir Blanc 1 (LAB 1)": 0.0,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2020",
+      "Recurso Próprio (Municipal)": 7072780400.32,
+      "Emendas Parlamentares (Cultura)": 8567011.88,
+      "Lei Aldir Blanc 1 (LAB 1)": 1202361935.11,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2021",
+      "Recurso Próprio (Municipal)": 5390222019.4,
+      "Emendas Parlamentares (Cultura)": 3848667.43,
+      "Lei Aldir Blanc 1 (LAB 1)": 525270191.26,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2022",
+      "Recurso Próprio (Municipal)": 9156365868.34,
+      "Emendas Parlamentares (Cultura)": 40265681.69,
+      "Lei Aldir Blanc 1 (LAB 1)": 80193199.24,
+      "Lei Paulo Gustavo (LPG)": 0.0,
+      "PNAB (Aldir Blanc 2)": 0.0
+    },
+    {
+      "label": "2023",
+      "Recurso Próprio (Municipal)": 12553274059.31,
+      "Emendas Parlamentares (Cultura)": 80239966.98,
+      "Lei Aldir Blanc 1 (LAB 1)": 14187255.59,
+      "Lei Paulo Gustavo (LPG)": 605301289.89,
+      "PNAB (Aldir Blanc 2)": 1927630.64
+    },
+    {
+      "label": "2024",
+      "Recurso Próprio (Municipal)": 14910242486.0,
+      "Emendas Parlamentares (Cultura)": 184084568.04,
+      "Lei Aldir Blanc 1 (LAB 1)": 3195730.4,
+      "Lei Paulo Gustavo (LPG)": 782606281.44,
+      "PNAB (Aldir Blanc 2)": 583600362.53
+    },
+    {
+      "label": "2025",
+      "Recurso Próprio (Municipal)": 15928621394.87,
+      "Emendas Parlamentares (Cultura)": 164251061.59,
+      "Lei Aldir Blanc 1 (LAB 1)": 1736325.41,
+      "Lei Paulo Gustavo (LPG)": 205366126.53,
+      "PNAB (Aldir Blanc 2)": 644582871.23
+    }
+  ]
+}
