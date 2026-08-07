@@ -78,6 +78,16 @@ figure {
   position: relative;
 }
 
+/* Charts carry an intrinsic size in SVG units and a matching viewBox, so the
+   card scales as a whole and the labels keep their size relative to it — what
+   you see here is what prints. Selecting the outer `<svg>` only: the design
+   system's `<Text>` nests one of its own per label, deeper in the tree. */
+figure > div > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Page chrome, deliberately outside the SVG so it never lands in an export. */
 .export {
   position: absolute;

@@ -1,0 +1,120 @@
+{
+  "universo": 5434,
+  "unidade": "% dos municípios",
+  "perfis": [
+    {
+      "key": "Despertados",
+      "label": "Despertados",
+      "descricao": "Efeito indutor"
+    },
+    {
+      "key": "Constantes",
+      "label": "Constantes",
+      "descricao": "Sustentabilidade"
+    },
+    {
+      "key": "Inertes",
+      "label": "Inertes",
+      "descricao": "Dependência exclusiva"
+    },
+    {
+      "key": "Substituição",
+      "label": "Substituição",
+      "descricao": "Retração local"
+    }
+  ],
+  "caboGuerra": [
+    {
+      "label": "Norte",
+      "indutor": 31.3817,
+      "substituicao": 2.8103,
+      "liquido": 28.5714
+    },
+    {
+      "label": "Centro-Oeste",
+      "indutor": 28.103,
+      "substituicao": 4.4496,
+      "liquido": 23.6534
+    },
+    {
+      "label": "Nordeste",
+      "indutor": 18.8839,
+      "substituicao": 4.2277,
+      "liquido": 14.6561
+    },
+    {
+      "label": "Sudeste",
+      "indutor": 10.6162,
+      "substituicao": 1.7084,
+      "liquido": 8.9079
+    },
+    {
+      "label": "Sul",
+      "indutor": 12.168,
+      "substituicao": 4.8843,
+      "liquido": 7.2836
+    }
+  ],
+  "porte": [
+    {
+      "label": "Metrópole",
+      "n": 15,
+      "Despertados": 13.3333,
+      "nDespertados": 2,
+      "Constantes": 73.3333,
+      "nConstantes": 11,
+      "Inertes": 6.6667,
+      "nInertes": 1,
+      "Substituição": 6.6667,
+      "nSubstituição": 1
+    },
+    {
+      "label": "Grande Porte",
+      "n": 303,
+      "Despertados": 7.9208,
+      "nDespertados": 24,
+      "Constantes": 85.8086,
+      "nConstantes": 260,
+      "Inertes": 1.9802,
+      "nInertes": 6,
+      "Substituição": 4.2904,
+      "nSubstituição": 13
+    },
+    {
+      "label": "Médio Porte",
+      "n": 338,
+      "Despertados": 6.5089,
+      "nDespertados": 22,
+      "Constantes": 88.1657,
+      "nConstantes": 298,
+      "Inertes": 0.8876,
+      "nInertes": 3,
+      "Substituição": 4.4379,
+      "nSubstituição": 15
+    },
+    {
+      "label": "Pequeno Porte II",
+      "n": 1041,
+      "Despertados": 13.3525,
+      "nDespertados": 139,
+      "Constantes": 82.5168,
+      "nConstantes": 859,
+      "Inertes": 1.633,
+      "nInertes": 17,
+      "Substituição": 2.4976,
+      "nSubstituição": 26
+    },
+    {
+      "label": "Pequeno Porte I",
+      "n": 3737,
+      "Despertados": 19.2133,
+      "nDespertados": 718,
+      "Constantes": 74.3109,
+      "nConstantes": 2777,
+      "Inertes": 2.8365,
+      "nInertes": 106,
+      "Substituição": 3.6393,
+      "nSubstituição": 136
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+/* Print proof: the charts at the size they will actually be read at.
+   Everything here is page furniture — the charts themselves carry no CSS. */
+
+@font-face {
+  font-family: 'General Sans Variable';
+  src: url('../node_modules/sniic-design-system/dist/typefaces/GeneralSans-Variable.ttf')
+    format('truetype-variations');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+:root {
+  color-scheme: light;
+  font: 16px/1.5 'General Sans Variable', system-ui, sans-serif;
+  background: #8a8f85;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.sheet {
+  /* The A4 sheet itself. 20 mm margins leave a 170 mm text column — the width
+     `a4Scale` sizes the type against, and the one the RibbonChart A4 stories
+     target. Change this and the charts print at a different point size. */
+  width: 210mm;
+  height: 297mm;
+  padding: 20mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8mm;
+  overflow: hidden;
+  break-after: page;
+}
+
+figure {
+  margin: 0;
+}
+
+/* Scales the card as a whole; the labels keep their size relative to it. The
+   outer `<svg>` only — the design system's `<Text>` nests one per label. */
+figure > div > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-size: 13pt;
+  font-weight: 600;
+  color: #33382e;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 9pt;
+  color: #4d5148;
+  margin: 1mm 0 0;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 8pt;
+  font-weight: 600;
+  color: #808679;
+  margin: 0 0 1mm;
+}
+
+@media print {
+  :root {
+    background: #fff;
+  }
+
+  .sheet {
+    margin: 0;
+  }
+}

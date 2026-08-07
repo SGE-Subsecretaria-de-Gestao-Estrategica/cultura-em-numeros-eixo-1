@@ -402,12 +402,15 @@
         />
       {/each}
 
+      <!-- filled with the series colour, so a value pulled out of its segment
+           still reads as belonging to it: at these sizes the leader line and a
+           1px stroke are too thin to carry the hue on their own -->
       {#each callouts as c (c.key)}
         <ValueCallout
           callout={c}
           style={CALLOUT_STYLE}
-          background={palette.base[100]}
-          textColor={palette.neutral[300]}
+          background={c.color}
+          textColor={getContrastColor(c.color)}
           fontFamily={valueStyle.fontFamily}
           fontWeight={valueStyle.fontWeight}
         />

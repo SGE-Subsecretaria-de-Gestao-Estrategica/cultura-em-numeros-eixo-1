@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "export:png": "node scripts/export-png.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

@@ -46,6 +46,64 @@ export const labelFitsInBar = (
   availableWidth > 0 &&
   availableWidth >= padding + measureLabel(text, size, weight) + rightMargin;
 
+/** Text column of an A4 portrait page, in millimetres — the figure width. */
+export const A4_TEXT_WIDTH_MM = 170;
+
+/** 9 pt, in millimetres. The size `fontSize.md` is meant to print at. */
+const TARGET_MM = 3.175;
+
+/**
+ * How much to multiply the type scale — and every fixed measure alongside it —
+ * for a card authored at `width` units.
+ *
+ * Type in an SVG is absolute, so its printed size is decided by the ratio of
+ * font size to chart width, not by either alone. This is the same formula the
+ * RibbonChart A4 stories use, so a card authored through it prints at exactly
+ * the sizes those figures do: `md` 9 pt, `sm` 7.9 pt, `xs` 6.8 pt, and a 20-unit
+ * title 15 pt.
+ *
+ * Everything fixed scales with it, not just the glyphs: margins, gaps, corner
+ * radii, band heights. Scaling the type alone would leave the chrome
+ * proportionally larger and squeeze the plot.
+ */
+export const a4Scale = (width: number) => (TARGET_MM / A4_TEXT_WIDTH_MM) * (width / fontSize.md);
+
+/**
+ * Greedy word wrap, measured in the family the chart actually draws.
+ *
+ * `<Text>` takes a `width` and wraps on its own, but it measures with the
+ * design system's default stack rather than the one it renders in, so its line
+ * breaks land in the wrong place. Wrapping here also makes the line count known
+ * before the chart is laid out, which is what lets the card reserve the right
+ * margin for a title that turns out to need two lines.
+ *
+ * A word longer than `maxWidth` gets a line to itself rather than being cut.
+ */
+export const wrapText = (
+  text: string,
+  size: number,
+  maxWidth: number,
+  weight = 400,
+): string[] => {
+  if (!text) return [];
+
+  const lines: string[] = [];
+  let current = '';
+
+  for (const word of text.split(/\s+/)) {
+    const candidate = current ? `${current} ${word}` : word;
+    if (current && measureLabel(candidate, size, weight) > maxWidth) {
+      lines.push(current);
+      current = word;
+    } else {
+      current = candidate;
+    }
+  }
+  if (current) lines.push(current);
+
+  return lines;
+};
+
 /**
  * Axis tick styling, passed explicitly on every `<Axis>` — in both spellings,
  * which is not redundant.

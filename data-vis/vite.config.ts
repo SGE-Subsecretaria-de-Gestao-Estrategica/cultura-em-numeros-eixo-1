@@ -12,6 +12,15 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [svelte()],
+  build: {
+    rollupOptions: {
+      // a4.html is the print proof — the charts at the size they are read at
+      input: {
+        main: path.resolve(dirname, 'index.html'),
+        a4: path.resolve(dirname, 'a4.html'),
+      },
+    },
+  },
   test: {
     projects: [{
       extends: true,

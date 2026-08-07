@@ -2,6 +2,8 @@
   import { downloadSvg } from 'sniic-design-system';
   import EstadualPorFonteChart from './lib/EstadualPorFonteChart.svelte';
   import MunicipalPorFonteChart from './lib/MunicipalPorFonteChart.svelte';
+  import EfeitoIndutorMunicipalChart from './lib/EfeitoIndutorMunicipalChart.svelte';
+  import PerfilMudancaMunicipalChart from './lib/PerfilMudancaMunicipalChart.svelte';
 
   /**
    * The download control lives in the page, not in the chart: anything drawn
@@ -9,6 +11,8 @@
    */
   let estadualSvg = $state<SVGSVGElement | null>(null);
   let municipalSvg = $state<SVGSVGElement | null>(null);
+  let efeitoIndutorSvg = $state<SVGSVGElement | null>(null);
+  let perfilMudancaSvg = $state<SVGSVGElement | null>(null);
 </script>
 
 <main>
@@ -34,6 +38,30 @@
       class="export"
       onclick={() =>
         municipalSvg && downloadSvg(municipalSvg, 'investimento-municipal-por-fonte.svg')}
+    >
+      Baixar SVG
+    </button>
+  </figure>
+
+  <figure>
+    <EfeitoIndutorMunicipalChart bind:svgEl={efeitoIndutorSvg} />
+    <button
+      class="export"
+      onclick={() =>
+        efeitoIndutorSvg &&
+        downloadSvg(efeitoIndutorSvg, 'efeito-indutor-substituicao-por-regiao.svg')}
+    >
+      Baixar SVG
+    </button>
+  </figure>
+
+  <figure>
+    <PerfilMudancaMunicipalChart bind:svgEl={perfilMudancaSvg} />
+    <button
+      class="export"
+      onclick={() =>
+        perfilMudancaSvg &&
+        downloadSvg(perfilMudancaSvg, 'perfil-mudanca-municipal-por-porte.svg')}
     >
       Baixar SVG
     </button>
