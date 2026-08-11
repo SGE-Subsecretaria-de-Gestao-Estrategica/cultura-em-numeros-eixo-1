@@ -220,6 +220,34 @@
     ano === anos[0] ? 'start' : ano === anos[anos.length - 1] ? 'end' : 'middle';
 
   /**
+   * Altura vertical de cada nome de série na ponta da sua linha.
+   *
+   * O nome fica na altura do último ponto, mas duas séries podem terminar
+   * coladas — e dois nomes sobrepostos são pior do que a legenda que eles
+   * substituem. Um passe de cima para baixo abre os vãos preservando a ordem,
+   * para que o nome de cima siga pertencendo à linha de cima. O deslocamento
+   * é de poucos pixels, e a cor é o que mantém cada nome ligado à sua linha.
+   */
+  function rotulosDeSerie(yScale: (v: number) => number) {
+    const alturaLinha = Number(type.sm) * 1.25;
+
+    const pendentes = series
+      .map((s, index) => ({
+        key: s.key,
+        label: s.label,
+        color: seriesColor(index),
+        y: yScale(s.pontos[s.pontos.length - 1].pct),
+      }))
+      .sort((a, b) => a.y - b.y);
+
+    for (let i = 1; i < pendentes.length; i++) {
+      pendentes[i].y = Math.max(pendentes[i].y, pendentes[i - 1].y + alturaLinha);
+    }
+
+    return pendentes;
+  }
+
+  /**
    * Rótulos de valor de uma onda, colocados de modo a não cair sobre as linhas
    * nem uns sobre os outros.
    *
@@ -346,7 +374,6 @@
       {@const d = pontos
         .map((p, i) => `${i ? 'L' : 'M'}${xScale(p.ano)},${yScale(p.pct)}`)
         .join(' ')}
-      {@const ultimo = pontos[pontos.length - 1]}
 
       <path
         {d}
@@ -365,18 +392,20 @@
           fill={color}
         />
       {/each}
+    {/each}
 
-      <!-- nome da série na ponta da linha, no lugar de uma legenda -->
+    <!-- nomes das séries na ponta das linhas, no lugar de uma legenda -->
+    {#each rotulosDeSerie((v) => yScale(v)) as rotulo (rotulo.key)}
       <Text
         x={innerWidth + L.seriesLabelGap}
-        y={yScale(ultimo.pct)}
+        y={rotulo.y}
         textAnchor="start"
         verticalAnchor="middle"
         fontSize={type.sm}
         fontWeight={600}
         {fontFamily}
-        fill={color}
-        text={serie.label}
+        fill={rotulo.color}
+        text={rotulo.label}
       />
     {/each}
 
