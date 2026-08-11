@@ -14,10 +14,12 @@ export default defineConfig({
   plugins: [svelte()],
   build: {
     rollupOptions: {
-      // a4.html is the print proof — the charts at the size they are read at
+      // a4.html and gestao.html are the print proofs — the charts at the size
+      // they are read at, one page per eixo
       input: {
         main: path.resolve(dirname, 'index.html'),
         a4: path.resolve(dirname, 'a4.html'),
+        gestao: path.resolve(dirname, 'gestao.html'),
       },
     },
   },

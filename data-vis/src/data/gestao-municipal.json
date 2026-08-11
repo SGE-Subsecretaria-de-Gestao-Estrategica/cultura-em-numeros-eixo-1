@@ -1,0 +1,457 @@
+{
+  "ondas": [
+    2006,
+    2014,
+    2018,
+    2021
+  ],
+  "universo": {
+    "2006": 5564,
+    "2014": 5570,
+    "2018": 5570,
+    "2021": 5570
+  },
+  "tripe": {
+    "series": [
+      {
+        "key": "tem_conselho",
+        "label": "Conselho de Cultura",
+        "pontos": [
+          {
+            "ano": 2006,
+            "pct": 17.0,
+            "n": 948,
+            "base": 5564
+          },
+          {
+            "ano": 2014,
+            "pct": 38.6,
+            "n": 2151,
+            "base": 5570
+          },
+          {
+            "ano": 2018,
+            "pct": 42.2,
+            "n": 2352,
+            "base": 5570
+          },
+          {
+            "ano": 2021,
+            "pct": 50.3,
+            "n": 2804,
+            "base": 5570
+          }
+        ]
+      },
+      {
+        "key": "tem_fundo",
+        "label": "Fundo de Cultura",
+        "pontos": [
+          {
+            "ano": 2006,
+            "pct": 5.1,
+            "n": 285,
+            "base": 5564
+          },
+          {
+            "ano": 2014,
+            "pct": 19.9,
+            "n": 1111,
+            "base": 5570
+          },
+          {
+            "ano": 2018,
+            "pct": 32.2,
+            "n": 1796,
+            "base": 5570
+          },
+          {
+            "ano": 2021,
+            "pct": 33.9,
+            "n": 1891,
+            "base": 5570
+          }
+        ]
+      },
+      {
+        "key": "tem_plano",
+        "label": "Plano de Cultura",
+        "pontos": [
+          {
+            "ano": 2006,
+            "pct": 11.6,
+            "n": 646,
+            "base": 5564
+          },
+          {
+            "ano": 2014,
+            "pct": 8.4,
+            "n": 468,
+            "base": 5570
+          },
+          {
+            "ano": 2018,
+            "pct": 11.7,
+            "n": 654,
+            "base": 5570
+          },
+          {
+            "ano": 2021,
+            "pct": 15.2,
+            "n": 847,
+            "base": 5570
+          }
+        ]
+      }
+    ]
+  },
+  "equipamentos": {
+    "series": [
+      {
+        "key": "equip_biblioteca",
+        "label": "Biblioteca pública",
+        "pontos": [
+          {
+            "ano": 2006,
+            "pct": 89.1,
+            "n": 4955,
+            "base": 5562
+          },
+          {
+            "ano": 2014,
+            "pct": 97.1,
+            "n": 5408,
+            "base": 5567
+          },
+          {
+            "ano": 2021,
+            "pct": 88.3,
+            "n": 4917,
+            "base": 5570
+          }
+        ]
+      },
+      {
+        "key": "equip_museu",
+        "label": "Museu",
+        "pontos": [
+          {
+            "ano": 2006,
+            "pct": 21.9,
+            "n": 1219,
+            "base": 5562
+          },
+          {
+            "ano": 2014,
+            "pct": 27.2,
+            "n": 1515,
+            "base": 5567
+          },
+          {
+            "ano": 2021,
+            "pct": 29.6,
+            "n": 1649,
+            "base": 5570
+          }
+        ]
+      },
+      {
+        "key": "equip_teatro",
+        "label": "Teatro ou sala de espetáculo",
+        "pontos": [
+          {
+            "ano": 2006,
+            "pct": 21.2,
+            "n": 1181,
+            "base": 5562
+          },
+          {
+            "ano": 2014,
+            "pct": 23.4,
+            "n": 1303,
+            "base": 5567
+          },
+          {
+            "ano": 2021,
+            "pct": 23.3,
+            "n": 1299,
+            "base": 5570
+          }
+        ]
+      },
+      {
+        "key": "equip_cinema",
+        "label": "Cinema",
+        "pontos": [
+          {
+            "ano": 2006,
+            "pct": 8.7,
+            "n": 482,
+            "base": 5562
+          },
+          {
+            "ano": 2014,
+            "pct": 10.5,
+            "n": 582,
+            "base": 5567
+          },
+          {
+            "ano": 2021,
+            "pct": 9.0,
+            "n": 502,
+            "base": 5570
+          }
+        ]
+      }
+    ],
+    "ondas": [
+      2006,
+      2014,
+      2021
+    ]
+  },
+  "estrutura": {
+    "categorias": [
+      "Secretaria exclusiva",
+      "Administração indireta",
+      "Secretaria em conjunto",
+      "Setor subordinado",
+      "Não possui estrutura"
+    ],
+    "ondas": [
+      {
+        "label": "2006",
+        "base": 5562,
+        "naoResposta": 2,
+        "Secretaria exclusiva": 4.2,
+        "Administração indireta": 2.6,
+        "Secretaria em conjunto": 72.0,
+        "Setor subordinado": 18.7,
+        "Não possui estrutura": 2.4,
+        "n_Secretaria exclusiva": 236,
+        "n_Administração indireta": 145,
+        "n_Secretaria em conjunto": 4007,
+        "n_Setor subordinado": 1038,
+        "n_Não possui estrutura": 136
+      },
+      {
+        "label": "2014",
+        "base": 5568,
+        "naoResposta": 2,
+        "Secretaria exclusiva": 19.3,
+        "Administração indireta": 2.1,
+        "Secretaria em conjunto": 54.1,
+        "Setor subordinado": 18.9,
+        "Não possui estrutura": 5.5,
+        "n_Secretaria exclusiva": 1073,
+        "n_Administração indireta": 119,
+        "n_Secretaria em conjunto": 3014,
+        "n_Setor subordinado": 1054,
+        "n_Não possui estrutura": 308
+      },
+      {
+        "label": "2018",
+        "base": 5569,
+        "naoResposta": 1,
+        "Secretaria exclusiva": 14.6,
+        "Administração indireta": 2.0,
+        "Secretaria em conjunto": 65.8,
+        "Setor subordinado": 13.6,
+        "Não possui estrutura": 4.0,
+        "n_Secretaria exclusiva": 811,
+        "n_Administração indireta": 114,
+        "n_Secretaria em conjunto": 3665,
+        "n_Setor subordinado": 756,
+        "n_Não possui estrutura": 223
+      },
+      {
+        "label": "2021",
+        "base": 5566,
+        "naoResposta": 4,
+        "Secretaria exclusiva": 12.9,
+        "Administração indireta": 2.0,
+        "Secretaria em conjunto": 72.1,
+        "Setor subordinado": 11.0,
+        "Não possui estrutura": 2.0,
+        "n_Secretaria exclusiva": 720,
+        "n_Administração indireta": 114,
+        "n_Secretaria em conjunto": 4012,
+        "n_Setor subordinado": 611,
+        "n_Não possui estrutura": 109
+      }
+    ]
+  },
+  "genero": {
+    "categorias": [
+      "Feminino",
+      "Masculino"
+    ],
+    "ondas": [
+      {
+        "label": "2014",
+        "base": 5251,
+        "naoResposta": 319,
+        "Feminino": 49.2,
+        "Masculino": 50.8,
+        "n_Feminino": 2582,
+        "n_Masculino": 2669
+      },
+      {
+        "label": "2018",
+        "base": 5330,
+        "naoResposta": 240,
+        "Feminino": 49.8,
+        "Masculino": 50.2,
+        "n_Feminino": 2652,
+        "n_Masculino": 2678
+      },
+      {
+        "label": "2021",
+        "base": 5436,
+        "naoResposta": 134,
+        "Feminino": 47.7,
+        "Masculino": 52.3,
+        "n_Feminino": 2591,
+        "n_Masculino": 2845
+      }
+    ]
+  },
+  "corRaca": {
+    "categorias": [
+      "Branca",
+      "Parda",
+      "Preta",
+      "Amarela",
+      "Indígena"
+    ],
+    "ondas": [
+      {
+        "label": "2018",
+        "base": 5330,
+        "naoResposta": 240,
+        "Branca": 59.0,
+        "Parda": 33.7,
+        "Preta": 6.3,
+        "Amarela": 0.8,
+        "Indígena": 0.2,
+        "n_Branca": 3143,
+        "n_Parda": 1798,
+        "n_Preta": 335,
+        "n_Amarela": 41,
+        "n_Indígena": 13
+      },
+      {
+        "label": "2021",
+        "base": 5436,
+        "naoResposta": 134,
+        "Branca": 57.8,
+        "Parda": 34.8,
+        "Preta": 6.5,
+        "Amarela": 0.6,
+        "Indígena": 0.4,
+        "n_Branca": 3140,
+        "n_Parda": 1894,
+        "n_Preta": 351,
+        "n_Amarela": 30,
+        "n_Indígena": 21
+      }
+    ]
+  },
+  "escolaridadeTripe": {
+    "ano": 2021,
+    "itens": [
+      {
+        "label": "Ensino fundamental",
+        "n": 105,
+        "valor": 4,
+        "pct": 3.8
+      },
+      {
+        "label": "Ensino médio a pós-graduação lato sensu",
+        "n": 4988,
+        "valor": 512,
+        "pct": 10.3
+      },
+      {
+        "label": "Mestrado e doutorado",
+        "n": 342,
+        "valor": 52,
+        "pct": 15.2
+      }
+    ],
+    "semInformacao": 135
+  },
+  "execucaoLab": {
+    "ano": 2021,
+    "itens": [
+      {
+        "label": "0%",
+        "n": 425,
+        "valor": 425,
+        "pct": 10.6
+      },
+      {
+        "label": "Até 10%",
+        "n": 1123,
+        "valor": 1123,
+        "pct": 28.1
+      },
+      {
+        "label": "11% a 20%",
+        "n": 296,
+        "valor": 296,
+        "pct": 7.4
+      },
+      {
+        "label": "21% a 30%",
+        "n": 247,
+        "valor": 247,
+        "pct": 6.2
+      },
+      {
+        "label": "31% a 40%",
+        "n": 201,
+        "valor": 201,
+        "pct": 5.0
+      },
+      {
+        "label": "41% a 50%",
+        "n": 245,
+        "valor": 245,
+        "pct": 6.1
+      },
+      {
+        "label": "51% a 60%",
+        "n": 213,
+        "valor": 213,
+        "pct": 5.3
+      },
+      {
+        "label": "61% a 70%",
+        "n": 203,
+        "valor": 203,
+        "pct": 5.1
+      },
+      {
+        "label": "71% a 80%",
+        "n": 226,
+        "valor": 226,
+        "pct": 5.7
+      },
+      {
+        "label": "81% a 90%",
+        "n": 254,
+        "valor": 254,
+        "pct": 6.4
+      },
+      {
+        "label": "Mais de 90%",
+        "n": 565,
+        "valor": 565,
+        "pct": 14.1
+      }
+    ],
+    "base": 3998,
+    "semInformacao": 1572
+  }
+}
