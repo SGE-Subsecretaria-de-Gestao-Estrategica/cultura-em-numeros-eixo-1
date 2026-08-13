@@ -3,7 +3,7 @@ Monta os dados dos dois graficos do comportamento orcamentario municipal a
 partir dos CSVs ja processados em
 eixo1/orcamento/data/processed/municipal/:
 
-  - Cabo_Guerra_Balanco_Liquido.csv       (% de municipios por regiao)
+  - cabo_guerra.csv                       (% de municipios por regiao)
   - Efeito_Comportamental_Por_Porte.csv   (n e % por porte populacional)
 
 Os dois descrevem o mesmo universo: os 5.434 municipios com dados, cada um
@@ -23,7 +23,7 @@ from pathlib import Path
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = PROJECT_DIR.parent
 MUNICIPAL_DIR = REPO_ROOT / "eixo1/orcamento/data/processed/municipal"
-CABO_GUERRA_CSV = MUNICIPAL_DIR / "Cabo_Guerra_Balanco_Liquido.csv"
+CABO_GUERRA_CSV = MUNICIPAL_DIR / "cabo_guerra.csv"
 PORTE_CSV = MUNICIPAL_DIR / "Efeito_Comportamental_Por_Porte.csv"
 OUT_PATH = PROJECT_DIR / "src/data/comportamento-municipal.json"
 
@@ -57,8 +57,7 @@ def _num(text: str) -> float:
 
 
 def read_cabo_guerra() -> list[dict]:
-    # iso-8859-1: este CSV saiu do R sem `fileEncoding="UTF-8"`, ao contrario do outro
-    with CABO_GUERRA_CSV.open(encoding="iso-8859-1", newline="") as fh:
+    with CABO_GUERRA_CSV.open(encoding="utf-8-sig", newline="") as fh:
         rows = list(csv.DictReader(fh, delimiter=";"))
 
     por_regiao: dict[str, dict[str, float]] = {}
@@ -109,13 +108,18 @@ def read_porte() -> list[dict]:
     if faltando:
         raise ValueError(f"portes ausentes em {PORTE_CSV.name}: {sorted(faltando)}")
 
+    # perfil sem nenhum municipio no porte nao aparece como linha no CSV; o
+    # grafico ainda precisa da chave, com zero
+    vazio = {"n": 0, "pct": 0.0}
+
     out = []
     for porte in PORTES:
         perfis = por_porte[porte]
         registro: dict = {"label": porte, "n": sum(p["n"] for p in perfis.values())}
         for origem, chave, _ in PERFIS:
-            registro[chave] = round(perfis[origem]["pct"], 4)
-            registro[f"n{chave}"] = perfis[origem]["n"]
+            perfil = perfis.get(origem, vazio)
+            registro[chave] = round(perfil["pct"], 4)
+            registro[f"n{chave}"] = perfil["n"]
         out.append(registro)
 
     return out

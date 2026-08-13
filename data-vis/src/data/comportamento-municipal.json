@@ -25,96 +25,96 @@
   ],
   "caboGuerra": [
     {
-      "label": "Norte",
-      "indutor": 31.3817,
-      "substituicao": 2.8103,
-      "liquido": 28.5714
-    },
-    {
-      "label": "Centro-Oeste",
-      "indutor": 28.103,
-      "substituicao": 4.4496,
-      "liquido": 23.6534
+      "label": "Sudeste",
+      "indutor": 79.4997,
+      "substituicao": 4.82,
+      "liquido": 74.6797
     },
     {
       "label": "Nordeste",
-      "indutor": 18.8839,
-      "substituicao": 4.2277,
-      "liquido": 14.6561
+      "indutor": 81.1161,
+      "substituicao": 7.7227,
+      "liquido": 73.3935
     },
     {
-      "label": "Sudeste",
-      "indutor": 10.6162,
-      "substituicao": 1.7084,
-      "liquido": 8.9079
+      "label": "Norte",
+      "indutor": 74.7073,
+      "substituicao": 6.089,
+      "liquido": 68.6183
+    },
+    {
+      "label": "Centro-Oeste",
+      "indutor": 69.555,
+      "substituicao": 8.4309,
+      "liquido": 61.1241
     },
     {
       "label": "Sul",
-      "indutor": 12.168,
-      "substituicao": 4.8843,
-      "liquido": 7.2836
+      "indutor": 64.7815,
+      "substituicao": 9.5973,
+      "liquido": 55.1842
     }
   ],
   "porte": [
     {
       "label": "Metrópole",
       "n": 15,
-      "Despertados": 13.3333,
-      "nDespertados": 2,
-      "Constantes": 73.3333,
-      "nConstantes": 11,
-      "Inertes": 6.6667,
-      "nInertes": 1,
-      "Substituição": 6.6667,
-      "nSubstituição": 1
+      "Despertados": 46.6667,
+      "nDespertados": 7,
+      "Constantes": 40.0,
+      "nConstantes": 6,
+      "Inertes": 0.0,
+      "nInertes": 0,
+      "Substituição": 13.3333,
+      "nSubstituição": 2
     },
     {
       "label": "Grande Porte",
       "n": 303,
-      "Despertados": 7.9208,
-      "nDespertados": 24,
-      "Constantes": 85.8086,
-      "nConstantes": 260,
-      "Inertes": 1.9802,
-      "nInertes": 6,
-      "Substituição": 4.2904,
-      "nSubstituição": 13
+      "Despertados": 52.8053,
+      "nDespertados": 160,
+      "Constantes": 37.9538,
+      "nConstantes": 115,
+      "Inertes": 0.0,
+      "nInertes": 0,
+      "Substituição": 9.2409,
+      "nSubstituição": 28
     },
     {
       "label": "Médio Porte",
       "n": 338,
-      "Despertados": 6.5089,
-      "nDespertados": 22,
-      "Constantes": 88.1657,
-      "nConstantes": 298,
-      "Inertes": 0.8876,
-      "nInertes": 3,
-      "Substituição": 4.4379,
-      "nSubstituição": 15
+      "Despertados": 66.568,
+      "nDespertados": 225,
+      "Constantes": 26.3314,
+      "nConstantes": 89,
+      "Inertes": 0.0,
+      "nInertes": 0,
+      "Substituição": 7.1006,
+      "nSubstituição": 24
     },
     {
       "label": "Pequeno Porte II",
       "n": 1041,
-      "Despertados": 13.3525,
-      "nDespertados": 139,
-      "Constantes": 82.5168,
-      "nConstantes": 859,
-      "Inertes": 1.633,
-      "nInertes": 17,
-      "Substituição": 2.4976,
-      "nSubstituição": 26
+      "Despertados": 74.4476,
+      "nDespertados": 775,
+      "Constantes": 19.5965,
+      "nConstantes": 204,
+      "Inertes": 0.0,
+      "nInertes": 0,
+      "Substituição": 5.9558,
+      "nSubstituição": 62
     },
     {
       "label": "Pequeno Porte I",
       "n": 3737,
-      "Despertados": 19.2133,
-      "nDespertados": 718,
-      "Constantes": 74.3109,
-      "nConstantes": 2777,
-      "Inertes": 2.8365,
-      "nInertes": 106,
-      "Substituição": 3.6393,
-      "nSubstituição": 136
+      "Despertados": 78.86,
+      "nDespertados": 2947,
+      "Constantes": 13.7543,
+      "nConstantes": 514,
+      "Inertes": 0.0535,
+      "nInertes": 2,
+      "Substituição": 7.3321,
+      "nSubstituição": 274
     }
   ]
 }
