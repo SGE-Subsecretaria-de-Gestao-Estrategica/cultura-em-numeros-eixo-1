@@ -20,9 +20,10 @@
   data={comportamento.porte}
   {keys}
   title="Perfil de mudança no gasto municipal em cultura"
-  subtitle="Distribuição dos municípios de cada porte populacional entre os quatro perfis"
-  footnote={`${footnote}.`}
-  source={`Comportamentos Pós-repasses. Fonte: Ministério da Cultura / SICONFI (MSC Orçamentária Municipal). Universo: ${universo} municípios com dados.`}
+  subtitle="Distribuição dos municípios de cada porte populacional entre os quatro perfis. Comportamentos Pós-repasses (2023, 2024)."
+  footnote={`${footnote}. Critério de Classificação: Variação da Trajetória
+  (> 20% + R$ 5,00 de margem).`}
+  source={`Fonte: Ministério da Cultura / SICONFI (MSC Orçamentária Municipal). Universo: ${universo} municípios com dados.`}
   {background}
   bind:svgEl
 />

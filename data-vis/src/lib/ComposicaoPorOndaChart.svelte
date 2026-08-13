@@ -75,10 +75,12 @@
 
   const k = $derived(a4Scale(width));
 
-  const TITLE_FONT_SIZE = 20;
+  const TITLE_FONT_SIZE = 14;
 
   const type = $derived({
     title: TITLE_FONT_SIZE * k,
+    /** Rótulo da onda — o mesmo corpo do eixo X da série histórica. */
+    lg: scale.lg * k,
     md: scale.md * k,
     sm: scale.sm * k,
     xs: scale.xs * k,
@@ -417,9 +419,9 @@
           textAnchor="start"
           verticalAnchor="middle"
           fontSize={type.xs}
-          fontWeight={600}
+          fontWeight={500}
           {fontFamily}
-          fill={item.color}
+          fill={palette.neutral[200]}
           text={item.text}
         />
       {/each}
@@ -429,8 +431,8 @@
         y={innerHeight + L.ondaLabelGap}
         textAnchor="middle"
         verticalAnchor="middle"
-        fontSize={type.md}
-        fontWeight={600}
+        fontSize={type.lg}
+        fontWeight={500}
         {fontFamily}
         fill={palette.neutral[300]}
         text={row.label}

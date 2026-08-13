@@ -4,6 +4,7 @@
     Chart,
     DefaultTheme,
     colorScales,
+    getContrastColor,
     getPillarTheme,
     resolveThemeStyle,
     Text,
@@ -12,7 +13,7 @@
   } from 'sniic-design-system';
   import LegendChips from './LegendChips.svelte';
   import TextLines from './TextLines.svelte';
-  import { a4Scale, fontFamily, fontSize as scale, wrapText } from './tokens';
+  import { a4Scale, fontFamily, fontSize as scale, labelFitsInBar, wrapText } from './tokens';
 
   export type CaboGuerraRow = {
     label: string;
@@ -90,7 +91,7 @@
    */
   const k = $derived(a4Scale(width));
 
-  const TITLE_FONT_SIZE = 20;
+  const TITLE_FONT_SIZE = 14;
 
   const type = $derived({
     title: TITLE_FONT_SIZE * k,
@@ -123,14 +124,18 @@
     noteGap: 18 * k,
     /** Between the footnote block and the source block. */
     noteSpacing: 3 * k,
-    /** One row's share of the plot; the bar takes all but the band padding. */
-    band: 38 * k,
-    barRadius: 4 * k,
+    /**
+     * One row's share of the plot; the bar takes all but the band padding.
+     * Same band and same padding as the sibling `PerfilPorPorteChart`, so the
+     * two figures print with bars of identical weight.
+     */
+    band: 49 * k,
+    barRadius: 2 * k,
     /** Half the surface gap that keeps the two bars off each other at zero. */
     baselineGap: 1 * k,
-    /** Between a bar end and the value written past it. */
+    /** Between a bar end and a value that had to be written past it. */
     valueGap: 8 * k,
-    /** Room reserved at each end of the plot for those values. */
+    /** Room given up at an end of the plot for the values that don't fit inside. */
     valueGutter: 46 * k,
     /** Region name to the plot edge, and the saldo heading to the first row. */
     rowLabelGap: 12 * k,
@@ -182,6 +187,15 @@
       DefaultTheme.dataLabel,
     )!,
   );
+  /**
+   * O valor quando ele cai fora da barra, no vão reservado.
+   *
+   * Fora, ele é texto sobre o cartão e segue a regra da série histórica: peso
+   * leve, negrito só em nome de categoria. Dentro, `valueStyle` mantém o 600 —
+   * ali o texto disputa com um preenchimento saturado.
+   */
+  const valorForaStyle = $derived({ ...valueStyle, fontWeight: 400 });
+
   const rowStyle = $derived(
     resolveThemeStyle<ChartTheme, 'text'>(
       { fontSize: type.md, fontWeight: 600, fill: palette.neutral[300], fontFamily },
@@ -191,7 +205,7 @@
   );
   const saldoStyle = $derived(
     resolveThemeStyle<ChartTheme, 'dataLabel'>(
-      { fontSize: type.md, fontWeight: 600, fill: palette.neutral[300], fontFamily },
+      { fontSize: type.md, fontWeight: 400, fill: palette.neutral[300], fontFamily },
       theme.dataLabel,
       DefaultTheme.dataLabel,
     )!,
@@ -251,17 +265,47 @@
     { label: substituicaoLabel, color: SUBSTITUICAO },
   ]);
 
+  const labelFits = (value: number, barWidth: number) =>
+    labelFitsInBar(
+      pct(value),
+      Number(valueStyle.fontSize),
+      barWidth,
+      Number(valueStyle.fontWeight),
+    );
+
   /**
-   * Widens the domain so a `valueGutter` of plot pixels stays free at each end
-   * for the values written past the bars. Solved rather than guessed: padding
-   * the domain changes the pixels-per-unit that the padding is measured in.
+   * Where each side writes its values, and how much plot width that costs.
+   *
+   * Values ride inside their bar, as in the sibling `PerfilPorPorteChart` — but
+   * the choice is made per side rather than per bar. One series written inside
+   * on one row and outside on the next reads as a mistake rather than as a fit
+   * rule, and the outside ones would sit at a different x on every row, since
+   * each is hung off its own bar end. So a side goes out whole as soon as any
+   * one of its bars is too short, and buys a `valueGutter` of plot width to do
+   * it. At these shares that is the substitution side, whose bars run a
+   * twentieth of the indutor ones.
+   *
+   * Two passes: reserving a gutter shrinks the bars, which can push the other
+   * side out as well — never back in, so the answer settles after one repeat.
    */
-  function domainFor(innerWidth: number): [number, number] {
-    const span = indutorMax + substituicaoMax;
-    const usable = Math.max(innerWidth - L.valueGutter * 2, 1);
-    const padded = (span * innerWidth) / usable;
-    const pad = (padded - span) / 2;
-    return [-substituicaoMax - pad, indutorMax + pad];
+  function layout(innerWidth: number) {
+    const span = indutorMax + substituicaoMax || 1;
+    let gutter = { left: 0, right: 0 };
+    let inside = { left: true, right: true };
+
+    for (let pass = 0; pass < 2; pass++) {
+      const unit = (innerWidth - gutter.left - gutter.right) / span;
+      inside = {
+        left: data.every((d) => labelFits(d.substituicao, d.substituicao * unit)),
+        right: data.every((d) => labelFits(d.indutor, d.indutor * unit)),
+      };
+      gutter = {
+        left: inside.left ? 0 : L.valueGutter,
+        right: inside.right ? 0 : L.valueGutter,
+      };
+    }
+
+    return { gutter, inside };
   }
 
   /**
@@ -316,7 +360,10 @@
     innerHeight,
     margin,
   }: ChartDimensions)}
-    {@const xScale = scaleLinear().domain(domainFor(innerWidth)).range([0, innerWidth])}
+    {@const plot = layout(innerWidth)}
+    {@const xScale = scaleLinear()
+      .domain([-substituicaoMax, indutorMax])
+      .range([plot.gutter.left, innerWidth - plot.gutter.right])}
     {@const yScale = scaleBand<string>()
       .domain(categories)
       .range([0, innerHeight])
@@ -401,49 +448,71 @@
         text={row.label}
       />
 
+      {@const indutorWidth = Math.max(indutorX - zeroX - L.baselineGap, 0)}
+      {@const substituicaoWidth = Math.max(zeroX - L.baselineGap - substituicaoX, 0)}
+
       <path
-        d={barPath(
-          zeroX + L.baselineGap,
-          y,
-          Math.max(indutorX - zeroX - L.baselineGap, 0),
-          barHeight,
-          'right',
-        )}
+        d={barPath(zeroX + L.baselineGap, y, indutorWidth, barHeight, 'right')}
         fill={INDUTOR}
       />
       <path
-        d={barPath(
-          substituicaoX,
-          y,
-          Math.max(zeroX - L.baselineGap - substituicaoX, 0),
-          barHeight,
-          'left',
-        )}
+        d={barPath(substituicaoX, y, substituicaoWidth, barHeight, 'left')}
         fill={SUBSTITUICAO}
       />
 
-      <Text
-        x={indutorX + L.valueGap}
-        y={centerY}
-        textAnchor="start"
-        verticalAnchor="middle"
-        fontSize={valueStyle.fontSize}
-        fontWeight={valueStyle.fontWeight}
-        fontFamily={valueStyle.fontFamily}
-        fill={valueStyle.fill}
-        text={pct(row.indutor)}
-      />
-      <Text
-        x={substituicaoX - L.valueGap}
-        y={centerY}
-        textAnchor="end"
-        verticalAnchor="middle"
-        fontSize={valueStyle.fontSize}
-        fontWeight={valueStyle.fontWeight}
-        fontFamily={valueStyle.fontFamily}
-        fill={valueStyle.fill}
-        text={pct(row.substituicao)}
-      />
+      <!-- the value rides inside its own bar where the side has room for it,
+           and past the bar end into the reserved gutter where it doesn't -->
+      {#if plot.inside.right}
+        <Text
+          x={zeroX + L.baselineGap + indutorWidth / 2}
+          y={centerY}
+          textAnchor="middle"
+          verticalAnchor="middle"
+          fontSize={valueStyle.fontSize}
+          fontWeight={valueStyle.fontWeight}
+          fontFamily={valueStyle.fontFamily}
+          fill={getContrastColor(INDUTOR)}
+          text={pct(row.indutor)}
+        />
+      {:else}
+        <Text
+          x={indutorX + L.valueGap}
+          y={centerY}
+          textAnchor="start"
+          verticalAnchor="middle"
+          fontSize={valorForaStyle.fontSize}
+          fontWeight={valorForaStyle.fontWeight}
+          fontFamily={valorForaStyle.fontFamily}
+          fill={valorForaStyle.fill}
+          text={pct(row.indutor)}
+        />
+      {/if}
+
+      {#if plot.inside.left}
+        <Text
+          x={substituicaoX + substituicaoWidth / 2}
+          y={centerY}
+          textAnchor="middle"
+          verticalAnchor="middle"
+          fontSize={valueStyle.fontSize}
+          fontWeight={valueStyle.fontWeight}
+          fontFamily={valueStyle.fontFamily}
+          fill={getContrastColor(SUBSTITUICAO)}
+          text={pct(row.substituicao)}
+        />
+      {:else}
+        <Text
+          x={substituicaoX - L.valueGap}
+          y={centerY}
+          textAnchor="end"
+          verticalAnchor="middle"
+          fontSize={valorForaStyle.fontSize}
+          fontWeight={valorForaStyle.fontWeight}
+          fontFamily={valorForaStyle.fontFamily}
+          fill={valorForaStyle.fill}
+          text={pct(row.substituicao)}
+        />
+      {/if}
 
       <!-- the saldo sits in its own gutter rather than on the bars: at these
            values it always falls inside the indutor bar, where a marker would

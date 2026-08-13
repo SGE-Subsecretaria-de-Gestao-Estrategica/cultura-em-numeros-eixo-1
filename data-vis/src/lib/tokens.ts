@@ -116,12 +116,16 @@ export const wrapText = (
  * attributes on the `<text>` itself, where they win. Send only camelCase and
  * the theme's kebab-case values silently override the size you asked for.
  */
-export const tickLabelProps = (fill: string, size: number = fontSize.md) => ({
+export const tickLabelProps = (
+  fill: string,
+  size: number = fontSize.md,
+  weight: number = 500,
+) => ({
   fontFamily,
   fontSize: size,
-  fontWeight: 500,
+  fontWeight: weight,
   fill,
   'font-family': fontFamily,
   'font-size': size,
-  'font-weight': 500,
+  'font-weight': weight,
 });

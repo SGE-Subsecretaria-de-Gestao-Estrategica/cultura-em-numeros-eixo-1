@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { categorical8 } from 'sniic-design-system';
   import SerieHistoricaChart from './SerieHistoricaChart.svelte';
+  import { sniic } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   /** Bindable — repassado para a página poder oferecer o download do SVG. */
@@ -10,19 +10,26 @@
   }: { svgEl?: SVGSVGElement | null; background?: string | null } = $props();
 
   /**
-   * Azul, laranja e teal — três matizes de fato distintos da escala categórica
-   * do sistema, não três degraus da mesma cor. As linhas se cruzam entre 2006 e
-   * 2014, então elas têm de se separar por matiz e não por luminosidade.
+   * Uma cor só para as três séries — a lista é percorrida ciclicamente.
+   *
+   * Quem separa as séries aqui não é mais a cor: cada linha traz o valor em
+   * todas as ondas e um bloco na ponta com o nome. Fica um custo, e ele é real:
+   * fundo e plano se cruzam por volta de 2010, e no cruzamento não há como
+   * dizer qual faixa é qual sem ir aos rótulos das ondas vizinhas.
    */
-  const colors = [categorical8[0], categorical8[2], categorical8[1]];
+  const colors = [sniic.vermelho];
 </script>
 
 <SerieHistoricaChart
   series={gestao.tripe.series}
   {colors}
+  markerColor={sniic.marromMarcador}
+  endValueColor={sniic.azul}
+  variant="faixa"
+  valueFormat="pct"
   title="Evolução do tripé institucional da cultura"
-  subtitle="Proporção dos municípios brasileiros com cada instrumento do Sistema Nacional de Cultura criado, nas quatro ondas da MUNIC."
-  footnote="O eixo é linear no tempo: as ondas estão a 8, 4 e 3 anos de distância, e a inclinação de cada trecho mede o ritmo da mudança. Base: municípios com resposta válida em cada onda."
+  subtitle="Percentual de municípios brasileiros com cada instrumento do Sistema Nacional de Cultura criado, nas quatro ondas da MUNIC."
+  footnote="O eixo é linear no tempo, e a inclinação de cada trecho mede o ritmo da mudança. Base: municípios com resposta válida em cada onda."
   source="Fonte: Elaboração própria com base na MUNIC/IBGE (2006, 2014, 2018 e 2021)."
   {background}
   bind:svgEl

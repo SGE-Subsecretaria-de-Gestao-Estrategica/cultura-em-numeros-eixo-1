@@ -89,7 +89,7 @@
    */
   const k = $derived(a4Scale(width));
 
-  const TITLE_FONT_SIZE = 20;
+  const TITLE_FONT_SIZE = 14;
 
   const type = $derived({
     title: TITLE_FONT_SIZE * k,
@@ -210,7 +210,7 @@
   /** Rail labels are ink on the card, not on a fill, so they carry their own colour. */
   const railStyle = $derived(
     resolveThemeStyle<ChartTheme, 'dataLabel'>(
-      { fontSize: type.xs, fontWeight: 600, fill: palette.neutral[200], fontFamily },
+      { fontSize: type.xs, fontWeight: 500, fill: palette.neutral[200], fontFamily },
       theme.dataLabel,
       DefaultTheme.dataLabel,
     )!,

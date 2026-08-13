@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { colorScales } from 'sniic-design-system';
   import ComposicaoPorOndaChart from './ComposicaoPorOndaChart.svelte';
+  import { rampaVermelha } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   let {
@@ -11,17 +11,11 @@
   /**
    * Uma rampa sequencial, não uma paleta categórica: as cinco categorias estão
    * ordenadas por grau de institucionalização, de secretaria própria a nenhuma
-   * estrutura, e a escala de azul deixa essa ordem visível sem que o leitor
-   * precise decorar qual matiz é qual. Do mais escuro (mais institucionalizado)
-   * ao mais claro.
+   * estrutura, e a escala deixa essa ordem visível sem que o leitor precise
+   * decorar qual matiz é qual. Do mais escuro (mais institucionalizado) ao mais
+   * claro, na família do vermelho da marca.
    */
-  const colors = [
-    colorScales.blue[4],
-    colorScales.blue[3],
-    colorScales.blue[2],
-    colorScales.blue[1],
-    colorScales.blue[0],
-  ];
+  const colors = [...rampaVermelha];
 </script>
 
 <ComposicaoPorOndaChart

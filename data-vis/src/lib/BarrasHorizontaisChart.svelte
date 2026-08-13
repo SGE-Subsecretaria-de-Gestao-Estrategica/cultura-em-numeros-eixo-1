@@ -70,7 +70,7 @@
 
   const k = $derived(a4Scale(width));
 
-  const TITLE_FONT_SIZE = 20;
+  const TITLE_FONT_SIZE = 14;
 
   const type = $derived({
     title: TITLE_FONT_SIZE * k,
@@ -240,7 +240,7 @@
         textAnchor="end"
         verticalAnchor="middle"
         fontSize={type.md}
-        fontWeight={500}
+        fontWeight={600}
         {fontFamily}
         fill={palette.neutral[300]}
         text={item.label}
@@ -261,9 +261,9 @@
         textAnchor="start"
         verticalAnchor="middle"
         fontSize={type.sm}
-        fontWeight={600}
+        fontWeight={400}
         {fontFamily}
-        fill={palette.neutral[300]}
+        fill={palette.neutral[200]}
         text={item.rotulo}
       />
     {/each}

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { colorScales } from 'sniic-design-system';
   import BarrasHorizontaisChart from './BarrasHorizontaisChart.svelte';
+  import { sniic } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   let {
@@ -33,7 +33,7 @@
 
 <BarrasHorizontaisChart
   {itens}
-  color={colorScales.teal[2]}
+  color={sniic.vermelho}
   bandHeight={26}
   title="Execução do repasse da Lei Aldir Blanc pelos municípios"
   subtitle={`Distribuição dos municípios pelo percentual do recurso recebido que chegou a ser executado, em ${dados.ano}.`}

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { colorScales } from 'sniic-design-system';
   import ComposicaoPorOndaChart from './ComposicaoPorOndaChart.svelte';
+  import { rampaDe } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   let {
@@ -9,11 +9,12 @@
   }: { svgEl?: SVGSVGElement | null; background?: string | null } = $props();
 
   /**
-   * Roxo e azul-escuro: dois matizes que se separam com folga sob qualquer tipo
-   * de visão de cores, e nenhum dos dois é o par rosa/azul convencional que
-   * codifica gênero por estereótipo antes de codificá-lo por dado.
+   * Dois degraus da rampa da marca, separados por luminosidade e não por matiz.
+   * Continua valendo o motivo de sempre: o par rosa/azul codificaria gênero por
+   * estereótipo antes de codificá-lo por dado, e aqui não há dois matizes para
+   * isso acontecer — as duas categorias são a mesma cor em claros diferentes.
    */
-  const colors = [colorScales.purple[2], colorScales.blue[3]];
+  const colors = rampaDe(2);
 </script>
 
 <ComposicaoPorOndaChart

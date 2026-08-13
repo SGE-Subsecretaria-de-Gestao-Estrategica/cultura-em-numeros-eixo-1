@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { colorScales } from 'sniic-design-system';
   import BarrasHorizontaisChart from './BarrasHorizontaisChart.svelte';
+  import { sniic } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   let {
@@ -30,7 +30,7 @@
 
 <BarrasHorizontaisChart
   {itens}
-  color={colorScales.purple[2]}
+  color={sniic.vermelho}
   title="Escolaridade do gestor e institucionalização da cultura"
   subtitle={`Percentual de municípios com o tripé completo — plano, fundo e conselho de cultura — por nível de escolaridade do titular do órgão gestor, em ${dados.ano}.`}
   footnote={`A relação é monotônica, mas descreve associação e não causa: municípios que atraem gestores mais titulados também tendem a ser maiores e mais estruturados. ${integer.format(dados.semInformacao)} municípios sem informação de escolaridade ficam fora.`}
