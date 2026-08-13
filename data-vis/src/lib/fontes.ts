@@ -1,10 +1,10 @@
 /**
- * Shared setup for the "fontes de recurso" ribbon figures — the Storybook
- * stories and the A4 proof page draw the same chart, so the palette, the short
- * names and the print sizing live here rather than in either of them.
+ * Shared setup for the "fontes de recurso" figures — the Storybook stories and
+ * the A4 proof page draw the same charts, so the palettes, the short names and
+ * the print sizing live here rather than in any one of them.
  */
 
-import { colorScales, purple } from 'sniic-design-system';
+import { categorical8, colorScales, purple } from 'sniic-design-system';
 import { a4Scale } from './tokens';
 
 /**
@@ -34,6 +34,88 @@ export const fonteLabels: Record<string, string> = {
   'Lei Aldir Blanc 1 (LAB 1)': 'LAB 1',
   'Lei Paulo Gustavo (LPG)': 'LPG',
   'PNAB (Aldir Blanc 2)': 'PNAB',
+};
+
+/**
+ * Os três grupos institucionais da série federal, na ordem em que as figuras os
+ * desenham: execução direta, renúncia fiscal, transferências a entes.
+ *
+ * Validadas contra os seis checks: banda de luminosidade, piso de croma,
+ * separação sob daltonismo (pior par ΔE 9,4 em protanopia, acima do mínimo de
+ * 8), piso de visão normal e contraste contra a superfície.
+ *
+ * Azul e laranja mantêm a identidade que MinC e Rouanet já têm no ribbon chart;
+ * o roxo é o extraordinário, o dinheiro que só existe quando uma lei o cria.
+ *
+ * Ficam aqui, e não em cada figura, porque o combo de linhas e colunas e o
+ * gráfico de linhas desenham os mesmos três grupos: duas paletas iguais copiadas
+ * em dois arquivos só esperam a hora de divergir.
+ */
+export const grupoFederalColors = ['#4271b5', '#ea662f', '#a44c7f'];
+
+/** Só o terceiro encurta — por extenso, ele não cabe ao lado da linha. */
+export const grupoFederalLabels: Record<string, string> = {
+  'Execução direta': 'Execução direta',
+  'Renúncia fiscal': 'Renúncia fiscal',
+  'Transferências a estados e municípios': 'Transferências a entes',
+};
+
+/**
+ * As oito fontes federais na ordem em que o JSON as traz, com a cor que cada
+ * uma tem no ribbon chart — a permutação existe para que a tabela, o ribbon e
+ * o gráfico de linhas possam ser lidos um ao lado do outro.
+ *
+ * Oito séries passam do que a rampa do pilar sustenta (três matizes), então a
+ * paleta é a categórica do design system.
+ */
+const ORDEM_CATEGORICA = [0, 1, 6, 2, 3, 5, 4, 7];
+
+export const fonteFederalColors = (keys: readonly string[]): Record<string, string> =>
+  Object.fromEntries(keys.map((k, i) => [k, categorical8[ORDEM_CATEGORICA[i]]]));
+
+/**
+ * Três degraus da paleta descem um tom quando as fontes são desenhadas como
+ * traço fino, e não como faixa.
+ *
+ * A escala categórica é afinada para o ribbon chart, onde a cor preenche área
+ * e ainda passa por 55% de opacidade — o amarelo `#f6c341` e o lavanda
+ * `#c9b6c5` funcionam ali. Num traço de 2 px, e sobretudo no nome da série
+ * escrito na cor dela, os dois rendem menos de 2:1 contra o cartão claro e
+ * saem ilegíveis; o lima `#81a72f` fica em 2,8:1, no limite.
+ *
+ * A troca é pelo degrau imediatamente mais escuro da mesma família, então a
+ * matiz — que é o que identifica a fonte entre as figuras — não muda: amarelo
+ * vira ocre, lima vira oliva, lavanda vira malva, e os três passam de 3,4:1.
+ */
+const CONTRASTE_EM_TRACO: Record<string, string> = {
+  [categorical8[3]]: colorScales.yellow[3],
+  [categorical8[5]]: colorScales.lime[3],
+  [categorical8[7]]: colorScales.lavender[3],
+};
+
+export const fonteFederalLineColors = (keys: readonly string[]): Record<string, string> =>
+  Object.fromEntries(
+    Object.entries(fonteFederalColors(keys)).map(([k, cor]) => [k, CONTRASTE_EM_TRACO[cor] ?? cor]),
+  );
+
+/**
+ * Nomes curtos das fontes federais.
+ *
+ * As leis vêm por extenso e o resto por sigla, e não é inconsistência: numa
+ * figura sobre fonte de recurso, "Lei Paulo Gustavo" e "Lei Aldir Blanc 1" são
+ * o assunto, e são justamente as que acabam dentro do plot, onde o nome longo
+ * cabe. As que chegam a 2025 põem o nome na margem direita, que toda série
+ * paga em largura de plot — lá a sigla é o que evita a calha larga.
+ */
+export const fonteFederalLabels: Record<string, string> = {
+  'Ministério da Cultura (Órgão 42000)': 'MinC',
+  'Lei Rouanet': 'Lei Rouanet',
+  'Incentivo (ANCINE)': 'ANCINE',
+  'FSA (UO 74912)': 'FSA',
+  'PNAB (UO 73120)': 'PNAB',
+  'Lei Paulo Gustavo': 'Lei Paulo Gustavo',
+  'Lei Aldir Blanc 1': 'Lei Aldir Blanc 1',
+  'Outros Órgãos (Cidadania/Turismo)': 'Outros órgãos',
 };
 
 /**

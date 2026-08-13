@@ -3,6 +3,7 @@
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
   import EvolucaoFederalChart from './EvolucaoFederalChart.svelte';
   import StoryFrame from './StoryFrame.svelte';
+  import { grupoFederalColors, grupoFederalLabels } from './fontes';
   import federal from '../data/federal-por-fonte.json';
 
   const { Story } = defineMeta({
@@ -16,23 +17,6 @@
   });
 
   const grupos = federal.grupos;
-
-  /**
-   * Três séries, validadas contra os seis checks: banda de luminosidade, piso
-   * de croma, separação sob daltonismo (pior par ΔE 9,4 em protanopia, acima do
-   * mínimo de 8), piso de visão normal e contraste contra a superfície.
-   *
-   * Azul e laranja mantêm a identidade que MinC e Rouanet já têm no ribbon
-   * chart; o roxo é o extraordinário, o dinheiro que só existe quando uma lei o
-   * cria.
-   */
-  const cores = ['#4271b5', '#ea662f', '#a44c7f'];
-
-  const rotulos: Record<string, string> = {
-    'Execução direta': 'Execução direta',
-    'Renúncia fiscal': 'Renúncia fiscal',
-    'Transferências a estados e municípios': 'Transferências a entes',
-  };
 
   /** Bilhões com uma casa: a escala do gráfico não sustenta mais precisão. */
   const bi = (v: number) =>
@@ -55,8 +39,8 @@
     data: grupos.real,
     linhas: grupos.linhas,
     colunas: grupos.colunas,
-    labels: rotulos,
-    colors: cores,
+    labels: grupoFederalLabels,
+    colors: grupoFederalColors,
     destaque,
     valueFormat: bi,
     unidade: 'R$ bilhões · preços médios de 2024',

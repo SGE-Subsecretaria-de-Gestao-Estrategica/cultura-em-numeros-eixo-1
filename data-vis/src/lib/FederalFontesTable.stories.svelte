@@ -1,7 +1,8 @@
 <script module lang="ts">
   import { defineMeta } from '@storybook/addon-svelte-csf';
-  import { categorical8 } from 'sniic-design-system';
+
   import FederalFontesTable from './FederalFontesTable.svelte';
+  import { fonteFederalColors } from './fontes';
   import federal from '../data/federal-por-fonte.json';
 
   const { Story } = defineMeta({
@@ -23,10 +24,7 @@
   };
 
   /** Mesmas cores do ribbon chart, para quem lê os dois lado a lado. */
-  const ordem = [0, 1, 6, 2, 3, 5, 4, 7];
-  const colors = Object.fromEntries(
-    federal.keys.map((k, i) => [k, categorical8[ordem[i]]]),
-  );
+  const colors = fonteFederalColors(federal.keys);
 </script>
 
 <Story
