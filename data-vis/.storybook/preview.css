@@ -1,0 +1,16 @@
+/* Story harness only — loaded after app.css so it wins.
+
+   The charts are print artefacts: dark type on a light sheet, always. app.css
+   flips `:root` to a dark surface when the OS asks for it, which is right for
+   the app — it recolours its own chrome along with it — but in Storybook it
+   only puts a dark canvas behind an unchanged chart.
+
+   White also stands in for the page the figures are placed in: the stories
+   render the cards with `background: null`, so what is behind the marks here
+   is the canvas, and it should be paper. */
+:root,
+body,
+.sb-show-main {
+  background: #ffffff;
+  color-scheme: light;
+}

@@ -1,8 +1,9 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { colorScales, downloadSvg } from 'sniic-design-system';
+  import { colorScales } from 'sniic-design-system';
   import ComposicaoPorOndaChart from './ComposicaoPorOndaChart.svelte';
+  import StoryFrame from './StoryFrame.svelte';
   import gestao from '../data/gestao-municipal.json';
 
   const { Story } = defineMeta({
@@ -15,6 +16,8 @@
       width: { control: { type: 'range', min: 600, max: 1900, step: 20 } },
       responsive: { control: 'boolean' },
     },
+    /** Sem o fundo do cartão — ver a nota em SerieHistoricaChart.stories. */
+    args: { background: null },
   });
 
   /** Rampa sequencial: as categorias da estrutura estão ordenadas por grau de
@@ -44,30 +47,10 @@
   type StoryArgs = ComponentProps<typeof ComposicaoPorOndaChart>;
 </script>
 
-<script lang="ts">
-  /**
-   * Autodocs renders every story on one page, so the SVGs are keyed by story
-   * id — one shared reference would have the charts overwrite each other and
-   * every button would export whichever rendered last.
-   */
-  const svgEls: Record<string, SVGSVGElement | null> = $state({});
-
-  function save(ctx: StoryContext<StoryArgs>) {
-    const el = svgEls[ctx.id];
-    if (el) downloadSvg(el, `${ctx.id}.svg`);
-  }
-</script>
-
 {#snippet template(args: StoryArgs, ctx: StoryContext<StoryArgs>)}
-  <div class="story">
-    <button class="export" onclick={() => save(ctx)}>Baixar SVG</button>
-    <!-- get/set binding: the key does not exist until the chart mounts, and
-         `bind:svgEl={undefined}` clashes with the prop's `null` fallback -->
-    <ComposicaoPorOndaChart
-      {...args}
-      bind:svgEl={() => svgEls[ctx.id] ?? null, (el) => (svgEls[ctx.id] = el)}
-    />
-  </div>
+  <StoryFrame name={ctx.id}>
+    <ComposicaoPorOndaChart {...args} />
+  </StoryFrame>
 {/snippet}
 
 <!--
@@ -144,13 +127,3 @@
   }}
   template={template as never}
 />
-
-<!-- Story harness only. The chart components carry no CSS of their own, so
-     that every mark they draw survives the SVG export. -->
-<style>
-  .story {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-</style>

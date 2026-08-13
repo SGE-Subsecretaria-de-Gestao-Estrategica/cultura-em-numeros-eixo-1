@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/svelte-vite'
 import '../node_modules/sniic-design-system/dist/sniic.css'
 import '../src/app.css'
+import './preview.css'
 import { loadChartFont } from '../src/lib/fonts'
 
 const preview: Preview = {

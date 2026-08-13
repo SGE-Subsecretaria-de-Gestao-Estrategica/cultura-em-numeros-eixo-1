@@ -1,8 +1,8 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { downloadSvg } from 'sniic-design-system';
   import EvolucaoFederalChart from './EvolucaoFederalChart.svelte';
+  import StoryFrame from './StoryFrame.svelte';
   import federal from '../data/federal-por-fonte.json';
 
   const { Story } = defineMeta({
@@ -81,23 +81,10 @@
   };
 </script>
 
-<script lang="ts">
-  const svgEls: Record<string, SVGSVGElement | null> = $state({});
-
-  function save(ctx: StoryContext<StoryArgs>) {
-    const el = svgEls[ctx.id];
-    if (el) downloadSvg(el, `${ctx.id}.svg`);
-  }
-</script>
-
 {#snippet template(args: StoryArgs, ctx: StoryContext<StoryArgs>)}
-  <div class="story">
-    <button class="export" onclick={() => save(ctx)}>Baixar SVG</button>
-    <EvolucaoFederalChart
-      {...args}
-      bind:svgEl={() => svgEls[ctx.id] ?? null, (el) => (svgEls[ctx.id] = el)}
-    />
-  </div>
+  <StoryFrame name={ctx.id}>
+    <EvolucaoFederalChart {...args} />
+  </StoryFrame>
 {/snippet}
 
 <!--
@@ -128,27 +115,3 @@
   args={{ ...base, ...A4 }}
   template={template as never}
 />
-
-<style>
-  .story {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .export {
-    align-self: flex-end;
-    font: 500 12px/1 'General Sans Variable', system-ui, sans-serif;
-    color: #4d5148;
-    background: transparent;
-    border: 1px solid #cec2bb;
-    border-radius: 4px;
-    padding: 7px 12px;
-    cursor: pointer;
-  }
-
-  .export:hover {
-    color: #33382e;
-    border-color: #4d5148;
-  }
-</style>

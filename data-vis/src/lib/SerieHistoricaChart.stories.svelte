@@ -1,8 +1,10 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { categorical8, colorScales, downloadSvg } from 'sniic-design-system';
+  import { categorical8, colorScales } from 'sniic-design-system';
   import SerieHistoricaChart from './SerieHistoricaChart.svelte';
+  import StoryFrame from './StoryFrame.svelte';
+  import { sniic } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   const { Story } = defineMeta({
@@ -11,10 +13,17 @@
     tags: ['autodocs'],
     parameters: { layout: 'padded' },
     argTypes: {
+      variant: { control: 'inline-radio', options: ['linha', 'faixa'] },
       yMax: { control: { type: 'range', min: 20, max: 100, step: 5 } },
       width: { control: { type: 'range', min: 600, max: 1900, step: 20 } },
       responsive: { control: 'boolean' },
     },
+    /**
+     * Sem o fundo do cartão, que é como o PNG é rasterizado (`?bg=0`): o SVG
+     * baixado daqui compõe sobre a página em que for colocado. O branco atrás
+     * das marcas é a tela do Storybook, não do gráfico.
+     */
+    args: { background: null },
   });
 
   const tripeColors = [categorical8[0], categorical8[2], categorical8[1]];
@@ -53,30 +62,10 @@
   type StoryArgs = ComponentProps<typeof SerieHistoricaChart>;
 </script>
 
-<script lang="ts">
-  /**
-   * Autodocs renders every story on one page, so the SVGs are keyed by story
-   * id — one shared reference would have the charts overwrite each other and
-   * every button would export whichever rendered last.
-   */
-  const svgEls: Record<string, SVGSVGElement | null> = $state({});
-
-  function save(ctx: StoryContext<StoryArgs>) {
-    const el = svgEls[ctx.id];
-    if (el) downloadSvg(el, `${ctx.id}.svg`);
-  }
-</script>
-
 {#snippet template(args: StoryArgs, ctx: StoryContext<StoryArgs>)}
-  <div class="story">
-    <button class="export" onclick={() => save(ctx)}>Baixar SVG</button>
-    <!-- get/set binding: the key does not exist until the chart mounts, and
-         `bind:svgEl={undefined}` clashes with the prop's `null` fallback -->
-    <SerieHistoricaChart
-      {...args}
-      bind:svgEl={() => svgEls[ctx.id] ?? null, (el) => (svgEls[ctx.id] = el)}
-    />
-  </div>
+  <StoryFrame name={ctx.id}>
+    <SerieHistoricaChart {...args} />
+  </StoryFrame>
 {/snippet}
 
 <!--
@@ -92,11 +81,24 @@
   rejected. The cast is on the hand-off only — the snippet itself stays typed.
 -->
 
+<!--
+  A variante de faixa como o relatório a usa: uma cor de marca para todas as
+  séries, marcadores azuis, o eixo Y trocado por rótulo em todo ponto, o
+  intervalo entre as ondas anotado no topo, o bloco de leitura na ponta de cada
+  linha e a régua de bolinhas embaixo. O plot conta em municípios; a régua, em
+  proporção — e o valor de 2021 é o único em azul, nos dois.
+-->
 <Story
   name="Tripé institucional"
   args={{
     series: gestao.tripe.series,
-    colors: tripeColors,
+    colors: [sniic.vermelho],
+    markerColor: sniic.azul,
+    endValueColor: sniic.azul,
+    valueFormat: 'abs',
+    dotStrip: true,
+    dotStripLead: 'Do total de 5.570 municípios brasileiros, isso representa…',
+    variant: 'faixa',
     title: 'Evolução do tripé institucional da cultura',
     subtitle:
       'Proporção dos municípios brasileiros com cada instrumento do Sistema Nacional de Cultura criado.',
@@ -105,16 +107,32 @@
   template={template as never}
 />
 
+<!-- As mesmas séries na variante fina, para comparar as duas lado a lado. -->
+<Story
+  name="Tripé institucional · linha"
+  args={{
+    series: gestao.tripe.series,
+    colors: tripeColors,
+    title: 'Evolução do tripé institucional da cultura',
+    subtitle: 'A mesma série na variante fina, com eixo Y e grade horizontal.',
+    source: 'Fonte: MUNIC/IBGE (2006, 2014, 2018 e 2021).',
+  }}
+  template={template as never}
+/>
+
 <!--
-  Quatro séries, e duas delas — museu e teatro — separadas por 0,7 ponto em
-  2006. Os rótulos da série de baixo caem para debaixo do próprio marcador,
-  que é o espaço que sobra entre as duas linhas.
+  Quatro séries, três delas amontoadas entre 9% e 30% de um eixo que vai a 100%
+  — o caso apertado da variante de faixa. Os blocos de ponta não cabem na altura
+  que separa as linhas, então são puxados para cima até caberem, na ordem das
+  séries. Em 2006, museu e teatro estão a 0,7 ponto de distância: nessa escala,
+  as duas faixas se sobrepõem.
 -->
 <Story
   name="Séries próximas"
   args={{
     series: gestao.equipamentos.series,
     colors: equipColors,
+    variant: 'faixa',
     yMax: 100,
     title: 'Equipamentos culturais nos municípios',
     subtitle: 'Proporção dos municípios que declaram ter cada equipamento em funcionamento.',
@@ -137,28 +155,19 @@
 />
 
 <!--
-  Sem cartão: é assim que o PNG é rasterizado (`/gestao.html?bg=0`), para o
-  gráfico compor sobre a página em que for colocado. O fundo desta página é o
-  do Storybook, não do gráfico.
+  A única story com cartão: o gráfico desenha o próprio fundo e a própria
+  borda, para quem for colocá-lo sobre uma página que não seja branca. Todas as
+  outras seguem o padrão do export, sem fundo.
 -->
 <Story
-  name="Sem cartão"
+  name="Com cartão"
   args={{
     series: gestao.tripe.series,
     colors: tripeColors,
-    background: null,
+    variant: 'faixa',
+    background: '#ffffff',
     title: 'Evolução do tripé institucional da cultura',
-    subtitle: 'O mesmo gráfico sem o fundo e a borda do cartão.',
+    subtitle: 'O mesmo gráfico com o fundo e a borda do cartão.',
   }}
   template={template as never}
 />
-
-<!-- Story harness only. The chart components carry no CSS of their own, so
-     that every mark they draw survives the SVG export. -->
-<style>
-  .story {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-</style>
