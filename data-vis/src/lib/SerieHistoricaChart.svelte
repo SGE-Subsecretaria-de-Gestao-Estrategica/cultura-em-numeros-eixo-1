@@ -20,7 +20,6 @@
     Axis,
     Chart,
     DefaultTheme,
-    categorical8,
     getPillarTheme,
     resolveThemeStyle,
     Text,
@@ -30,6 +29,7 @@
   import LegendChips from './LegendChips.svelte';
   import TextLines from './TextLines.svelte';
   import { layoutLegend } from './legend';
+  import { categoricaMarcaTraco } from './cores';
   import {
     a4Scale,
     fontFamily,
@@ -236,7 +236,7 @@
     subtitle,
     footnote,
     source,
-    colors = categorical8,
+    colors = categoricaMarcaTraco,
     markerColor,
     endValueColor,
     yMax,

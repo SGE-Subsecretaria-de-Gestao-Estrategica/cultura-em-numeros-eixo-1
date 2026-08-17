@@ -11,7 +11,6 @@
   import {
     Chart,
     DefaultTheme,
-    categorical8,
     getPillarTheme,
     resolveThemeStyle,
     Text,
@@ -19,6 +18,7 @@
     type ChartTheme,
   } from 'sniic-design-system';
   import TextLines from './TextLines.svelte';
+  import { sniic } from './cores';
   import {
     a4Scale,
     fontFamily,
@@ -83,12 +83,11 @@
   const palette = $derived(theme.palette);
 
   /**
-   * A paleta do pilar traz só três matizes reais — o resto da rampa são tons da
-   * mesma cor — então a cor da barra vem da escala categórica do sistema, que é
-   * a mesma de onde os gráficos vizinhos tiram as suas. O tema do pilar segue
-   * mandando nos neutros: tipo, base do cartão e bordas.
+   * Uma série só, então a barra sai no vermelho da marca — a primeira cor da
+   * escala categórica, de onde os gráficos vizinhos tiram as suas. O tema do
+   * pilar segue mandando nos neutros: tipo, base do cartão e bordas.
    */
-  const barColor = $derived(color ?? categorical8[0]);
+  const barColor = $derived(color ?? sniic.vermelho);
 
   const L = $derived({
     cardPadding: 24 * k,

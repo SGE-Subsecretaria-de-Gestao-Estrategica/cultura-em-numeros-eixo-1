@@ -3,7 +3,6 @@
   import {
     Chart,
     DefaultTheme,
-    colorScales,
     getContrastColor,
     getPillarTheme,
     resolveThemeStyle,
@@ -13,6 +12,7 @@
   } from 'sniic-design-system';
   import LegendChips from './LegendChips.svelte';
   import TextLines from './TextLines.svelte';
+  import { sniic } from './cores';
   import { a4Scale, fontFamily, fontSize as scale, labelFitsInBar, wrapText } from './tokens';
 
   export type CaboGuerraRow = {
@@ -147,17 +147,20 @@
   const palette = $derived(theme.palette);
 
   /**
-   * The two poles, drawn from the same scales as the RibbonChart A4 figures so
-   * the set reads as one collection.
+   * The two poles, in the two brand hues that sit furthest apart.
    *
-   * Lime rather than teal for the positive pole: against this purple, teal
-   * separates by only ΔE 3.0 under deuteranopia and 3.4 under tritanopia — the
-   * two halves of the chart collapse into one colour, which is the one thing
-   * this chart cannot afford. Lime clears it at ΔE 19.3 (deutan) and 29.6 for
-   * normal vision, and is the same pair the municipal ribbon figure runs on.
+   * The pairing is not arbitrary either way round: blue is the colour every
+   * figure in the collection gives the ente's own budget, and this chart's
+   * positive pole is exactly that — the local money the transfer pulled in.
+   * Red is the emergency law, the money that came from outside, which is what
+   * the substitution pole is made of.
+   *
+   * They are also the safest pair the palette has: ΔE 32.5 for normal vision
+   * and never below 23.7 under any form of colour blindness. That matters more
+   * here than anywhere else — if the two poles merge, the chart is gone.
    */
-  const INDUTOR = colorScales.lime[2];
-  const SUBSTITUICAO = colorScales.purple[2];
+  const INDUTOR = sniic.azul;
+  const SUBSTITUICAO = sniic.vermelho;
 
   const titleStyle = $derived(
     resolveThemeStyle<ChartTheme, 'text'>(

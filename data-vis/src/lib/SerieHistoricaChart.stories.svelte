@@ -1,10 +1,9 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { categorical8, colorScales } from 'sniic-design-system';
   import SerieHistoricaChart from './SerieHistoricaChart.svelte';
   import StoryFrame from './StoryFrame.svelte';
-  import { sniic } from './cores';
+  import { categoricaTracoDe, sniic } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   const { Story } = defineMeta({
@@ -26,8 +25,8 @@
     args: { background: null },
   });
 
-  const tripeColors = [categorical8[0], categorical8[2], categorical8[1]];
-  const equipColors = [categorical8[0], categorical8[1], categorical8[2], categorical8[4]];
+  const tripeColors = categoricaTracoDe(3);
+  const equipColors = categoricaTracoDe(4);
 
   /**
    * Duas séries a menos de um ponto de distância na primeira e na última onda,
@@ -146,7 +145,7 @@
   name="Séries que se cruzam"
   args={{
     series: coladas,
-    colors: [colorScales.purple[2], colorScales.teal[2]],
+    colors: categoricaTracoDe(2),
     yMax: 40,
     title: 'Duas séries a menos de um ponto de distância',
     subtitle: 'Caso sintético, para exercitar a resolução de colisão dos rótulos.',

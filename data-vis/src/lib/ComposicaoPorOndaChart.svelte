@@ -13,7 +13,6 @@
   import {
     Chart,
     DefaultTheme,
-    categorical8,
     getContrastColor,
     getPillarTheme,
     resolveThemeStyle,
@@ -24,6 +23,7 @@
   import LegendChips from './LegendChips.svelte';
   import TextLines from './TextLines.svelte';
   import { layoutLegend } from './legend';
+  import { categoricaMarca } from './cores';
   import {
     a4Scale,
     fontFamily,
@@ -59,7 +59,7 @@
   let {
     data,
     categorias,
-    colors = categorical8,
+    colors = categoricaMarca,
     title,
     subtitle,
     footnote,

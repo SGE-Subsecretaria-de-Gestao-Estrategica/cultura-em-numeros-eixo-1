@@ -1,9 +1,9 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { colorScales } from 'sniic-design-system';
   import BarrasHorizontaisChart from './BarrasHorizontaisChart.svelte';
   import StoryFrame from './StoryFrame.svelte';
+  import { sniic } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   const { Story } = defineMeta({
@@ -69,7 +69,7 @@
   name="Rótulos longos"
   args={{
     itens: escolaridade,
-    color: colorScales.purple[2],
+    color: sniic.azul,
     title: 'Escolaridade do gestor e institucionalização da cultura',
     subtitle:
       'Percentual de municípios com o tripé completo — plano, fundo e conselho — por escolaridade do titular, em 2021.',
@@ -84,7 +84,7 @@
   name="Muitas categorias"
   args={{
     itens: aldirBlanc,
-    color: colorScales.teal[2],
+    color: sniic.vermelho,
     bandHeight: 26,
     title: 'Execução do repasse da Lei Aldir Blanc pelos municípios',
     subtitle:
@@ -103,7 +103,7 @@
   name="Escala fixa em 100%"
   args={{
     itens: escolaridade,
-    color: colorScales.purple[2],
+    color: sniic.azul,
     xMax: 100,
     title: 'Escolaridade do gestor e institucionalização da cultura',
     subtitle: 'As mesmas barras contra a escala inteira: o tripé completo é minoria em toda faixa.',

@@ -3,7 +3,6 @@
   import {
     Chart,
     DefaultTheme,
-    colorScales,
     getContrastColor,
     getPillarTheme,
     resolveThemeStyle,
@@ -13,6 +12,7 @@
   } from 'sniic-design-system';
   import LegendChips from './LegendChips.svelte';
   import TextLines from './TextLines.svelte';
+  import { rampaVermelha, sniic } from './cores';
   import {
     a4Scale,
     fontFamily,
@@ -146,30 +146,26 @@
   const palette = $derived(theme.palette);
 
   /**
-   * Drawn from the same scales as the RibbonChart A4 figures, so the set reads
-   * as one collection — but keeping the meaning of the profiles rather than the
-   * fonte-de-recurso meaning those figures give their hues.
+   * The four profiles in the brand palette, split the way the chart is read:
+   * cool for the halves where local money grew or held, warm for the two ways
+   * it did not.
    *
-   * Lime and purple are the two poles, matching the sibling chart — and lime
-   * rather than teal because teal and this purple are ΔE 3.0 apart under
-   * deuteranopia, which would merge `Despertados` and `Substituição`, the two
-   * ends the chart is read across.
+   * `Despertados` takes the brand blue and `Substituição` the brand red — the
+   * same poles, in the same hues, as the sibling `CaboGuerraChart`, and the
+   * pair the palette separates best (ΔE 32.5, never below 23.7 under colour
+   * blindness). They are the two ends the chart is read across, so they are the
+   * pair that cannot merge.
    *
-   * `Constantes` takes the teal tint: three quarters of every bar carry no
-   * movement, and a tint recedes where a saturated hue would shout. It cannot
-   * be the lavender tint the ribbon palette uses for its residual series —
-   * that is a step of this same purple, so it would read as a pale
-   * `Substituição`. `Inertes` takes blue because it and `Substituição` are
-   * adjacent slivers that have to stay apart under every kind of colour
-   * vision. Every pair clears the gate, not just the adjacent ones: the worst
-   * is ΔE 9.4 (protan) and 17.5 for normal vision.
+   * `Constantes` takes the brand cyan: three quarters of every bar carry no
+   * movement, and cyan is the lightest step in the palette, so it holds the
+   * area without shouting. `Inertes` takes the darkest red — it and
+   * `Substituição` are adjacent slivers at the right end of every row, and two
+   * steps of the same family put them ΔE 24.7 apart while keeping both on the
+   * warm side, which is where they belong. Every pair clears the gate, not just
+   * the adjacent ones: the worst is ΔE 20.6 under colour blindness and 24.7 for
+   * normal vision.
    */
-  const seriesPalette = [
-    colorScales.lime[2],
-    colorScales.teal[1],
-    colorScales.blue[2],
-    colorScales.purple[2],
-  ];
+  const seriesPalette = [sniic.azul, sniic.ciano, rampaVermelha[0], sniic.vermelho];
   const seriesColor = (index: number) => seriesPalette[index % seriesPalette.length];
 
   const titleStyle = $derived(

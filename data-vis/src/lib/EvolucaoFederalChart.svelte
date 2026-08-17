@@ -28,6 +28,7 @@
     type ChartTheme,
   } from 'sniic-design-system';
   import LegendChips from './LegendChips.svelte';
+  import { categoricaMarcaTraco } from './cores';
   import { fontFamily, fontSize, measureLabel, tickLabelProps } from './tokens';
 
   export type GrupoDatum = {
@@ -71,7 +72,7 @@
     linhas,
     colunas,
     labels = {},
-    colors = ['#4271b5', '#ea662f', '#a44c7f'],
+    colors = categoricaMarcaTraco,
     destaque,
     width = 1000,
     height = 520,

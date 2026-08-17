@@ -22,7 +22,7 @@
 <SerieHistoricaChart
   series={gestao.equipamentos.series}
   {colors}
-  markerColor={sniic.vermelhoProfundo}
+  markerColor={sniic.marcador}
   endValueColor={sniic.azul}
   variant="faixa"
   valueFormat="abs"

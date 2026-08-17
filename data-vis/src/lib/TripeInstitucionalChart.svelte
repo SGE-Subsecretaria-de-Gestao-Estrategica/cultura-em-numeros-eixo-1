@@ -23,7 +23,7 @@
 <SerieHistoricaChart
   series={gestao.tripe.series}
   {colors}
-  markerColor={sniic.marromMarcador}
+  markerColor={sniic.marcador}
   endValueColor={sniic.azul}
   variant="faixa"
   valueFormat="pct"

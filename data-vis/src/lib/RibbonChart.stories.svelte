@@ -1,13 +1,14 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { BRL, NUM, categorical8 } from 'sniic-design-system';
+  import { BRL, NUM } from 'sniic-design-system';
   import RibbonChart from './RibbonChart.svelte';
   import StoryFrame from './StoryFrame.svelte';
   import {
     A4_RIBBON as A4,
     A4_RIBBON_LANDSCAPE as A4_LANDSCAPE,
     fonteColors,
+    fonteFederalPalette,
     fonteLabels,
   } from './fontes';
   import estadual from '../data/estadual-por-fonte.json';
@@ -29,25 +30,13 @@
   });
 
   /**
-   * Eight federal sources, so the ramp is the library's `categorical8` — the
-   * pillar ramp carries three hues, and the fonte palette above only stretches
-   * to five.
-   *
-   * The order is permuted, not invented: the two renúncia fiscal series take
-   * the warm pair (orange, red) so tax expenditure reads apart from money the
-   * União actually empenhou, and the residual `Outros órgãos` takes the muted
-   * mauve. The rest keep the ramp's own sequence.
+   * Eight federal sources in `federal.keys` order, from the shared palette —
+   * the same colours the table, the line chart and the stacked columns give
+   * these sources, so the four figures can be read side by side. Hue is the
+   * institutional group, lightness is the source inside it; see
+   * `fonteFederalPalette`.
    */
-  const federalColors = [
-    categorical8[0], // MinC — blue, the permanent budget line
-    categorical8[1], // Rouanet — renúncia fiscal
-    categorical8[6], // ANCINE — renúncia fiscal
-    categorical8[2], // FSA
-    categorical8[3], // PNAB
-    categorical8[5], // LPG
-    categorical8[4], // LAB 1
-    categorical8[7], // Outros órgãos — residual
-  ];
+  const federalColors = fonteFederalPalette;
 
   const federalLabels: Record<string, string> = {
     'Ministério da Cultura (Órgão 42000)': 'MinC',

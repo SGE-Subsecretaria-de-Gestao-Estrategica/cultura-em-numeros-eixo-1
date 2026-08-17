@@ -1,9 +1,9 @@
 <script module lang="ts">
   import type { ComponentProps } from 'svelte';
   import { defineMeta, type StoryContext } from '@storybook/addon-svelte-csf';
-  import { colorScales } from 'sniic-design-system';
   import ComposicaoPorOndaChart from './ComposicaoPorOndaChart.svelte';
   import StoryFrame from './StoryFrame.svelte';
+  import { categoricaDe, rampaDe, rampaVermelha } from './cores';
   import gestao from '../data/gestao-municipal.json';
 
   const { Story } = defineMeta({
@@ -21,26 +21,19 @@
   });
 
   /** Rampa sequencial: as categorias da estrutura estão ordenadas por grau de
-      institucionalização, do mais escuro ao mais claro. */
-  const estruturaColors = [
-    colorScales.blue[4],
-    colorScales.blue[3],
-    colorScales.blue[2],
-    colorScales.blue[1],
-    colorScales.blue[0],
-  ];
+      institucionalização, do mais escuro ao mais claro — a mesma rampa da marca
+      que o `EstruturaOrgaoGestorChart` desenha sobre os mesmos dados. */
+  const estruturaColors = [...rampaVermelha];
 
-  const generoColors = [colorScales.purple[2], colorScales.blue[3]];
+  /** Dois degraus da mesma rampa, separados por luminosidade e não por matiz:
+      gênero não é uma escala, mas duas matizes aqui sugeririam um contraste que
+      o dado não tem. */
+  const generoColors = rampaDe(2);
 
   /** Cinco categorias de novo, mas aqui três delas são fatias muito finas —
-      amarela e indígena não passam de 0,8%. */
-  const corRacaColors = [
-    colorScales.blue[3],
-    colorScales.orange[2],
-    colorScales.teal[2],
-    colorScales.yellow[2],
-    colorScales.purple[2],
-  ];
+      amarela e indígena não passam de 0,8% —, então vale a escala categórica,
+      que é onde a marca separa mais. */
+  const corRacaColors = categoricaDe(5);
 
   // `Args<typeof Story>` collapses to `never` for a meta declared with
   // `component`; the story args are just the component's props.

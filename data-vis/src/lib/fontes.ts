@@ -4,26 +4,63 @@
  * the print sizing live here rather than in any one of them.
  */
 
-import { categorical8, colorScales, purple } from 'sniic-design-system';
+import { rampaAzul, rampaCiana, rampaVermelha } from './cores';
 import { a4Scale } from './tokens';
 
 /**
- * Recurso próprio takes the library's purple; the four transfers share a
- * green family, so the chart reads as own revenue against everything that
- * was transferred in.
+ * As cinco fontes de recurso sub-nacionais, nas três matizes da marca.
  *
- * The greens alternate between the lime and teal scales while stepping
- * steadily darker (L* 84 → 74 → 64 → 35). Alternating is what keeps them
- * apart: the closest pair here is ΔE 31 in Lab, against ΔE 12 for four
- * consecutive steps of a single scale, which would blur under the ribbons'
- * 55% opacity.
+ * A matiz carrega de onde o dinheiro vem, e a luminosidade separa as fontes
+ * dentro de cada origem. É a mesma lógica das figuras federais, para que a
+ * coleção inteira possa ser lida com uma chave só:
+ *
+ * - **Azul, o orçamento do próprio ente.** O recurso próprio, a linha de base
+ *   sobre a qual todo o resto entra.
+ * - **Ciano, o que vem da União fora de uma lei de emergência.** As emendas
+ *   parlamentares — no federal, é a matiz da renúncia fiscal, o outro dinheiro
+ *   que a União move sem ser pela porta do orçamento do ente.
+ * - **Vermelhos, as três leis de emergência.** Do mais claro ao mais escuro na
+ *   ordem em que entram: LAB 1 (2020), LPG (2023), PNAB (2024). A rampa é
+ *   espaçada em luminosidade, então a ordem sobrevive à impressão em escala de
+ *   cinza, e os três degraus escolhidos são os de separação máxima que ainda
+ *   sustentam um traço sobre o cartão claro.
+ *
+ * Os 11 pontos de luminosidade entre os degraus vermelhos do meio são o que
+ * resolve o único cruzamento da figura de linhas: a LPG despencando e a PNAB
+ * subindo se atravessam em 2025.
+ *
+ * Este é o conjunto de preenchimento, para as fitas: nele as emendas ficam com
+ * o ciano da marca, que a 55% de opacidade ainda se lê. O pior par é LAB 1
+ * contra LPG, a ΔE 6,6 depois da opacidade — os dois degraus vermelhos vizinhos
+ * —, e é por isso que a figura de fitas escreve o nome da fonte dentro do
+ * segmento: aqui a cor reforça a identidade, não a carrega sozinha.
  */
 export const fonteColors = [
-  purple, // Recurso próprio
-  colorScales.lime[1], // Emendas
-  colorScales.teal[1], // LAB 1
-  colorScales.lime[2], // LPG
-  colorScales.teal[3], // PNAB
+  rampaAzul[2], // Recurso próprio — o azul da marca
+  rampaCiana[4], // Emendas — o ciano da marca
+  rampaVermelha[3], // LAB 1
+  rampaVermelha[2], // LPG — o vermelho da marca
+  rampaVermelha[0], // PNAB
+];
+
+/**
+ * As mesmas cinco fontes para as figuras de evolução estadual — as linhas e as
+ * colunas empilhadas, que são a mesma tabela e por isso têm de sair na mesma
+ * paleta.
+ *
+ * Difere de `fonteColors` num degrau só: o ciano da marca rende 1,8:1 sobre o
+ * cartão e não sustenta um traço de 2 px, então as emendas descem para o degrau
+ * abaixo. A matiz — que é o que identifica a fonte entre as figuras — não muda.
+ *
+ * Nesta versão nenhum par cai abaixo de ΔE 11,9 em visão normal nem de 11,0 sob
+ * qualquer forma de daltonismo, e o pior deles é o par vermelho vizinho.
+ */
+export const fonteMarcaColors = [
+  rampaAzul[2], // Recurso próprio
+  rampaCiana[3], // Emendas — o ciano um degrau abaixo, para aguentar o traço
+  rampaVermelha[3], // LAB 1
+  rampaVermelha[2], // LPG — o vermelho da marca
+  rampaVermelha[0], // PNAB
 ];
 
 /** Covers both datasets — the own-revenue key differs by sphere. */
@@ -40,18 +77,25 @@ export const fonteLabels: Record<string, string> = {
  * Os três grupos institucionais da série federal, na ordem em que as figuras os
  * desenham: execução direta, renúncia fiscal, transferências a entes.
  *
- * Validadas contra os seis checks: banda de luminosidade, piso de croma,
- * separação sob daltonismo (pior par ΔE 9,4 em protanopia, acima do mínimo de
- * 8), piso de visão normal e contraste contra a superfície.
+ * É uma matiz da marca para cada grupo, e é daqui que sai a chave de leitura de
+ * todas as outras figuras federais: azul é o orçamento executado pela União,
+ * ciano é a renúncia fiscal, vermelho é o dinheiro que desce para estados e
+ * municípios. As oito fontes abaixo herdam a matiz do grupo a que pertencem, e
+ * as figuras sub-nacionais seguem a mesma chave.
  *
- * Azul e laranja mantêm a identidade que MinC e Rouanet já têm no ribbon chart;
- * o roxo é o extraordinário, o dinheiro que só existe quando uma lei o cria.
+ * São as três primeiras da escala de traço da marca: nenhum par cai abaixo de
+ * ΔE 21 em visão normal, nem de 16 sob qualquer forma de daltonismo — a maior
+ * separação que três séries podem ter nesta paleta.
  *
  * Ficam aqui, e não em cada figura, porque o combo de linhas e colunas e o
  * gráfico de linhas desenham os mesmos três grupos: duas paletas iguais copiadas
  * em dois arquivos só esperam a hora de divergir.
  */
-export const grupoFederalColors = ['#4271b5', '#ea662f', '#a44c7f'];
+export const grupoFederalColors = [
+  rampaAzul[2], // Execução direta
+  rampaCiana[3], // Renúncia fiscal
+  rampaVermelha[2], // Transferências a estados e municípios
+];
 
 /** Só o terceiro encurta — por extenso, ele não cabe ao lado da linha. */
 export const grupoFederalLabels: Record<string, string> = {
@@ -61,42 +105,78 @@ export const grupoFederalLabels: Record<string, string> = {
 };
 
 /**
- * As oito fontes federais na ordem em que o JSON as traz, com a cor que cada
- * uma tem no ribbon chart — a permutação existe para que a tabela, o ribbon e
- * o gráfico de linhas possam ser lidos um ao lado do outro.
+ * As oito fontes federais na ordem em que o JSON as traz. É a mesma paleta na
+ * tabela, no ribbon e nos gráficos de linhas e de colunas, para que as quatro
+ * figuras possam ser lidas uma ao lado da outra.
  *
- * Oito séries passam do que a rampa do pilar sustenta (três matizes), então a
- * paleta é a categórica do design system.
+ * Oito séries passam do que três matizes sustentam sozinhas, então a paleta usa
+ * as duas dimensões que tem: a **matiz diz a que grupo institucional a fonte
+ * pertence** — os mesmos três de `grupoFederalColors` — e a **luminosidade
+ * separa as fontes dentro do grupo**. Quem já leu a figura dos três grupos
+ * chega aqui sabendo metade da legenda.
+ *
+ * - **Azuis, a execução direta.** MinC no azul da marca, por ser a maior; FSA
+ *   no degrau escuro; os outros órgãos no claro.
+ * - **Cianos, a renúncia fiscal.** A Lei Rouanet no ciano da marca e a ANCINE
+ *   três degraus abaixo — as duas ficam sempre encostadas na pilha, e essa
+ *   distância é o que impede que se fundam numa faixa só, que é exatamente a
+ *   leitura errada: metade do investimento federal é renúncia, e a figura
+ *   precisa mostrar de qual das duas.
+ * - **Vermelhos, o que desce para estados e municípios.** As três leis com a
+ *   mais nova no degrau mais escuro, que é como as figuras sub-nacionais já as
+ *   desenham.
+ *
+ * Nenhum par cai abaixo de ΔE 12,6 em visão normal nem de 8,9 sob qualquer
+ * forma de daltonismo, e nenhuma adjacência da pilha abaixo de 12,6 — todas as
+ * seis anteriores estavam abaixo disso, e é por elas que as duas tabelas de
+ * correção que existiam aqui saíram.
  */
-const ORDEM_CATEGORICA = [0, 1, 6, 2, 3, 5, 4, 7];
+export const fonteFederalPalette = [
+  rampaAzul[2], // Ministério da Cultura
+  rampaCiana[4], // Lei Rouanet
+  rampaCiana[1], // Incentivo (ANCINE)
+  rampaAzul[0], // FSA
+  rampaVermelha[0], // PNAB
+  rampaVermelha[1], // Lei Paulo Gustavo
+  rampaVermelha[3], // Lei Aldir Blanc 1
+  rampaAzul[3], // Outros órgãos
+];
 
 export const fonteFederalColors = (keys: readonly string[]): Record<string, string> =>
-  Object.fromEntries(keys.map((k, i) => [k, categorical8[ORDEM_CATEGORICA[i]]]));
+  Object.fromEntries(keys.map((k, i) => [k, fonteFederalPalette[i % fonteFederalPalette.length]]));
 
 /**
- * Três degraus da paleta descem um tom quando as fontes são desenhadas como
- * traço fino, e não como faixa.
+ * Um degrau desce quando as fontes são desenhadas como traço fino, e não como
+ * faixa.
  *
- * A escala categórica é afinada para o ribbon chart, onde a cor preenche área
- * e ainda passa por 55% de opacidade — o amarelo `#f6c341` e o lavanda
- * `#c9b6c5` funcionam ali. Num traço de 2 px, e sobretudo no nome da série
- * escrito na cor dela, os dois rendem menos de 2:1 contra o cartão claro e
- * saem ilegíveis; o lima `#81a72f` fica em 2,8:1, no limite.
+ * O ciano da marca preenche área muito bem, e ainda aguenta os 55% de opacidade
+ * do ribbon chart. Num traço de 2 px, e sobretudo no nome da série escrito na
+ * cor dela, ele rende 1,8:1 contra o cartão claro e sai ilegível.
  *
- * A troca é pelo degrau imediatamente mais escuro da mesma família, então a
- * matiz — que é o que identifica a fonte entre as figuras — não muda: amarelo
- * vira ocre, lima vira oliva, lavanda vira malva, e os três passam de 3,4:1.
+ * A troca é por um degrau mais escuro da mesma família, então a matiz — que é o
+ * que identifica a fonte entre as figuras — não muda: a Lei Rouanet passa de
+ * 1,8:1 para 3,9:1, e continua sendo o ciano do grupo da renúncia fiscal.
  */
 const CONTRASTE_EM_TRACO: Record<string, string> = {
-  [categorical8[3]]: colorScales.yellow[3],
-  [categorical8[5]]: colorScales.lime[3],
-  [categorical8[7]]: colorScales.lavender[3],
+  [rampaCiana[4]]: rampaCiana[2],
 };
 
 export const fonteFederalLineColors = (keys: readonly string[]): Record<string, string> =>
   Object.fromEntries(
     Object.entries(fonteFederalColors(keys)).map(([k, cor]) => [k, CONTRASTE_EM_TRACO[cor] ?? cor]),
   );
+
+/**
+ * Na pilha, o par que importa não é cada cor contra o cartão, é cada cor contra
+ * a sua vizinha — e aí a paleta já serve como está: a menor adjacência é PNAB
+ * sob a Lei Paulo Gustavo, dois degraus vermelhos a ΔE 12,6 (10,4 sob
+ * protanopia), com o vão de superfície entre as duas.
+ *
+ * Fica como função, e não como sinônimo, porque é a assinatura que as figuras
+ * empilhadas chamam — e porque é aqui que uma correção entraria, se algum ano
+ * futuro puser duas fontes de matizes vizinhas encostadas.
+ */
+export const fonteFederalStackColors = fonteFederalColors;
 
 /**
  * Nomes curtos das fontes federais.
