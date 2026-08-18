@@ -7,6 +7,7 @@
     stackOrderAscending,
     type ScaleBand,
     type ScaleLinear,
+    type Series,
   } from 'd3';
   import {
     Axis,
@@ -34,6 +35,7 @@
   } from './callouts';
   import ValueCallout from './ValueCallout.svelte';
   import LegendChips from './LegendChips.svelte';
+  import { fonteMarcaColors } from './fontes';
   import {
     fontFamily,
     fontSize as scale,
@@ -47,6 +49,32 @@
     keys: string[];
     /** Short display names for the legend; falls back to the raw key. */
     labels?: Record<string, string>;
+    /**
+     * Cores na ordem de `keys`. Por omissão, a paleta do tema — ver
+     * `seriesPalette`, que é a que as figuras existentes usam.
+     */
+    colors?: readonly string[];
+    /**
+     * Ordem de empilhamento. Por omissão, `stackOrderAscending`: a menor
+     * parcela na base, que é o que deixa as fatias finas encostadas no eixo, ao
+     * alcance de uma chamada curta.
+     *
+     * `stackOrderNone` empilha na ordem de `keys`, da base para o topo. Vale
+     * quando a ordem *significa* alguma coisa — uma fonte permanente na base e
+     * o que entra por cima dela sendo episódico —, ao custo de deixar a fatia
+     * fina no meio da pilha.
+     */
+    order?: (series: Series<StackedDatum, string>) => Iterable<number>;
+    /**
+     * Folga acima da coluna mais alta, como fator do maior total. Por omissão
+     * 1,08 — o bastante para o rótulo do total não sair cortado.
+     *
+     * Precisa de mais quando um segmento fino fica no *topo* da pilha: a
+     * chamada dele é colocada acima do segmento, o total já está ali, e a
+     * rotina de posicionamento só sabe empurrar a caixa para cima. Sem altura
+     * sobrando ela não empurra nada, e os dois números saem sobrepostos.
+     */
+    headroom?: number;
     title: string;
     subtitle?: string;
     /** Expansion of the abbreviations used in the legend. */
@@ -63,6 +91,9 @@
     data,
     keys,
     labels = {},
+    colors,
+    order = stackOrderAscending,
+    headroom = 1.08,
     title,
     subtitle,
     footnote,
@@ -80,7 +111,7 @@
   /** Square corners: the theme's rounding leaves notches between stacked segments. */
   const SEGMENT_RADIUS = 0;
   /** Headroom above the tallest column so its total label isn't clipped. */
-  const Y_HEADROOM = 1.08;
+  const Y_HEADROOM = $derived(headroom);
   /**
    * Below this a segment is thinner than a hairline — Emendas is R$ 3 mi against
    * a R$ 5 bi column in some years — and a callout would point at nothing.
@@ -132,21 +163,15 @@
   );
 
   /**
-   * Series colours in `keys` order. The two recurring sources (recurso próprio,
-   * emendas) take muted neutrals so they read as the baseline, leaving the
-   * theme's hues to mark the policy-specific transfers — which are the point of
-   * the chart. Falls back to the categorical ramp for any extra series.
+   * Series colours in `keys` order — the five fontes in the shared brand
+   * palette, the same colours the ribbon and the evolução estadual figures give
+   * them. Blue is the ente's own budget, cyan what the União transferred
+   * outside an emergency law, and the three reds are the laws in the order they
+   * came; see `fonteMarcaColors`. Falls back to the categorical ramp for any
+   * extra series.
    */
-  const seriesPalette = $derived([
-    palette.neutral[100],
-    palette.neutral[200],
-    palette.accent,
-    palette.primary,
-    palette.secondary,
-  ]);
-
   const seriesColor = (index: number) =>
-    seriesPalette[index] ?? getCategoricalColor(index, theme);
+    colors?.[index] ?? fonteMarcaColors[index] ?? getCategoricalColor(index, theme);
 
   const legendItems = $derived(
     keys.map((key, i) => ({ label: labels[key] ?? key, color: seriesColor(i) })),
@@ -166,7 +191,7 @@
     stack<StackedDatum, string>()
       .keys(keys)
       .value((d, key) => Number(d[key]) || 0)
-      .order(stackOrderAscending)(data),
+      .order(order)(data),
   );
 
   /**
@@ -183,8 +208,29 @@
     const columns: CalloutColumn[] = data.map((row, rowIndex) => {
       const centerX = (xScale(String(row.label)) ?? 0) + bandwidth / 2;
       const total = BRL.format(rowTotal(row));
-      const obstacles: Box[] = [];
       const items: CalloutInput[] = [];
+
+      /*
+       * O total da coluna é o primeiro obstáculo, e não só os rótulos que estão
+       * dentro dela: ele fica logo acima do topo da pilha, que é exatamente
+       * para onde vai a chamada de um segmento fino que esteja no topo — o caso
+       * da PNAB em 2024, R$ 557 mi numa coluna de R$ 7,7 bi. Sem isto, os dois
+       * números saem impressos um sobre o outro.
+       *
+       * A caixa é a mesma que o desenho do total usa: recuo de 8 acima do topo
+       * da pilha, ancorada pela base, e a altura do corpo do tipo.
+       */
+      const totalSize = Number(totalStyle.fontSize);
+      const totalWidth = measureLabel(total, totalSize, Number(totalStyle.fontWeight));
+      const totalTop = yScale(rowTotal(row)) - 8;
+      const obstacles: Box[] = [
+        {
+          x: centerX - totalWidth / 2,
+          y: totalTop - totalSize,
+          width: totalWidth,
+          height: totalSize,
+        },
+      ];
 
       stacked.forEach((series, seriesIndex) => {
         const point = series[rowIndex];
@@ -288,7 +334,7 @@
       color={(_key: string, i: number) => seriesColor(i)}
       {xScale}
       {yScale}
-      order={stackOrderAscending}
+      {order}
       rx={SEGMENT_RADIUS}
     >
       {#snippet children({ barStacks }: { barStacks: { key: string; bars: ComputedBar[] }[] })}
