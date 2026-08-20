@@ -16,7 +16,7 @@ Este documento descreve a arquitetura da esteira de dados orçamentários do **E
 
 ## 1. Passo a Passo: Como rodar a esteira completa
 
-Para quem acabou de chegar no repositório, a execução do código exige uma ordem rigorosa, pois as esferas alimentam a consolidação nacional. Siga os passos abaixo:
+Siga os passos abaixo:
 
 1. **Abra o Projeto pelo `.Rproj`:** Vá até a raiz do repositório clonado e dê um duplo clique no arquivo `.Rproj` (ex: `orcamento.Rproj`). Isso garantirá que os caminhos relativos (via pacote `{here}`) funcionem perfeitamente.
 2. **Restaure o Ambiente Virtual (`renv`):** No console do RStudio, digite `renv::restore()`. O R instalará exatamente as mesmas versões dos pacotes utilizadas no desenvolvimento.
