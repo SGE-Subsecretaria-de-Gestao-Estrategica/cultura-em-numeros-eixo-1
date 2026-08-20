@@ -69,7 +69,7 @@ Abaixo está a ficha técnica de cada etapa da esteira. Nela consta o que o scri
 * **📤 OUTPUTS GERADOS:**
   * **Bases:** `data/processed/municipal/municipal_final.csv`, além dos 4 CSVs de Indicadores de Metas da RCL.
   * **Gráficos:** `outputs/municipal/grafico_cabo_guerra.png`, `grafico_porte_comportamental.png`.
-  * **Interativos:** `grafico_dispersao_interativo.html`, `grafico_sankey_interativo.html`.
+  * **Interativos:** `grafico_dispersao_interativo.html`
 
 ### 2.4. Consolidação Macro Nacional (`gasto_nacional_consolidado.R`)
 **Objetivo:** Lê as três bases "finais" processadas nos passos anteriores e as consolida em uma visão macroeconômica tricolor (Municípios, Estados, União).
