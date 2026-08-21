@@ -25,7 +25,7 @@ Siga os passos abaixo:
    - **Passo 1:** Rode `scripts/federal/gasto_federal.R`
    - **Passo 2:** Rode `scripts/estadual/gasto_estadual.R`
    - **Passo 3:** Rode `scripts/municipal/gasto_municipal.R`
-   - **Passo 4:** Rode `scripts/nacional/gasto_nacional_consolidado.R`
+   - **Passo 4:** Rode `scripts/nacional/nacional.R`
 
 ---
 
