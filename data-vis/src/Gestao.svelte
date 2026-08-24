@@ -11,10 +11,14 @@
    */
   import EquipamentosCulturaisChart from './lib/EquipamentosCulturaisChart.svelte';
   import EscolaridadeTripeChart from './lib/EscolaridadeTripeChart.svelte';
+  import EstruturaMapaChart from './lib/EstruturaMapaChart.svelte';
   import EstruturaOrgaoGestorChart from './lib/EstruturaOrgaoGestorChart.svelte';
   import ExecucaoAldirBlancChart from './lib/ExecucaoAldirBlancChart.svelte';
+  import ExecucaoLabRegiaoChart from './lib/ExecucaoLabRegiaoChart.svelte';
   import GeneroTitularesChart from './lib/GeneroTitularesChart.svelte';
   import TripeInstitucionalChart from './lib/TripeInstitucionalChart.svelte';
+  import TripeMapaChart from './lib/TripeMapaChart.svelte';
+  import TripeRegiaoChart from './lib/TripeRegiaoChart.svelte';
 
   /**
    * `?bg=0` remove o fundo próprio dos cartões, que é como o export de PNG roda
@@ -44,7 +48,40 @@
   </header>
 
   <figure>
+    <TripeMapaChart {background} />
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <TripeRegiaoChart {background} />
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
     <EstruturaOrgaoGestorChart {background} />
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <EstruturaMapaChart {background} />
   </figure>
 </div>
 
@@ -78,6 +115,17 @@
 
   <figure>
     <ExecucaoAldirBlancChart {background} />
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>A resposta municipal à Lei Aldir Blanc</h1>
+  </header>
+
+  <figure>
+    <ExecucaoLabRegiaoChart {background} />
   </figure>
 </div>
 

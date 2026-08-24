@@ -152,20 +152,21 @@
    *
    * `Despertados` takes the brand blue and `Substituição` the brand red — the
    * same poles, in the same hues, as the sibling `CaboGuerraChart`, and the
-   * pair the palette separates best (ΔE 32.5, never below 23.7 under colour
+   * pair the palette separates best (ΔE 32.2, never below 26.7 under colour
    * blindness). They are the two ends the chart is read across, so they are the
    * pair that cannot merge.
    *
-   * `Constantes` takes the brand cyan: three quarters of every bar carry no
-   * movement, and cyan is the lightest step in the palette, so it holds the
-   * area without shouting. `Inertes` takes the darkest red — it and
-   * `Substituição` are adjacent slivers at the right end of every row, and two
-   * steps of the same family put them ΔE 24.7 apart while keeping both on the
-   * warm side, which is where they belong. Every pair clears the gate, not just
-   * the adjacent ones: the worst is ΔE 20.6 under colour blindness and 24.7 for
-   * normal vision.
+   * `Constantes` takes the brand green: three quarters of every bar carry no
+   * movement, and green is the lightest step in the palette, so it holds the
+   * area without shouting — and its lightness is also what keeps it apart from
+   * the brand red under red-green blindness. `Inertes` takes the darkest red —
+   * it and `Substituição` are adjacent slivers at the right end of every row,
+   * and two steps of the same family put them ΔE 26.5 apart while keeping both
+   * on the warm side, which is where they belong. Every pair clears the gate,
+   * not just the adjacent ones: the worst is ΔE 17.6 under colour blindness and
+   * 26.5 for normal vision.
    */
-  const seriesPalette = [sniic.azul, sniic.ciano, rampaVermelha[0], sniic.vermelho];
+  const seriesPalette = [sniic.azul, sniic.verde, rampaVermelha[0], sniic.vermelho];
   const seriesColor = (index: number) => seriesPalette[index % seriesPalette.length];
 
   const titleStyle = $derived(
@@ -383,6 +384,7 @@
 </script>
 
 <Chart
+  {fontFamily}
   {responsive}
   {width}
   height={cardHeight}

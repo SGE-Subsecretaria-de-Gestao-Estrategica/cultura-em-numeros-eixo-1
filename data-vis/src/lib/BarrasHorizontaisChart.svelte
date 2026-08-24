@@ -175,6 +175,7 @@
 </script>
 
 <Chart
+  {fontFamily}
   {responsive}
   {width}
   height={cardHeight}

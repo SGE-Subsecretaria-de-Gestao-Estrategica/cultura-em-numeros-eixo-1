@@ -1,21 +1,24 @@
 /**
- * A paleta da marca do SNIIC — as três matizes e as variações delas com que
+ * A paleta da marca do SNIIC — as cinco matizes e as variações delas com que
  * todas as figuras são desenhadas.
  *
- * As três cores são as mesmas que o tema do pilar 1 do design system carrega
- * como `primary`, `secondary` e `accent`. O que este arquivo acrescenta são as
+ * As cinco cores da marca: vermelho `#D5362A`, rosa `#EC6596`, roxo `#4B2F92`,
+ * azul `#4F68DA` e verde `#68CF27`. O que este arquivo acrescenta são as
  * variações: cada matiz vira uma rampa de cinco degraus, e é dela que saem as
- * cores das categorias. A escala categórica do design system não é mais usada
- * em nenhuma figura.
+ * cores das categorias. A escala categórica do design system não é usada em
+ * nenhuma figura.
  *
- * Por que rampas, e não mais matizes: com três matizes só, a separação entre
- * séries tem de vir da luminosidade. É ela, e não a saturação, que sobrevive à
- * impressão em escala de cinza e à maior parte das formas de daltonismo — e é
- * o que permite oito séries saírem de três cores sem virarem uma mancha só.
+ * Por que rampas, e não só matizes: a separação por luminosidade é o que
+ * sobrevive à impressão em escala de cinza e à maior parte das formas de
+ * daltonismo. E esta paleta tem um par que o daltonismo derruba de fato:
+ * vermelho e verde ficam praticamente iguais sob protanopia e deuteranopia
+ * quando têm a mesma luminosidade — é por isso que o verde de preenchimento é
+ * claro, o verde de traço é o degrau mais escuro, e nenhum degrau médio do
+ * verde aparece ao lado dos vermelhos.
  */
 
 /**
- * Os degraus das três rampas são medidos na mesma escala de luminosidade em
+ * Os degraus das cinco rampas são medidos na mesma escala de luminosidade em
  * OKLab — L* 0,32 / 0,44 / 0,555 / 0,67 / 0,79 —, com a matiz mantida e o croma
  * caindo em direção às pontas, onde ele não cabe no sRGB. Duas consequências
  * que as figuras usam o tempo todo:
@@ -26,39 +29,58 @@
  *   é o que faz uma rampa servir de escala sequencial.
  *
  * A cor da marca ocupa o degrau em que ela mesma cai: 2 no vermelho e no azul,
- * 4 no ciano, que é claro por natureza.
+ * 3 no rosa, 1 no roxo — que é escuro por natureza — e 4 no verde, que é claro
+ * por natureza.
  */
 
-/** Do mais escuro ao mais claro, com o `#CB3328` da marca no degrau 2. */
-export const rampaVermelha = ['#620A07', '#961E16', '#CB3328', '#E46B5C', '#FA9F91'] as const;
-
-/** Do mais escuro ao mais claro, com o `#2062C2` da marca no degrau 2. */
-export const rampaAzul = ['#06306A', '#144EA1', '#2062C2', '#6696DF', '#98BCF3'] as const;
+/** Do mais escuro ao mais claro, com o `#D5362A` da marca no degrau 2. */
+export const rampaVermelha = ['#660001', '#9E0102', '#D5362A', '#F65848', '#FF9C8D'] as const;
 
 /**
- * Do mais escuro ao mais claro, com o `#12C9D2` da marca no degrau 4.
+ * Do mais escuro ao mais claro, com o `#EC6596` da marca no degrau 3.
  *
- * O ciano da marca é claro demais para carregar traço ou texto: sobre o cartão
- * ele rende 1,8:1. Quem precisa dele num traço fino pega um degrau mais escuro
- * da mesma família — a matiz, que é o que identifica a série entre as figuras,
- * não muda.
+ * O rosa da marca rende 2,6:1 sobre o cartão — preenche bem, mas não sustenta
+ * um traço fino. Quem precisa dele num traço pega um degrau mais escuro da
+ * mesma família.
  */
-export const rampaCiana = ['#13393C', '#185D61', '#1E8288', '#29A8AF', '#12C9D2'] as const;
+export const rampaRosa = ['#610030', '#960B4F', '#BD3B6F', '#EC6596', '#FF95B7'] as const;
+
+/** Do mais escuro ao mais claro, com o `#4B2F92` da marca no degrau 1. */
+export const rampaRoxa = ['#381579', '#4B2F92', '#755EC5', '#9682EB', '#BAAEFF'] as const;
+
+/** Do mais escuro ao mais claro, com o `#4F68DA` da marca no degrau 2. */
+export const rampaAzul = ['#191A8A', '#3143B1', '#4F68DA', '#6E8BFF', '#A1B7FF'] as const;
+
+/**
+ * Do mais escuro ao mais claro, com o `#68CF27` da marca no degrau 4.
+ *
+ * O verde da marca é claro demais para carregar traço ou texto: sobre o cartão
+ * ele rende 1,7:1. E os degraus médios têm um problema só deles: na mesma
+ * luminosidade de um vermelho, um verde some sob protanopia e deuteranopia.
+ * Num traço, o verde desce direto ao degrau 0, que se separa dos vermelhos
+ * escuros por luminosidade — a matiz, que é o que identifica a série entre as
+ * figuras, não muda.
+ */
+export const rampaVerde = ['#183D00', '#2A6201', '#3D8702', '#51AF03', '#68CF27'] as const;
 
 export const sniic = {
   /** Vermelho da marca — `rampaVermelha[2]`. */
   vermelho: rampaVermelha[2],
+  /** Rosa da marca — `rampaRosa[3]`. */
+  rosa: rampaRosa[3],
+  /** Roxo da marca — `rampaRoxa[1]`. */
+  roxo: rampaRoxa[1],
   /** Azul da marca — `rampaAzul[2]`. */
   azul: rampaAzul[2],
-  /** Ciano da marca — `rampaCiana[4]`. */
-  ciano: rampaCiana[4],
+  /** Verde da marca — `rampaVerde[4]`. */
+  verde: rampaVerde[4],
   /**
    * A cor dos marcadores pousados sobre uma faixa vermelha grossa.
    *
    * Sobre a faixa, um ponto da própria cor dela sumiria dentro dela, e um ponto
    * de outra matiz traria uma segunda cor para dentro do dado. O degrau mais
-   * escuro da mesma família resolve os dois: rende 2,6:1 contra a faixa, que é
-   * o máximo que a família dá, e não acrescenta cor nenhuma à figura.
+   * escuro da mesma família resolve os dois: é o máximo de contraste que a
+   * família dá contra a faixa, e não acrescenta cor nenhuma à figura.
    */
   marcador: rampaVermelha[0],
 } as const;
@@ -87,34 +109,36 @@ export const rampaDe = (n: number): string[] => degrausDe(rampaVermelha, n);
  * A escala categórica da marca: a cor de cada série quando as séries não estão
  * ordenadas entre si.
  *
- * A ordem é gulosa, não arbitrária — cada degrau é o que fica mais longe de
- * todos os já escolhidos. Isso torna todo prefixo utilizável: um gráfico de
- * três séries pega as três primeiras e recebe as três cores da marca; um de
- * cinco pega as cinco primeiras e recebe o melhor conjunto de cinco que a
- * paleta dá. Nenhuma figura precisa escolher índices na mão.
+ * As cinco primeiras são as cinco cores da marca, na ordem da marca — um
+ * gráfico de até cinco séries recebe só cores oficiais. Da sexta em diante a
+ * ordem é gulosa: cada degrau é o que fica mais longe de todos os já
+ * escolhidos, então todo prefixo continua utilizável e nenhuma figura precisa
+ * escolher índices na mão.
  *
  * O que cada tamanho garante, como distância mínima entre duas séries quaisquer
  * (ΔE em OKLab ×100, visão normal / pior forma de daltonismo):
  *
  * | séries | 3     | 4     | 5     | 6     | 7     | 8     |
  * |--------|-------|-------|-------|-------|-------|-------|
- * | ΔE     | 29/24 | 25/21 | 20/17 | 15/12 | 12/11 | 12/10 |
+ * | ΔE     | 15/11 | 15/11 | 15/11 | 15/11 | 15/11 | 11/10 |
  *
- * O piso confortável para preenchimentos é ΔE 15. Até seis séries a paleta o
- * sustenta; de sete em diante ela desce a ~12, e a figura tem de carregar a
- * identidade por outro meio — rótulo dentro do segmento, nome na ponta da
- * linha — com a cor fazendo o reforço, não o trabalho. Vale para preenchimento;
- * para traço fino, `categoricaTracoDe`.
+ * O piso confortável para preenchimentos é ΔE 15 — a paleta o sustenta até sete
+ * séries em visão normal, mas o piso sob daltonismo é 11 desde a quarta série
+ * (o rosa e o azul claros sob tritanopia, o verde e o vermelho sob
+ * deuteranopia). De seis em diante convém a figura carregar a identidade por
+ * outro meio — rótulo dentro do segmento, nome na ponta da linha — com a cor
+ * fazendo o reforço, não o trabalho. Vale para preenchimento; para traço fino,
+ * `categoricaTracoDe`.
  */
 export const categoricaMarca = [
   rampaVermelha[2], // o vermelho da marca
+  rampaRosa[3], // o rosa da marca
+  rampaRoxa[1], // o roxo da marca
   rampaAzul[2], // o azul da marca
-  rampaCiana[4], // o ciano da marca
+  rampaVerde[4], // o verde da marca
   rampaVermelha[0],
-  rampaAzul[0],
+  rampaRosa[1],
   rampaAzul[3],
-  rampaVermelha[3],
-  rampaVermelha[1],
 ] as const;
 
 /**
@@ -122,28 +146,26 @@ export const categoricaMarca = [
  * escrevem o nome da série na cor dela.
  *
  * A diferença é o piso de contraste contra o cartão: um preenchimento se
- * sustenta em 1,6:1, um traço de 2 px não. Os degraus claros saem, e a série
- * que ficaria com o ciano da marca fica com o degrau imediatamente abaixo.
+ * sustenta em 1,7:1, um traço de 2 px não. O rosa desce um degrau que ainda é
+ * rosa; o verde desce até o degrau mais escuro, porque é o único que não some
+ * ao lado de um vermelho sob protanopia ou deuteranopia — os degraus médios
+ * rendem ΔE 2,5 a 3,6 contra o vermelho da marca, que é uma cor só.
  *
- * Sai melhor que a escala categórica do design system que estas figuras usavam:
- * nas oito séries federais, o pior par vai de ΔE 9,0 para 11,8 em visão normal,
- * de 3,8 para 8,5 em protanopia e de 0,4 — duas cores praticamente iguais — para
- * 11,5 em deuteranopia.
- *
- * Até cinco séries a distância mínima é ΔE 20 e nenhuma forma de daltonismo cai
- * abaixo de 16. Da sexta em diante o ciano precisa de um segundo degrau e o par
- * azul-ciano escuro colapsa sob tritanopia (ΔE 4,7) — que é a forma rara, e
- * mesmo assim o gráfico só deve chegar lá se rotular as séries diretamente.
+ * Até quatro séries a distância mínima é ΔE 17 em visão normal e 12 sob
+ * qualquer forma de daltonismo. A quinta série traz o verde e o piso sob
+ * tritanopia desce a 9; da sexta em diante os degraus repetidos derrubam o piso
+ * a ΔE 6-7 — daí em diante o gráfico só deve chegar se rotular as séries
+ * diretamente, com a cor fazendo o reforço.
  */
 export const categoricaMarcaTraco = [
   rampaVermelha[2], // o vermelho da marca
+  rampaRosa[1], // o rosa dois degraus abaixo, para aguentar o traço
+  rampaRoxa[1], // o roxo da marca
   rampaAzul[2], // o azul da marca
-  rampaCiana[3], // o ciano um degrau abaixo, para aguentar o traço
-  rampaVermelha[0],
-  rampaAzul[0],
-  rampaCiana[2],
-  rampaVermelha[1],
-  rampaCiana[1],
+  rampaVerde[0], // o verde no degrau mais escuro — ver o comentário da rampa
+  rampaRosa[2],
+  rampaRoxa[0],
+  rampaAzul[1],
 ] as const;
 
 /** As `n` primeiras da escala categórica. Ver `categoricaMarca`. */

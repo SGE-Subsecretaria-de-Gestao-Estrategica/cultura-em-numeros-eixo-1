@@ -4,11 +4,11 @@
  * the print sizing live here rather than in any one of them.
  */
 
-import { rampaAzul, rampaCiana, rampaVermelha } from './cores';
+import { rampaAzul, rampaRosa, rampaVermelha } from './cores';
 import { a4Scale } from './tokens';
 
 /**
- * As cinco fontes de recurso sub-nacionais, nas três matizes da marca.
+ * As cinco fontes de recurso sub-nacionais, em três matizes da marca.
  *
  * A matiz carrega de onde o dinheiro vem, e a luminosidade separa as fontes
  * dentro de cada origem. É a mesma lógica das figuras federais, para que a
@@ -16,9 +16,12 @@ import { a4Scale } from './tokens';
  *
  * - **Azul, o orçamento do próprio ente.** O recurso próprio, a linha de base
  *   sobre a qual todo o resto entra.
- * - **Ciano, o que vem da União fora de uma lei de emergência.** As emendas
+ * - **Rosa, o que vem da União fora de uma lei de emergência.** As emendas
  *   parlamentares — no federal, é a matiz da renúncia fiscal, o outro dinheiro
- *   que a União move sem ser pela porta do orçamento do ente.
+ *   que a União move sem ser pela porta do orçamento do ente. O rosa, e não o
+ *   verde, porque esta paleta convive com três vermelhos: um verde médio some
+ *   ao lado de um vermelho sob protanopia e deuteranopia, e o rosa é a matiz
+ *   restante que se separa dos três sob todas as formas de daltonismo.
  * - **Vermelhos, as três leis de emergência.** Do mais claro ao mais escuro na
  *   ordem em que entram: LAB 1 (2020), LPG (2023), PNAB (2024). A rampa é
  *   espaçada em luminosidade, então a ordem sobrevive à impressão em escala de
@@ -30,14 +33,14 @@ import { a4Scale } from './tokens';
  * subindo se atravessam em 2025.
  *
  * Este é o conjunto de preenchimento, para as fitas: nele as emendas ficam com
- * o ciano da marca, que a 55% de opacidade ainda se lê. O pior par é LAB 1
- * contra LPG, a ΔE 6,6 depois da opacidade — os dois degraus vermelhos vizinhos
- * —, e é por isso que a figura de fitas escreve o nome da fonte dentro do
- * segmento: aqui a cor reforça a identidade, não a carrega sozinha.
+ * o degrau claro do rosa, que a 55% de opacidade ainda se lê. O pior par é
+ * LAB 1 contra LPG, a ΔE 5,8 depois da opacidade — os dois degraus vermelhos
+ * vizinhos —, e é por isso que a figura de fitas escreve o nome da fonte dentro
+ * do segmento: aqui a cor reforça a identidade, não a carrega sozinha.
  */
 export const fonteColors = [
   rampaAzul[2], // Recurso próprio — o azul da marca
-  rampaCiana[4], // Emendas — o ciano da marca
+  rampaRosa[4], // Emendas — o degrau claro do rosa
   rampaVermelha[3], // LAB 1
   rampaVermelha[2], // LPG — o vermelho da marca
   rampaVermelha[0], // PNAB
@@ -48,16 +51,17 @@ export const fonteColors = [
  * colunas empilhadas, que são a mesma tabela e por isso têm de sair na mesma
  * paleta.
  *
- * Difere de `fonteColors` num degrau só: o ciano da marca rende 1,8:1 sobre o
- * cartão e não sustenta um traço de 2 px, então as emendas descem para o degrau
- * abaixo. A matiz — que é o que identifica a fonte entre as figuras — não muda.
+ * Difere de `fonteColors` num degrau só: o rosa claro rende 1,8:1 sobre o
+ * cartão e não sustenta um traço de 2 px, então as emendas descem para um
+ * degrau escuro. A matiz — que é o que identifica a fonte entre as figuras —
+ * não muda.
  *
- * Nesta versão nenhum par cai abaixo de ΔE 11,9 em visão normal nem de 11,0 sob
+ * Nesta versão nenhum par cai abaixo de ΔE 9,3 em visão normal nem de 6,0 sob
  * qualquer forma de daltonismo, e o pior deles é o par vermelho vizinho.
  */
 export const fonteMarcaColors = [
   rampaAzul[2], // Recurso próprio
-  rampaCiana[3], // Emendas — o ciano um degrau abaixo, para aguentar o traço
+  rampaRosa[1], // Emendas — o rosa escuro, para aguentar o traço
   rampaVermelha[3], // LAB 1
   rampaVermelha[2], // LPG — o vermelho da marca
   rampaVermelha[0], // PNAB
@@ -79,13 +83,13 @@ export const fonteLabels: Record<string, string> = {
  *
  * É uma matiz da marca para cada grupo, e é daqui que sai a chave de leitura de
  * todas as outras figuras federais: azul é o orçamento executado pela União,
- * ciano é a renúncia fiscal, vermelho é o dinheiro que desce para estados e
+ * rosa é a renúncia fiscal, vermelho é o dinheiro que desce para estados e
  * municípios. As oito fontes abaixo herdam a matiz do grupo a que pertencem, e
  * as figuras sub-nacionais seguem a mesma chave.
  *
- * São as três primeiras da escala de traço da marca: nenhum par cai abaixo de
- * ΔE 21 em visão normal, nem de 16 sob qualquer forma de daltonismo — a maior
- * separação que três séries podem ter nesta paleta.
+ * Como traço, a renúncia fica no rosa escuro: nenhum par cai abaixo de ΔE 17
+ * em visão normal, nem de 15 sob qualquer forma de daltonismo — a maior
+ * separação que três séries com dois quentes podem ter nesta paleta.
  *
  * Ficam aqui, e não em cada figura, porque o combo de linhas e colunas e o
  * gráfico de linhas desenham os mesmos três grupos: duas paletas iguais copiadas
@@ -93,7 +97,7 @@ export const fonteLabels: Record<string, string> = {
  */
 export const grupoFederalColors = [
   rampaAzul[2], // Execução direta
-  rampaCiana[3], // Renúncia fiscal
+  rampaRosa[1], // Renúncia fiscal
   rampaVermelha[2], // Transferências a estados e municípios
 ];
 
@@ -117,8 +121,8 @@ export const grupoFederalLabels: Record<string, string> = {
  *
  * - **Azuis, a execução direta.** MinC no azul da marca, por ser a maior; FSA
  *   no degrau escuro; os outros órgãos no claro.
- * - **Cianos, a renúncia fiscal.** A Lei Rouanet no ciano da marca e a ANCINE
- *   três degraus abaixo — as duas ficam sempre encostadas na pilha, e essa
+ * - **Rosas, a renúncia fiscal.** A Lei Rouanet no degrau claro e a ANCINE
+ *   dois degraus abaixo — as duas ficam sempre encostadas na pilha, e essa
  *   distância é o que impede que se fundam numa faixa só, que é exatamente a
  *   leitura errada: metade do investimento federal é renúncia, e a figura
  *   precisa mostrar de qual das duas.
@@ -126,15 +130,13 @@ export const grupoFederalLabels: Record<string, string> = {
  *   mais nova no degrau mais escuro, que é como as figuras sub-nacionais já as
  *   desenham.
  *
- * Nenhum par cai abaixo de ΔE 12,6 em visão normal nem de 8,9 sob qualquer
- * forma de daltonismo, e nenhuma adjacência da pilha abaixo de 12,6 — todas as
- * seis anteriores estavam abaixo disso, e é por elas que as duas tabelas de
- * correção que existiam aqui saíram.
+ * Nenhum par cai abaixo de ΔE 11,1 em visão normal nem de 9,4 sob qualquer
+ * forma de daltonismo, e nenhuma adjacência da pilha abaixo de 12,8.
  */
 export const fonteFederalPalette = [
   rampaAzul[2], // Ministério da Cultura
-  rampaCiana[4], // Lei Rouanet
-  rampaCiana[1], // Incentivo (ANCINE)
+  rampaRosa[4], // Lei Rouanet
+  rampaRosa[2], // Incentivo (ANCINE)
   rampaAzul[0], // FSA
   rampaVermelha[0], // PNAB
   rampaVermelha[1], // Lei Paulo Gustavo
@@ -149,16 +151,16 @@ export const fonteFederalColors = (keys: readonly string[]): Record<string, stri
  * Um degrau desce quando as fontes são desenhadas como traço fino, e não como
  * faixa.
  *
- * O ciano da marca preenche área muito bem, e ainda aguenta os 55% de opacidade
+ * O rosa claro preenche área muito bem, e ainda aguenta os 55% de opacidade
  * do ribbon chart. Num traço de 2 px, e sobretudo no nome da série escrito na
  * cor dela, ele rende 1,8:1 contra o cartão claro e sai ilegível.
  *
  * A troca é por um degrau mais escuro da mesma família, então a matiz — que é o
  * que identifica a fonte entre as figuras — não muda: a Lei Rouanet passa de
- * 1,8:1 para 3,9:1, e continua sendo o ciano do grupo da renúncia fiscal.
+ * 1,8:1 para 4,5:1, e continua sendo o rosa do grupo da renúncia fiscal.
  */
 const CONTRASTE_EM_TRACO: Record<string, string> = {
-  [rampaCiana[4]]: rampaCiana[2],
+  [rampaRosa[4]]: rampaRosa[2],
 };
 
 export const fonteFederalLineColors = (keys: readonly string[]): Record<string, string> =>
@@ -169,7 +171,7 @@ export const fonteFederalLineColors = (keys: readonly string[]): Record<string, 
 /**
  * Na pilha, o par que importa não é cada cor contra o cartão, é cada cor contra
  * a sua vizinha — e aí a paleta já serve como está: a menor adjacência é PNAB
- * sob a Lei Paulo Gustavo, dois degraus vermelhos a ΔE 12,6 (10,4 sob
+ * sob a Lei Paulo Gustavo, dois degraus vermelhos a ΔE 12,8 (9,4 sob
  * protanopia), com o vão de superfície entre as duas.
  *
  * Fica como função, e não como sinônimo, porque é a assinatura que as figuras

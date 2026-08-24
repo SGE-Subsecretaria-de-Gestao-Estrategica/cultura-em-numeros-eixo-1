@@ -28,6 +28,7 @@ CSV_PATH = (
     / "eixo1/gestao&participacao/data/processed/munic_cultura_painel_historico_06_21.csv"
 )
 OUT_PATH = PROJECT_DIR / "src/data/gestao-municipal.json"
+MUNICIPIOS_OUT_PATH = PROJECT_DIR / "src/data/gestao-municipios-2021.json"
 
 ONDAS = [2006, 2014, 2018, 2021]
 
@@ -109,6 +110,36 @@ ESTRUTURA_ORDEM = [
     "Secretaria em conjunto",
     "Setor subordinado",
     "Não possui estrutura",
+]
+
+
+# --- regioes ------------------------------------------------------------------
+
+# O primeiro digito do codigo IBGE do municipio e a grande regiao. Vale para as
+# 4 ondas — inclusive 2006, que em outras tabulacoes aparece "sem informacao" de
+# regiao porque a variavel vinha de um merge; aqui ela sai do proprio codigo.
+REGIOES = {
+    "1": "Norte",
+    "2": "Nordeste",
+    "3": "Sudeste",
+    "4": "Sul",
+    "5": "Centro-Oeste",
+}
+
+# Ordem de exibicao nas tabelas regionais, alfabetica.
+REGIOES_ORDEM = ["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"]
+
+
+# --- mapa da estrutura do orgao gestor ----------------------------------------
+
+# No mapa as 5 categorias harmonizadas viram 3 classes ordenadas: municipios sao
+# poligonos minusculos, e 5 degraus de luminosidade na mesma matiz nao se
+# separam nesse tamanho. A ordem e a mesma da barra empilhada, do mais ao menos
+# institucionalizado.
+ESTRUTURA_CLASSES = [
+    ("Secretaria exclusiva ou administração indireta", ["Secretaria exclusiva", "Administração indireta"]),
+    ("Secretaria em conjunto com outras políticas", ["Secretaria em conjunto"]),
+    ("Setor subordinado ou sem estrutura", ["Setor subordinado", "Não possui estrutura"]),
 ]
 
 
@@ -211,9 +242,106 @@ def _composicao(df: pd.DataFrame, coluna: str, de_para, ordem, ondas) -> dict:
     return {"categorias": list(ordem), "ondas": ondas_out}
 
 
+def _regiao(cod) -> str:
+    return REGIOES[str(cod)[0]]
+
+
+def _tripe_regiao(df: pd.DataFrame) -> list[dict]:
+    """Conselho, fundo, plano e tripe completo por regiao, onda a onda.
+
+    Denominador: municipios da regiao na onda. `tem_*` e binario limpo nas 4
+    ondas, entao nao ha nao-resposta a excluir.
+    """
+    ondas_out = []
+    for ano in ONDAS:
+        onda = df[df.ano == ano]
+        regioes = []
+        for regiao in REGIOES_ORDEM:
+            grupo = onda[onda.regiao == regiao]
+            base = len(grupo)
+            completo = int(
+                (
+                    grupo.tem_plano.eq("Sim")
+                    & grupo.tem_fundo.eq("Sim")
+                    & grupo.tem_conselho.eq("Sim")
+                ).sum()
+            )
+            regioes.append(
+                {
+                    "regiao": regiao,
+                    "base": base,
+                    "conselho": _pct(int(grupo.tem_conselho.eq("Sim").sum()), base),
+                    "fundo": _pct(int(grupo.tem_fundo.eq("Sim").sum()), base),
+                    "plano": _pct(int(grupo.tem_plano.eq("Sim").sum()), base),
+                    "completo": _pct(completo, base),
+                }
+            )
+        ondas_out.append({"ano": ano, "regioes": regioes})
+    return ondas_out
+
+
+def _execucao_lab_regiao(d21: pd.DataFrame) -> list[dict]:
+    """Distribuicao dos municipios pelas faixas de execucao da LAB, por regiao.
+
+    Denominador: municipios da regiao que informaram a faixa — mesma base do
+    grafico nacional, repartida.
+    """
+    regioes = []
+    for regiao in REGIOES_ORDEM:
+        grupo = d21[d21.regiao == regiao].orcamento_perc_executado
+        contagem = grupo.value_counts()
+        base = int(sum(contagem.get(f, 0) for f in FAIXAS_LAB))
+        regioes.append(
+            {
+                "regiao": regiao,
+                "base": base,
+                "semInformacao": int(len(grupo) - base),
+                "faixas": [
+                    {
+                        "label": faixa,
+                        "n": int(contagem.get(faixa, 0)),
+                        "pct": _pct(int(contagem.get(faixa, 0)), base),
+                    }
+                    for faixa in FAIXAS_LAB
+                ],
+            }
+        )
+    return regioes
+
+
+def _municipios_2021(d21: pd.DataFrame) -> dict:
+    """O valor de cada municipio nos dois mapas, chaveado pelo codigo IBGE.
+
+    `t`: quantos instrumentos do tripe o municipio tem (0 a 3). `e`: indice da
+    classe de estrutura em `ESTRUTURA_CLASSES`, ou None para as 4 nao-respostas
+    — que no mapa saem na cor de "sem informacao", nao somem do territorio.
+    """
+    classe_de = {
+        cat: i
+        for i, (_, categorias) in enumerate(ESTRUTURA_CLASSES)
+        for cat in categorias
+    }
+    municipios = {}
+    for row in d21.itertuples():
+        instrumentos = sum(
+            getattr(row, c) == "Sim" for c in ("tem_conselho", "tem_fundo", "tem_plano")
+        )
+        categoria = ESTRUTURA_DE_PARA.get(row.tipo_orgao_gestor)
+        municipios[str(row.cod_municipio)] = {
+            "t": instrumentos,
+            "e": classe_de[categoria] if categoria is not None else None,
+        }
+    return {
+        "ano": 2021,
+        "estruturaClasses": [label for label, _ in ESTRUTURA_CLASSES],
+        "municipios": municipios,
+    }
+
+
 def build() -> dict:
     df = pd.read_csv(CSV_PATH)
     df["ano"] = df["ano"].astype(int)
+    df["regiao"] = df.cod_municipio.map(_regiao)
 
     # Erro cedo se o painel mudar de forma sob os pes do script.
     faltando = set(ONDAS) - set(df.ano.unique())
@@ -299,6 +427,9 @@ def build() -> dict:
             "base": base_lab,
             "semInformacao": int(contagem_lab.get("Sem Informação", 0)),
         },
+        # -- B1 / B2: tabelas regionais ---------------------------------------
+        "tripeRegiao": {"ondas": _tripe_regiao(df)},
+        "execucaoLabRegiao": {"ano": 2021, "regioes": _execucao_lab_regiao(d21)},
     }
 
 
@@ -307,6 +438,16 @@ if __name__ == "__main__":
     OUT_PATH.write_text(
         json.dumps(dados, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
+
+    # Os mapas: um registro por municipio, num arquivo proprio para nao inflar
+    # o JSON dos agregados. Sem indentacao — sao 5.570 entradas.
+    df = pd.read_csv(CSV_PATH)
+    df["ano"] = df["ano"].astype(int)
+    municipios = _municipios_2021(df[df.ano == 2021])
+    MUNICIPIOS_OUT_PATH.write_text(
+        json.dumps(municipios, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    print(f"escrito: {MUNICIPIOS_OUT_PATH.relative_to(PROJECT_DIR)}")
     print(f"escrito: {OUT_PATH.relative_to(PROJECT_DIR)}")
     print(f"  universo por onda: {dados['universo']}")
     print(f"  tripé 2021: " + ", ".join(

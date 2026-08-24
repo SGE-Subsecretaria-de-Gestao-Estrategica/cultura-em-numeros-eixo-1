@@ -273,6 +273,7 @@
 </script>
 
 <Chart
+  {fontFamily}
   responsive
   {height}
   {theme}

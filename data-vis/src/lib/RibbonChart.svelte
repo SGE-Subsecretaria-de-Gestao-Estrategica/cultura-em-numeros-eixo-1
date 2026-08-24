@@ -328,6 +328,7 @@
 </script>
 
 <Chart
+  {fontFamily}
   {width}
   {height}
   {responsive}
