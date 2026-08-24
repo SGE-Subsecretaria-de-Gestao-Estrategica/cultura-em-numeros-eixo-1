@@ -1,6 +1,6 @@
-# Cultura em Números
+# Eixo 1 Gestão e Participação Social 
 
-Repositório dedicado à organização, tratamento e análise de dados relacionados ao financiamento e à institucionalidade da cultura no Brasil, no âmbito do Ministério da Cultura. O projeto integra informações orçamentárias e estruturais das três esferas de governo, com o objetivo de ampliar a transparência, qualificar o monitoramento e subsidiar a formulação de políticas públicas culturais.
+Repositório dedicado à organização, tratamento e análise de dados relacionados ao financiamento e à institucionalidade da cultura no Brasil, no âmbito do Ministério da Cultura, dentro do escopo do Eixo 1 do Plano Nacional de Cultura (Gestão e Participação Social). O projeto integra informações orçamentárias e estruturais das três esferas de governo, com o objetivo de ampliar a transparência, qualificar o monitoramento e subsidiar a formulação de políticas públicas culturais.
 
 # 🎯 Objetivo
 
