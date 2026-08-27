@@ -51,21 +51,21 @@ A tabela a seguir é a fonte da verdade sobre as variáveis presentes nas bases 
 
 | Variável | Tipo | Base de Dados Original (Fonte) | Esfera | Descrição / Significado Analítico |
 | :--- | :--- | :--- | :--- | :--- |
-| `cod_municipio` / `cod_uf` | Char | IBGE | Ambas | Código oficial de 7 dígitos para município ou 2 dígitos para estado. |
-| `municipio` / `nome_uf` | Char | IBGE | Ambas | Nome por extenso da unidade territorial. |
-| `regiao` | Char | Variável Calculada | Ambas | Macro-região geográfica gerada a partir do primeiro dígito do código IBGE. |
-| `ano` | Inteiro | IBGE (MUNIC/ESTADIC) | Ambas | Ano de referência da aplicação do questionário da pesquisa. |
-| `tipo_orgao_gestor` | Categoria | IBGE | Ambas | Grau de autonomia do ente (Secretaria Exclusiva, Conjunta, ou Setor Subordinado). |
-| `tem_plano` | Char (Sim/Não) | IBGE | Ambas | Indica se o ente possui Plano de Cultura ativo. |
-| `tem_conselho` | Char (Sim/Não) | IBGE | Ambas | Indica se o ente possui Conselho de Cultura ativo. |
-| `tem_fundo` | Char (Sim/Não) | IBGE | Ambas | Indica se o ente possui Fundo de Cultura ativo. |
-| `tripe_completo` | Inteiro/Cat | Variável Calculada | Ambas | Indicador binário/categórico: 1 se Conselho, Fundo e Plano = "Sim" (Adesão Plena ao SNC). |
-| `gestor_sexo` | Categoria | IBGE | Ambas | Sexo do titular da pasta de cultura. |
-| `gestor_cor_raca` | Categoria | IBGE | Ambas | Autodeclaração de raça/cor do titular da pasta (Branca, Preta, Parda, Indígena, Amarela). |
-| `gestor_escolaridade_agrupada`| Categoria | Variável Calculada | Ambas | Harmonização dos níveis de ensino em 4 categorias amplas (Fundamental, Médio, Superior, Pós-Graduação). |
-| `cons_paritario` | Categoria | IBGE | Ambas | Avalia se a composição do conselho ativo é paritária entre sociedade civil e poder público. |
-| `cons_competencia` | Categoria | IBGE / Calculada | Ambas | Natureza do conselho a partir de cruzamento de variáveis (Deliberativo, Consultivo ou Normativo/Fiscalizador). |
+| `cod_municipio` / `cod_uf` | Char | IBGE | Municipal | Código oficial de 7 dígitos para município ou 2 dígitos para estado. |
+| `municipio` / `nome_uf` | Char | IBGE | Municipal | Nome por extenso da unidade territorial. |
+| `regiao` | Char | Variável Calculada | Municipal | Macro-região geográfica gerada a partir do primeiro dígito do código IBGE. |
+| `ano` | Inteiro | IBGE (MUNIC/ESTADIC) | Municipal | Ano de referência da aplicação do questionário da pesquisa. |
+| `tipo_orgao_gestor` | Categoria | IBGE | Municipal | Grau de autonomia do ente (Secretaria Exclusiva, Conjunta, ou Setor Subordinado). |
+| `tem_plano` | Char (Sim/Não) | IBGE | Municipal | Indica se o ente possui Plano de Cultura ativo. |
+| `tem_conselho` | Char (Sim/Não) | IBGE | Municipal | Indica se o ente possui Conselho de Cultura ativo. |
+| `tem_fundo` | Char (Sim/Não) | IBGE | Municipal | Indica se o ente possui Fundo de Cultura ativo. |
+| `tripe_completo` | Inteiro/Cat | Variável Calculada | Municipal | Indicador binário/categórico: 1 se Conselho, Fundo e Plano = "Sim" (Adesão Plena ao SNC). |
+| `gestor_sexo` | Categoria | IBGE | Municipal | Sexo do titular da pasta de cultura. |
+| `gestor_cor_raca` | Categoria | IBGE | Municipal | Autodeclaração de raça/cor do titular da pasta (Branca, Preta, Parda, Indígena, Amarela). |
+| `gestor_escolaridade_agrupada`| Categoria | Variável Calculada | Municipal | Harmonização dos níveis de ensino em 4 categorias amplas (Fundamental, Médio, Superior, Pós-Graduação). |
+| `cons_paritario` | Categoria | IBGE | Municipal | Avalia se a composição do conselho ativo é paritária entre sociedade civil e poder público. |
+| `cons_competencia` | Categoria | IBGE / Calculada | Municipal | Natureza do conselho a partir de cruzamento de variáveis (Deliberativo, Consultivo ou Normativo/Fiscalizador). |
 | `orcamento_perc_executado` | Categoria | IBGE (MUNIC 2021) | Municipal | Faixa de execução dos recursos emergenciais repassados pela União (Ex: Lei Aldir Blanc 1). |
 | `equip_*` | Char (Sim/Não) | IBGE | Municipal | Variáveis binárias indicando presença municipal de Biblioteca, Museu, Teatro e Cinema. |
-| `ir_gt_cultura` | Char (Sim/Não) | ESTADIC 2024 | Estadual | (Módulo Transversal) Indica se existe representação da Cultura em instâncias de Igualdade Racial. |
-| `pi_arte_cultura` | Char (Sim/Não) | ESTADIC 2023 | Estadual | (Módulo Transversal) Indica existência de política transversal de cultura para a Primeira Infância. |
+| `ir_gt_cultura` | Char (Sim/Não) | ESTADIC 2024 | Municipal | (Módulo Transversal) Indica se existe representação da Cultura em instâncias de Igualdade Racial. |
+| `pi_arte_cultura` | Char (Sim/Não) | ESTADIC 2023 | Municipal | (Módulo Transversal) Indica existência de política transversal de cultura para a Primeira Infância. |
