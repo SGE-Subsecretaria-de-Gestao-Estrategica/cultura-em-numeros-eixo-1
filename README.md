@@ -42,19 +42,28 @@ Os dados passam por processos de extração, padronização e validação, visan
 # 📁 Estrutura do Repositório
 ```text
 eixo1/
+├── Ficha de Metadados - Eixo 1.xlsx
 ├── orcamento/
 │   ├── data/
 │   │   ├── processed/
-│   │   └── raw/  # (Subpastas: estadual, federal, municipal)
-│   ├── documentacao/ # (Notas metodológicas)
-│   └── scripts/ #Subpastas: estadual, federal, municipal)
-├── gestao&participacao/ (WIP 🚧)
-│   ├── data/
-│   │   ├── processed/
-│   │   └── raw/
-│   ├── documentacao/
-│   └── scripts/
-└── README.md
+│   │   └── raw/          # (Subpastas: estadual, federal, municipal)
+│   ├── documentacao/     # (Notas metodológicas)
+│   └── scripts/          # (Subpastas: estadual, federal, municipal)
+└── gestao&participacao/
+    ├── estadic/ (WIP 🚧)
+    │   ├── data/         # (Subpastas: processed, raw)
+    │   ├── outputs/
+    │   ├── scripts/
+    │   ├── estadic.Rproj
+    │   └── README.md
+    └── munic/
+        ├── data/
+        │   ├── processed/
+        │   └── raw/
+        ├── outputs/
+        ├── scripts/
+        ├── munic.Rproj
+        └── README.md
 ```
 
 # ⚙️ Metodologia
