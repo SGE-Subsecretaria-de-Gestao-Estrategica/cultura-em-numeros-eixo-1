@@ -3,6 +3,14 @@
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
+# 0. AMBIENTE E DEPENDÊNCIAS (renv)
+# ------------------------------------------------------------------------------
+# ATENÇÃO: Caso seja a primeira vez abrindo o projeto neste computador, 
+# descomente e rode renv::init() para iniciar, ou renv::restore() para baixar
+# as versões exatas dos pacotes travadas no seu arquivo renv.lock.
+# renv::restore()
+
+# ------------------------------------------------------------------------------
 # 1. PACOTES E CONFIGURAÇÕES
 # ------------------------------------------------------------------------------
 library(tidyverse)
@@ -13,12 +21,10 @@ library(sf)
 library(scales)
 library(ggplot2)
 library(gt)
+library(here)
 
-dir_projeto <- "D:/aeae/Ministerio da Cultura/Cultura em Numeros/Eixo 1/Gestão/MUNIC"
-dir_visualizacoes <- file.path(dir_projeto, "Visualizações")
-
-dir.create(dir_visualizacoes, recursive = TRUE, showWarnings = FALSE)
-setwd(dir_projeto)
+dir.create(here("data", "processed"), recursive = TRUE, showWarnings = FALSE)
+dir.create(here("outputs"), recursive = TRUE, showWarnings = FALSE)
 
 # ------------------------------------------------------------------------------
 # 2. FUNÇÕES AUXILIARES
@@ -29,11 +35,11 @@ fix_sim_nao <- function(x) {
 }
 
 # ------------------------------------------------------------------------------
-# 3. EXTRAÇÃO DOS MICRODADOS
+# 3. EXTRAÇÃO DOS MICRODADOS (A PARTIR DE data/raw/)
 # ------------------------------------------------------------------------------
 
 # --- 2021 ---
-path_21 <- file.path(dir_projeto, "2021", "Base_MUNIC_2021_20240425.xlsx")
+path_21 <- here("data", "raw", "Base_MUNIC_2021_20240425.xlsx")
 df_21 <- read_excel(path_21, sheet = "Cultura") %>% 
   clean_names() %>%
   mutate(cod_municipio = as.character(cod_mun), 
@@ -84,7 +90,7 @@ df_21 <- read_excel(path_21, sheet = "Cultura") %>%
          cons_qtd_membros, cons_cap_continuada, cons_cap_eventual, cons_cap_nao_realiza)
 
 # --- 2018 ---
-path_18 <- file.path(dir_projeto, "2018", "Base_MUNIC_2018_xlsx_20201103.xlsx")
+path_14 <- here("data", "raw", "base_cultura_MUNIC_xls_2014.xls")
 df_18 <- read_excel(path_18, sheet = "Cultura") %>% 
   clean_names() %>% 
   transmute(cod_municipio = as.character(cod_mun),
@@ -115,7 +121,7 @@ df_18 <- read_excel(path_18, sheet = "Cultura") %>%
             gestor_cor_raca = mcul05)
 
 # --- 2014 ---
-path_14 <- file.path(dir_projeto, "2014", "base_cultura_MUNIC_xls_2014.xls")
+path_14 <- here("data", "raw", "base_cultura_MUNIC_xls_2014.xls")
 df_14_org   <- read_excel(path_14, sheet = "Órgão gestor") %>% clean_names() %>% select(cod_municipio = a1, tipo_orgao_gestor = a2)
 df_14_plano <- read_excel(path_14, sheet = "Políticas culturais") %>% clean_names() %>% select(cod_municipio = a1, tem_plano = a93)
 df_14_cons  <- read_excel(path_14, sheet = "Instâncias participativas") %>% clean_names() %>% select(cod_municipio = a1, tem_conselho = a305, tem_cons_patrimonio = a339)
@@ -142,7 +148,7 @@ df_14 <- df_14_org %>%
          tem_cons_patrimonio = fix_sim_nao(tem_cons_patrimonio))
 
 # --- 2006 ---
-path_06 <- file.path(dir_projeto, "2006", "Base Suplemento Cultura 2006.xls")
+path_06 <- here("data", "raw", "Base Suplemento Cultura 2006.xls")
 df_06_org   <- read_excel(path_06, sheet = "Órgão gestor") %>% clean_names() %>% select(cod_municipio = a1, tipo_orgao_gestor = a2)
 df_06_plano <- read_excel(path_06, sheet = "Instrumentos de gestão") %>% clean_names() %>% select(cod_municipio = a1, tem_plano = a104)
 df_06_cons  <- read_excel(path_06, sheet = "Conselhos municipais") %>% clean_names() %>% select(cod_municipio = a1, tem_conselho = a130, tem_cons_patrimonio = a164)
@@ -228,7 +234,7 @@ df_cons_14 <- read_excel(path_14, sheet = "Instâncias participativas") %>%
 df_conselhos_detalhado <- bind_rows(df_cons_14, df_cons_18, df_cons_21)
 
 # ------------------------------------------------------------------------------
-# 4. CONSOLIDAÇÃO, PADRONIZAÇÃO E LIMPEZA DA SESSÃO
+# 4. CONSOLIDAÇÃO E LIMPEZA DA SESSÃO (SALVANDO EM data/processed/)
 # ------------------------------------------------------------------------------
 dicionario_municipios <- df_21 %>%
   select(cod_oficial = cod_municipio, nome_oficial = municipio) %>%
@@ -267,17 +273,19 @@ df_painel_historico <- bind_rows(df_21, df_18, df_14, df_06) %>%
                                        gestor_cor_raca_limpa == "Branca" ~ "Brancos",
                                        gestor_cor_raca_limpa %in% c("Amarela", "Indígena") ~ "Amarela / Indígena",
                                        TRUE ~ NA_character_),
-         gestor_escolaridade_agrupada = case_when(str_detect(str_to_lower(gestor_escolaridade), "pós|especializa|mestrado|doutorado") ~ "Pós-Graduação",
-                                                  str_detect(str_to_lower(gestor_escolaridade), "superior|graduação") ~ "Ensino Superior",
-                                                  str_detect(str_to_lower(gestor_escolaridade), "médio|2º grau|2° grau|2o grau|segundo grau") ~ "Ensino Médio",
-                                                  str_detect(str_to_lower(gestor_escolaridade), "fundamental|1º grau|1° grau|1o grau|sem instrução|primeiro grau") ~ "Ensino Fundamental",
-                                                  TRUE ~ "Sem Informação")) %>%
+         gestor_escolaridade_agrupada = case_when(
+           str_detect(str_to_lower(gestor_escolaridade), "pós|especializa|mestrado|doutorado") ~ "Pós-Graduação",
+           str_detect(str_to_lower(gestor_escolaridade), "superior|graduação") ~ "Ensino Superior",
+           str_detect(str_to_lower(gestor_escolaridade), "médio|2º grau|2° grau|2o grau|segundo grau") ~ "Ensino Médio",
+           str_detect(str_to_lower(gestor_escolaridade), "fundamental|1º grau|1° grau|1o grau|sem instrução|primeiro grau") ~ "Ensino Fundamental",
+           TRUE ~ "Sem Informação")) %>%
   select(cod_municipio, municipio, cod_uf, uf, regiao, ano, populacao, tipo_orgao_gestor, tem_plano, tem_conselho, tem_fundo, 
          starts_with("tem_"), starts_with("equip_"), starts_with("gestor_"), starts_with("plano_"), starts_with("sec_"), starts_with("cons_"), starts_with("lab_"), everything(),
          -raiz_6_digitos, -cod_oficial, -nome_oficial) %>%
   arrange(cod_municipio, ano)
 
-write_excel_csv(df_painel_historico, "munic_cultura_painel_historico_06_21.csv")
+# Salva a base tratada na pasta data/processed/
+write_excel_csv(df_painel_historico, here("data", "processed", "munic_cultura_painel_historico_06_21.csv"))
 
 rm(df_21, df_18, df_14, df_06, df_cons_21, df_cons_18, df_cons_14, dicionario_municipios,
    df_14_org, df_14_plano, df_14_cons, df_14_fund, df_14_rh, df_14_leg, df_14_equip,
@@ -285,14 +293,14 @@ rm(df_21, df_18, df_14, df_06, df_cons_21, df_cons_18, df_cons_14, dicionario_mu
 gc()
 
 # ------------------------------------------------------------------------------
-# 5. CONFIGURAÇÃO VISUAL E MAPAS BASE
+# 5. CONFIGURAÇÃO VISUAL
 # ------------------------------------------------------------------------------
 cor_plano <- "#E74C3C"
 cor_conselho <- "#2980B9"
 cor_fundo <- "#27AE60"
 
 # ==============================================================================
-# 6. VISUALIZAÇÕES: GRÁFICOS (COM EXPORTAÇÃO AUTOMÁTICA)
+# 6. VISUALIZAÇÕES: GRÁFICOS (EXPORTAÇÃO PARA outputs/)
 # ==============================================================================
 
 # --- GRÁFICO 1 ---
@@ -316,7 +324,7 @@ p1 <- ggplot(df_tripe, aes(x = ano, y = taxa, color = instrumento, group = instr
   theme(legend.position = "bottom", plot.title = element_text(face = "bold", size = 16), panel.grid.minor = element_blank()) +
   labs(title = "Evolução do Tripé Institucional da Cultura (2006-2021)", subtitle = "Proporção de municípios brasileiros com os instrumentos criados", x = "Ano da Pesquisa (MUNIC/IBGE)", y = "Porcentagem de Municípios", color = "")
 
-ggsave(file.path(dir_visualizacoes, "grafico_1_evolução_tripe.png"), plot = p1, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_1_evolucao_tripe.png"), plot = p1, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 2 ---
 df_sexo <- df_painel_historico %>%
@@ -334,7 +342,7 @@ p2 <- ggplot(df_sexo, aes(x = factor(ano), y = porcentagem, fill = gestor_sexo))
   theme(legend.position = "top", plot.title = element_text(face = "bold"), panel.grid.major.x = element_blank()) +
   labs(title = "Gênero dos Titulares dos Órgãos Gestores de Cultura", subtitle = "Participação feminina e masculina no comando cultural dos municípios", x = "Ano", y = "", fill = "")
 
-ggsave(file.path(dir_visualizacoes, "grafico_2_genero_gestores.png"), plot = p2, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_2_genero_gestores.png"), plot = p2, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 3 ---
 df_lab <- df_painel_historico %>%
@@ -351,7 +359,7 @@ p3 <- ggplot(df_lab, aes(y = fct_rev(orcamento_perc_executado), x = n)) +
   theme(plot.title = element_text(face = "bold"), panel.grid.major.y = element_blank()) +
   labs(title = "Orçamento Executado (2021)", subtitle = "Número absoluto de municípios e proporção (%) do nível de execução do orçamento", x = "Quantidade de Municípios", y = "Percentual do Orçamento Executado", caption = "Fonte: Elaboração própria com base na MUNIC/IBGE 2021.")
 
-ggsave(file.path(dir_visualizacoes, "grafico_3_execucao_orcamentaria.png"), plot = p3, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_3_execucao_orcamentaria.png"), plot = p3, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 4 ---
 df_orgao_evol <- df_painel_historico %>%
@@ -374,7 +382,7 @@ p4 <- ggplot(df_orgao_evol, aes(x = factor(ano), y = porcentagem, fill = fct_reo
   theme(legend.position = "bottom", legend.direction = "vertical", panel.grid.major.x = element_blank()) +
   labs(title = "A Estrutura do Órgão Gestor de Cultura (2006-2021)", subtitle = "O espaço das secretarias exclusivas de cultura resistiu às crises?", x = "Ano da Pesquisa", y = "Proporção de Municípios", fill = "")
 
-ggsave(file.path(dir_visualizacoes, "grafico_4_orgao_gestor.png"), plot = p4, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_4_orgao_gestor.png"), plot = p4, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 5 ---
 df_cruzamento <- df_painel_historico %>%
@@ -403,7 +411,7 @@ p5 <- ggplot(df_cruzamento, aes(x = tripe_completo, y = percentual, fill = gesto
        subtitle = "Perfil educacional dos gestores em municípios com e sem o Tripé da Cultura", 
        x = "Status de Adesão ao SNC", y = "Proporção de Municípios", fill = "Escolaridade:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_5_escolaridade_vs_tripe.png"), plot = p5, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_5_escolaridade_vs_tripe.png"), plot = p5, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 6 ---
 df_raca <- df_painel_historico %>%
@@ -423,7 +431,7 @@ p6 <- ggplot(df_raca, aes(x = factor(ano), y = porcentagem, fill = fct_reorder(g
   theme(legend.position = "right", plot.title = element_text(face = "bold", size = 16), panel.grid.major.x = element_blank()) +
   labs(title = "Perfil Étnico-Racial dos Gestores Municipais de Cultura", subtitle = "Distribuição percentual dos titulares por raça/cor autodeclarada (2018-2021)", x = "Ano da Pesquisa", y = "Proporção de Gestores", fill = "Cor / Raça")
 
-ggsave(file.path(dir_visualizacoes, "grafico_6_perfil_etnico_racial.png"), plot = p6, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_6_perfil_etnico_racial.png"), plot = p6, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 7 ---
 df_interseccional <- df_painel_historico %>%
@@ -442,7 +450,7 @@ p7 <- ggplot(df_interseccional, aes(x = fct_reorder(perfil_intersec, porcentagem
   theme(plot.title = element_text(face = "bold"), panel.grid.major.y = element_blank()) +
   labs(title = "Interseccionalidade no Comando da Cultura Municipal (2021)", subtitle = "Cruzamento de gênero e raça dos titulares dos órgãos gestores de cultura", x = "", y = "Proporção de Municípios")
 
-ggsave(file.path(dir_visualizacoes, "grafico_7_interseccionalidade.png"), plot = p7, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_7_interseccionalidade.png"), plot = p7, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 8 ---
 df_esc_evol <- df_painel_historico %>%
@@ -464,7 +472,7 @@ p8 <- ggplot(df_esc_evol, aes(x = factor(ano), y = porcentagem, fill = gestor_es
   theme(legend.position = "bottom", legend.direction = "horizontal", plot.title = element_text(face = "bold"), panel.grid.major.x = element_blank()) +
   labs(title = "Nível de Escolaridade dos Gestores de Cultura (2006-2021)", subtitle = "Distribuição percentual da escolaridade dos dirigentes municipais de cultura", x = "Ano da Pesquisa", y = "Proporção de Gestores", fill = "Escolaridade:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_8_evolucao_escolaridade.png"), plot = p8, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_8_evolucao_escolaridade.png"), plot = p8, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 9 ---
 df_idade_evol <- df_painel_historico %>%
@@ -484,7 +492,7 @@ p9 <- ggplot(df_idade_evol, aes(x = gestor_faixa_etaria, y = porcentagem, fill =
   theme(legend.position = "top", plot.title = element_text(face = "bold"), panel.grid.minor = element_blank()) +
   labs(title = "Distribuição Etária dos Dirigentes de Cultura", subtitle = "Comparativo das faixas etárias dos titulares da pasta (2014, 2018 e 2021)", x = "Faixa Etária", y = "Proporção de Gestores", fill = "Ano:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_9_distribuicao_etaria.png"), plot = p9, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_9_distribuicao_etaria.png"), plot = p9, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 10 ---
 df_tripe_uf <- df_painel_historico %>%
@@ -510,7 +518,7 @@ p10 <- ggplot(df_tripe_uf, aes(x = reorder(uf, taxa_tripe), y = taxa_tripe, fill
   theme(plot.title = element_text(face = "bold"), panel.grid.major.y = element_blank(), legend.position = "bottom") +
   labs(title = "Tripé Institucional Completo por UF (2021)", subtitle = "Número absoluto e percentual de municípios com Conselho, Fundo e Plano simultaneamente ativos", x = "Unidade da Federação", y = "Taxa de Adesão Plena ao Tripé", fill = "Região:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_10_tripe_por_uf.png"), plot = p10, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_10_tripe_por_uf.png"), plot = p10, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 11 ---
 df_equip <- df_painel_historico %>%
@@ -537,7 +545,7 @@ p11 <- ggplot(df_equip, aes(x = ano, y = taxa, color = equipamento, group = equi
   theme(legend.position = "bottom", plot.title = element_text(face = "bold"), panel.grid.minor = element_blank()) +
   labs(title = "Presença de Equipamentos Culturais nos Municípios (2006-2021)", subtitle = "Proporção de cidades com bibliotecas, museus, teatros e cinemas municipais", x = "Ano da Pesquisa", y = "Percentual de Municípios", color = "")
 
-ggsave(file.path(dir_visualizacoes, "grafico_11_equipamentos_culturais.png"), plot = p11, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_11_equipamentos_culturais.png"), plot = p11, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 12 ---
 df_patrimonio <- df_painel_historico %>%
@@ -562,7 +570,7 @@ p12 <- ggplot(df_patrimonio, aes(x = ano, y = taxa, color = instrumento, group =
   theme(legend.position = "bottom", plot.title = element_text(face = "bold"), panel.grid.minor = element_blank()) +
   labs(title = "Institucionalização do Patrimônio Cultural nos Municípios", subtitle = "Evolução da existência de lei de tombamento/registro e conselho de patrimônio", x = "Ano da Pesquisa", y = "Percentual de Municípios", color = "")
 
-ggsave(file.path(dir_visualizacoes, "grafico_12_patrimonio_cultural.png"), plot = p12, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_12_patrimonio_cultural.png"), plot = p12, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 13 ---
 df_paridade_grafico <- df_conselhos_detalhado %>%
@@ -580,7 +588,7 @@ p13 <- ggplot(df_paridade_grafico, aes(x = factor(ano), y = porcentagem, fill = 
   theme(legend.position = "top", plot.title = element_text(face = "bold", size = 16), panel.grid.major.x = element_blank()) +
   labs(title = "Composição dos Conselhos Municipais de Cultura: Paridade", subtitle = "Proporção de conselhos ativos paritários entre sociedade civil e poder público (2014 e 2021)", x = "Ano da Pesquisa", y = "Proporção dos Conselhos Ativos", fill = "Composição:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_13_paridade_conselhos.png"), plot = p13, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_13_paridade_conselhos.png"), plot = p13, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 14 ---
 df_competencia_grafico <- df_conselhos_detalhado %>%
@@ -598,7 +606,7 @@ p14 <- ggplot(df_competencia_grafico, aes(x = factor(ano), y = porcentagem, fill
   theme(legend.position = "bottom", legend.direction = "vertical", plot.title = element_text(face = "bold", size = 16), panel.grid.minor = element_blank()) +
   labs(title = "Caráter e Competência dos Conselhos de Cultura", subtitle = "Atuação deliberativa, consultiva ou normativa dos conselhos municipais ativos (2014, 2018 e 2021)", x = "Ano da Pesquisa", y = "Proporção dos Conselhos Ativos", fill = "Competência do Conselho:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_14_competencia_conselhos.png"), plot = p14, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_14_competencia_conselhos.png"), plot = p14, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 15 ---
 df_porte <- df_painel_historico %>%
@@ -628,7 +636,7 @@ p15 <- ggplot(df_porte, aes(x = porte_pop, y = taxa, fill = status_tripe)) +
   theme(legend.position = "top", plot.title = element_text(face = "bold"), panel.grid.major.x = element_blank()) +
   labs(title = "Adesão ao SNC por Porte Populacional (2021)", subtitle = "Proporção de municípios com Tripé Completo versus Incompleto em cada faixa", x = "Porte Populacional", y = "Proporção de Municípios (%)", fill = "Status do SNC:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_15_adesao_snc_porte.png"), plot = p15, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_15_adesao_snc_porte.png"), plot = p15, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 16A ---
 df_lei_plano <- df_painel_historico %>%
@@ -651,7 +659,7 @@ p16a <- ggplot(df_lei_plano, aes(x = factor(ano), y = taxa, fill = status_lei)) 
   theme(legend.position = "right", plot.title = element_text(face = "bold"), panel.grid.major.x = element_blank()) +
   labs(title = "Estruturação do Plano Municipal de Cultura: Instituição Legal", subtitle = "Dentre os municípios com Plano, quantos informaram o número da lei/decreto de criação?", x = "Ano da Pesquisa", y = "Proporção de Municípios com Plano", fill = "Situação Legal:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_16a_plano_lei.png"), plot = p16a, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_16a_plano_lei.png"), plot = p16a, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 16B ---
 df_part_plano <- df_painel_historico %>%
@@ -672,7 +680,7 @@ p16b <- ggplot(df_part_plano, aes(x = factor(ano), y = taxa, fill = status_part)
   theme(legend.position = "right", plot.title = element_text(face = "bold"), panel.grid.major.x = element_blank()) +
   labs(title = "Estruturação do Plano Municipal de Cultura: Participação Social", subtitle = "Dentre os municípios que possuem Plano, proporção com participação da sociedade civil", x = "Ano da Pesquisa", y = "Proporção de Municípios com Plano", fill = "Construção do Plano:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_16b_plano_participacao.png"), plot = p16b, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_16b_plano_participacao.png"), plot = p16b, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 17 ---
 df_cap_cons <- df_painel_historico %>%
@@ -698,7 +706,7 @@ p17 <- ggplot(df_cap_cons, aes(x = status_cap, y = perc, fill = factor(ano))) +
   theme(legend.position = "top", plot.title = element_text(face = "bold"), panel.grid.minor = element_blank()) +
   labs(title = "Capacitação dos Conselheiros de Cultura", subtitle = "Frequência de formação oferecida aos membros dos conselhos ativos (2018 vs. 2021)", x = "Status de Capacitação", y = "Proporção de Conselhos", fill = "Ano:")
 
-ggsave(file.path(dir_visualizacoes, "grafico_17_capacitacao_conselheiros.png"), plot = p17, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_17_capacitacao_conselheiros.png"), plot = p17, width = 10, height = 6, dpi = 300)
 
 # --- GRÁFICO 18 ---
 df_membros <- df_painel_historico %>%
@@ -716,7 +724,8 @@ p18 <- ggplot(df_membros, aes(x = reorder(regiao, media_membros), y = media_memb
   theme(plot.title = element_text(face = "bold"), panel.grid.major.y = element_blank()) +
   labs(title = "Tamanho Médio dos Conselhos de Cultura por Região (2021)", subtitle = "Média de conselheiros (titulares e suplentes) nos conselhos ativos", x = "Região", y = "Número Médio de Conselheiros")
 
-ggsave(file.path(dir_visualizacoes, "grafico_18_tamanho_medio_conselhos.png"), plot = p18, width = 10, height = 6, dpi = 300)
+ggsave(here("outputs", "grafico_18_tamanho_medio_conselhos.png"), plot = p18, width = 10, height = 6, dpi = 300)
+
 # --- TABELA 1: GASTO DA LEI ALDIR BLANC POR REGIÃO (2021) ---
 tabela_lab_dados <- df_painel_historico %>%
   filter(ano == 2021, !is.na(orcamento_perc_executado), orcamento_perc_executado != "Sem Informação") %>%
@@ -745,7 +754,7 @@ gt_tabela_lab <- tabela_lab_dados %>%
               table.border.bottom.color = "transparent") %>%
   tab_source_note(source_note = md("*Fonte: Elaboração própria com base na MUNIC/IBGE 2021.*"))
 
-gtsave(gt_tabela_lab, "Tabela_Visual_1_LAB_Regiao.png")
+gtsave(gt_tabela_lab, here("outputs", "Tabela_Visual_1_LAB_Regiao.png"))
 
 # --- TABELA 2: EVOLUÇÃO DO TRIPÉ INSTITUCIONAL POR REGIÃO (2006-2021) ---
 tabela_tripe_dados <- df_painel_historico %>%
@@ -782,7 +791,7 @@ gt_tabela_tripe <- tabela_tripe_dados %>%
               column_labels.font.weight = "bold") %>%
   tab_source_note(source_note = md("*Fonte: Elaboração própria com base na MUNIC/IBGE.*"))
 
-gtsave(gt_tabela_tripe, "Tabela_Visual_2_Tripe_Regiao.png")
+gtsave(gt_tabela_tripe, here("outputs", "Tabela_Visual_2_Tripe_Regiao.png"))
 
 # --- TABELA 3: MATRIZ REGIONAL DA GESTÃO E DIVERSIDADE (2021) ---
 tabela_matriz_2021 <- df_painel_historico %>%
@@ -826,4 +835,4 @@ gt_tabela_matriz <- tabela_matriz_2021 %>%
               column_labels.font.weight = "bold") %>%
   tab_source_note(source_note = md("*Fonte: Elaboração própria com base na MUNIC/IBGE 2021.*"))
 
-gtsave(gt_tabela_matriz, "Tabela_Visual_3_Matriz_Regional_2021.png")
+gtsave(gt_tabela_matriz, here("outputs", "Tabela_Visual_3_Matriz_Regional_2021.png"))
