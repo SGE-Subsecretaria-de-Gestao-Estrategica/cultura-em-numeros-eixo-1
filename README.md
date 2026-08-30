@@ -50,8 +50,10 @@ eixo1/
 │   ├── documentacao/     # (Notas metodológicas)
 │   └── scripts/          # (Subpastas: estadual, federal, municipal)
 └── gestao&participacao/
-    ├── estadic/ (WIP 🚧)
-    │   ├── data/         # (Subpastas: processed, raw)
+    ├── estadic/
+    │   ├── data/
+        │   ├── processed/
+        │   └── raw/
     │   ├── outputs/
     │   ├── scripts/
     │   ├── estadic.Rproj
