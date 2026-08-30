@@ -51,13 +51,13 @@ eixo1/
 │   └── scripts/          # (Subpastas: estadual, federal, municipal)
 └── gestao&participacao/
     ├── estadic/
-    │   ├── data/
+        ├── data/
         │   ├── processed/
         │   └── raw/
-    │   ├── outputs/
-    │   ├── scripts/
-    │   ├── estadic.Rproj
-    │   └── README.md
+        ├── outputs/
+        ├── scripts/
+        ├── estadic.Rproj
+        └── README.md
     └── munic/
         ├── data/
         │   ├── processed/
