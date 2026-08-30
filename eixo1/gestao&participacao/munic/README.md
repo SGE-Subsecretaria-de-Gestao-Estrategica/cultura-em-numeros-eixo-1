@@ -1,5 +1,5 @@
 ---
-title: "Guia de Execução, Fluxo de Dados e Metadados (Eixo 1 - Gestão)"
+title: "Guia de Execução, Fluxo de Dados e Metadados (Eixo 1 - Gestão) - MUNIC"
 author: "Projeto Cultura em Números - Ministério da Cultura"
 date: "27/08/2026"
 output: 
@@ -18,7 +18,7 @@ Este documento descreve a arquitetura da esteira de dados de gestão e instituci
 
 Para quem acabou de chegar no repositório, a execução do código foi desenhada para ser totalmente reprodutível em qualquer máquina. Siga os passos abaixo:
 
-1. **Abra o Projeto pelo `.Rproj`:** Vá até a raiz do diretório clonado (ex: pasta `MUNIC` ou `ESTADIC`) e dê um duplo clique no arquivo `.Rproj`. Isso garantirá que os caminhos relativos (via pacote `{here}`) funcionem perfeitamente, aposentando a necessidade de configurar `setwd()`.
+1. **Abra o Projeto pelo `.Rproj`:** Vá até a raiz do diretório clonado e dê um duplo clique no arquivo `.Rproj`. Isso garantirá que os caminhos relativos (via pacote `{here}`) funcionem perfeitamente, aposentando a necessidade de configurar `setwd()`.
 2. **Restaure o Ambiente Virtual (`renv`):** No console do RStudio, digite `renv::restore()`. O R instalará exatamente as mesmas versões dos pacotes (como `tidyverse`, `arrow`, `sf`) utilizadas durante o desenvolvimento.
 3. **Verifique os Inputs (Dados Brutos):** Certifique-se de que os arquivos originais baixados do IBGE (`.xls` e `.xlsx`) estão posicionados "soltos" dentro da pasta `data/raw/` (conforme detalhado na Seção 2).
 4. **Execute os Scripts:**
