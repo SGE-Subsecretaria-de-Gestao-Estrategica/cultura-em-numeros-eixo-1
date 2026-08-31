@@ -49,9 +49,11 @@ figure {
   margin: 0;
 }
 
-/* Scales the card as a whole; the labels keep their size relative to it. The
-   outer `<svg>` only — the design system's `<Text>` nests one per label. */
-figure > div > svg {
+/* Escala o cartão inteiro; os rótulos guardam o tamanho relativo a ele.
+   Só o `<svg>` de fora: os `<Text>` do design system aninham um por rótulo, e
+   o seletor descendente os pegaria junto — daí o `:not(svg svg)`, que os deixa
+   de fora sem depender da profundidade em que cada componente os monta. */
+figure svg:not(svg svg) {
   display: block;
   width: 100%;
   height: auto;

@@ -4,8 +4,8 @@
  * the print sizing live here rather than in any one of them.
  */
 
-import { rampaAzul, rampaRosa, rampaVermelha } from './cores';
-import { a4Scale } from './tokens';
+import { rampaAzul, rampaRosa, rampaVermelha, sniic } from './cores';
+import { a4Scale, colorGradients } from './tokens';
 
 /**
  * As cinco fontes de recurso sub-nacionais, em três matizes da marca.
@@ -109,71 +109,61 @@ export const grupoFederalLabels: Record<string, string> = {
 };
 
 /**
- * As oito fontes federais na ordem em que o JSON as traz. É a mesma paleta na
- * tabela, no ribbon e nos gráficos de linhas e de colunas, para que as quatro
- * figuras possam ser lidas uma ao lado da outra.
+ * As oito fontes federais nos gradientes da marca — a paleta que o histomap
+ * desenha.
  *
  * Oito séries passam do que três matizes sustentam sozinhas, então a paleta usa
  * as duas dimensões que tem: a **matiz diz a que grupo institucional a fonte
- * pertence** — os mesmos três de `grupoFederalColors` — e a **luminosidade
- * separa as fontes dentro do grupo**. Quem já leu a figura dos três grupos
- * chega aqui sabendo metade da legenda.
+ * pertence** e a **luminosidade separa as fontes dentro do grupo**. Quem lê a
+ * legenda no topo da figura, que sai na ordem de empilhamento, já chega ao plot
+ * com os três grupos na cabeça.
  *
- * - **Azuis, a execução direta.** MinC no azul da marca, por ser a maior; FSA
- *   no degrau escuro; os outros órgãos no claro.
- * - **Rosas, a renúncia fiscal.** A Lei Rouanet no degrau claro e a ANCINE
- *   dois degraus abaixo — as duas ficam sempre encostadas na pilha, e essa
- *   distância é o que impede que se fundam numa faixa só, que é exatamente a
- *   leitura errada: metade do investimento federal é renúncia, e a figura
- *   precisa mostrar de qual das duas.
- * - **Vermelhos, o que desce para estados e municípios.** As três leis com a
- *   mais nova no degrau mais escuro, que é como as figuras sub-nacionais já as
- *   desenham.
+ * - **Azuis e roxo, a execução direta.** O MinC no degrau mais escuro do azul,
+ *   por ser a maior faixa; os Outros Órgãos num azul claro — a extinção do MinC
+ *   lê-se como clareamento dentro da mesma massa, que é o que ela foi; e o FSA
+ *   no roxo escuro, a única troca de matiz do grupo. Ela existe porque o
+ *   gradiente azul não separa três faixas: com o FSA em azul, o MinC e os
+ *   Outros Órgãos ficariam a ΔE 5 um do outro na legenda, encostados e quase
+ *   iguais, e são justamente os dois que o leitor precisa distinguir.
+ * - **Rosas, a renúncia fiscal.** A Lei Rouanet no degrau escuro e a ANCINE no
+ *   mais claro — as duas ficam sempre encostadas na pilha, e essa distância é o
+ *   que impede que se fundam numa faixa só, que é exatamente a leitura errada:
+ *   metade do investimento federal é renúncia, e a figura precisa mostrar de
+ *   qual das duas.
+ * - **Vermelhos, o que desce para estados e municípios.** A LPG no degrau mais
+ *   escuro e a PNAB no mais claro, que é o par que de fato se toca (2023), com
+ *   a LAB 1 no meio — ela vive sozinha em 2020 e só encosta na ANCINE.
  *
- * Nenhum par cai abaixo de ΔE 11,1 em visão normal nem de 9,4 sob qualquer
- * forma de daltonismo, e nenhuma adjacência da pilha abaixo de 12,8.
+ * O que a paleta garante é a adjacência, que é o que uma figura empilhada pede:
+ * nenhum par que chegue a se tocar na pilha cai abaixo de ΔE 15,1 em visão
+ * normal nem de 14,5 sob qualquer forma de daltonismo. O que ela não garante é
+ * o par distante: os gradientes desta marca são estreitos em luminosidade, e
+ * sob protanopia ou deuteranopia um rosa claro e um vermelho claro que nunca se
+ * encostam ficam a ΔE 3,7. Daí a legenda no topo e o nome escrito dentro da
+ * faixa: aqui a cor reforça a identidade, não a carrega sozinha.
  */
-export const fonteFederalPalette = [
-  rampaAzul[2], // Ministério da Cultura
-  rampaRosa[4], // Lei Rouanet
-  rampaRosa[2], // Incentivo (ANCINE)
-  rampaAzul[0], // FSA
-  rampaVermelha[0], // PNAB
-  rampaVermelha[1], // Lei Paulo Gustavo
-  rampaVermelha[3], // Lei Aldir Blanc 1
-  rampaAzul[3], // Outros órgãos
-];
-
-export const fonteFederalColors = (keys: readonly string[]): Record<string, string> =>
-  Object.fromEntries(keys.map((k, i) => [k, fonteFederalPalette[i % fonteFederalPalette.length]]));
-
-/**
- * Um degrau desce quando as fontes são desenhadas como traço fino, e não como
- * faixa.
- *
- * O rosa claro preenche área muito bem, e ainda aguenta os 55% de opacidade
- * do ribbon chart. Num traço de 2 px, e sobretudo no nome da série escrito na
- * cor dela, ele rende 1,8:1 contra o cartão claro e sai ilegível.
- *
- * A troca é por um degrau mais escuro da mesma família, então a matiz — que é o
- * que identifica a fonte entre as figuras — não muda: a Lei Rouanet passa de
- * 1,8:1 para 4,5:1, e continua sendo o rosa do grupo da renúncia fiscal.
- */
-const CONTRASTE_EM_TRACO: Record<string, string> = {
-  [rampaRosa[4]]: rampaRosa[2],
+export const fonteFederalPalette: Record<string, string> = {
+  'Ministério da Cultura (Órgão 42000)': colorGradients.secondaryVariant[0],
+  'Outros Órgãos (Cidadania/Turismo)': colorGradients.secondaryVariant[3],
+  'FSA (UO 74912)': colorGradients.secondary[0],
+  'Lei Rouanet': colorGradients.primaryVariant[0],
+  'Incentivo (ANCINE)': colorGradients.primaryVariant[4],
+  'Lei Aldir Blanc 1': colorGradients.primary[2],
+  'Lei Paulo Gustavo': colorGradients.primary[0],
+  'PNAB (UO 73120)': colorGradients.primary[4],
 };
 
-export const fonteFederalLineColors = (keys: readonly string[]): Record<string, string> =>
-  Object.fromEntries(
-    Object.entries(fonteFederalColors(keys)).map(([k, cor]) => [k, CONTRASTE_EM_TRACO[cor] ?? cor]),
-  );
+/**
+ * As cores na ordem em que as chaves forem pedidas.
+ *
+ * A paleta é indexada pelo nome da fonte, e não pela posição no JSON, porque a
+ * figura empilha na ordem dos grupos institucionais e não na ordem das chaves:
+ * indexar por posição faria a cor seguir a tabela em vez de seguir a fonte.
+ */
+export const fonteFederalColors = (keys: readonly string[]): Record<string, string> =>
+  Object.fromEntries(keys.map((k) => [k, fonteFederalPalette[k] ?? sniic.vermelho]));
 
 /**
- * Na pilha, o par que importa não é cada cor contra o cartão, é cada cor contra
- * a sua vizinha — e aí a paleta já serve como está: a menor adjacência é PNAB
- * sob a Lei Paulo Gustavo, dois degraus vermelhos a ΔE 12,8 (9,4 sob
- * protanopia), com o vão de superfície entre as duas.
- *
  * Fica como função, e não como sinônimo, porque é a assinatura que as figuras
  * empilhadas chamam — e porque é aqui que uma correção entraria, se algum ano
  * futuro puser duas fontes de matizes vizinhas encostadas.

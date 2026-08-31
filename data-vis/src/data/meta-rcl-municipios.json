@@ -1,0 +1,47 @@
+{
+  "meta": "2% da RCL",
+  "anos": [
+    {
+      "ano": 2019,
+      "analisados": 4899,
+      "acima": 924,
+      "pct": 18.86
+    },
+    {
+      "ano": 2020,
+      "analisados": 4913,
+      "acima": 392,
+      "pct": 7.98
+    },
+    {
+      "ano": 2021,
+      "analisados": 4928,
+      "acima": 192,
+      "pct": 3.9
+    },
+    {
+      "ano": 2022,
+      "analisados": 5085,
+      "acima": 1134,
+      "pct": 22.3
+    },
+    {
+      "ano": 2023,
+      "analisados": 5141,
+      "acima": 1676,
+      "pct": 32.6
+    },
+    {
+      "ano": 2024,
+      "analisados": 5191,
+      "acima": 1900,
+      "pct": 36.6
+    },
+    {
+      "ano": 2025,
+      "analisados": 4788,
+      "acima": 1891,
+      "pct": 39.49
+    }
+  ]
+}

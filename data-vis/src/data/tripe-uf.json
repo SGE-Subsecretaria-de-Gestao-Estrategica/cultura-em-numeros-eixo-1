@@ -1,0 +1,197 @@
+{
+  "mediaNacional": {
+    "2014": 4.2,
+    "2021": 10.2
+  },
+  "ufs": [
+    {
+      "uf": "AC",
+      "regiao": "Norte",
+      "pct2014": 18.2,
+      "pct2021": 13.6,
+      "municipios": 22
+    },
+    {
+      "uf": "AL",
+      "regiao": "Nordeste",
+      "pct2014": 2.9,
+      "pct2021": 3.9,
+      "municipios": 102
+    },
+    {
+      "uf": "AM",
+      "regiao": "Norte",
+      "pct2014": 1.6,
+      "pct2021": 1.6,
+      "municipios": 62
+    },
+    {
+      "uf": "AP",
+      "regiao": "Norte",
+      "pct2014": 0.0,
+      "pct2021": 25.0,
+      "municipios": 16
+    },
+    {
+      "uf": "BA",
+      "regiao": "Nordeste",
+      "pct2014": 3.8,
+      "pct2021": 7.9,
+      "municipios": 417
+    },
+    {
+      "uf": "CE",
+      "regiao": "Nordeste",
+      "pct2014": 9.8,
+      "pct2021": 17.4,
+      "municipios": 184
+    },
+    {
+      "uf": "DF",
+      "regiao": "Centro-Oeste",
+      "pct2014": 0.0,
+      "pct2021": 100.0,
+      "municipios": 1
+    },
+    {
+      "uf": "ES",
+      "regiao": "Sudeste",
+      "pct2014": 3.8,
+      "pct2021": 15.4,
+      "municipios": 78
+    },
+    {
+      "uf": "GO",
+      "regiao": "Centro-Oeste",
+      "pct2014": 1.6,
+      "pct2021": 5.3,
+      "municipios": 246
+    },
+    {
+      "uf": "MA",
+      "regiao": "Nordeste",
+      "pct2014": 2.8,
+      "pct2021": 6.9,
+      "municipios": 217
+    },
+    {
+      "uf": "MG",
+      "regiao": "Sudeste",
+      "pct2014": 5.2,
+      "pct2021": 7.9,
+      "municipios": 853
+    },
+    {
+      "uf": "MS",
+      "regiao": "Centro-Oeste",
+      "pct2014": 6.3,
+      "pct2021": 10.1,
+      "municipios": 79
+    },
+    {
+      "uf": "MT",
+      "regiao": "Centro-Oeste",
+      "pct2014": 7.1,
+      "pct2021": 24.1,
+      "municipios": 141
+    },
+    {
+      "uf": "PA",
+      "regiao": "Norte",
+      "pct2014": 0.0,
+      "pct2021": 4.2,
+      "municipios": 144
+    },
+    {
+      "uf": "PB",
+      "regiao": "Nordeste",
+      "pct2014": 4.9,
+      "pct2021": 4.5,
+      "municipios": 223
+    },
+    {
+      "uf": "PE",
+      "regiao": "Nordeste",
+      "pct2014": 3.8,
+      "pct2021": 7.0,
+      "municipios": 185
+    },
+    {
+      "uf": "PI",
+      "regiao": "Nordeste",
+      "pct2014": 2.2,
+      "pct2021": 6.7,
+      "municipios": 224
+    },
+    {
+      "uf": "PR",
+      "regiao": "Sul",
+      "pct2014": 3.0,
+      "pct2021": 7.8,
+      "municipios": 399
+    },
+    {
+      "uf": "RJ",
+      "regiao": "Sudeste",
+      "pct2014": 9.8,
+      "pct2021": 32.6,
+      "municipios": 92
+    },
+    {
+      "uf": "RN",
+      "regiao": "Nordeste",
+      "pct2014": 3.6,
+      "pct2021": 9.0,
+      "municipios": 167
+    },
+    {
+      "uf": "RO",
+      "regiao": "Norte",
+      "pct2014": 1.9,
+      "pct2021": 1.9,
+      "municipios": 52
+    },
+    {
+      "uf": "RR",
+      "regiao": "Norte",
+      "pct2014": 0.0,
+      "pct2021": 0.0,
+      "municipios": 15
+    },
+    {
+      "uf": "RS",
+      "regiao": "Sul",
+      "pct2014": 4.6,
+      "pct2021": 16.9,
+      "municipios": 497
+    },
+    {
+      "uf": "SC",
+      "regiao": "Sul",
+      "pct2014": 7.8,
+      "pct2021": 19.3,
+      "municipios": 295
+    },
+    {
+      "uf": "SE",
+      "regiao": "Nordeste",
+      "pct2014": 0.0,
+      "pct2021": 4.0,
+      "municipios": 75
+    },
+    {
+      "uf": "SP",
+      "regiao": "Sudeste",
+      "pct2014": 3.1,
+      "pct2021": 11.5,
+      "municipios": 645
+    },
+    {
+      "uf": "TO",
+      "regiao": "Norte",
+      "pct2014": 1.4,
+      "pct2021": 2.2,
+      "municipios": 139
+    }
+  ]
+}

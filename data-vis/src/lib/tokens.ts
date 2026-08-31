@@ -129,3 +129,29 @@ export const tickLabelProps = (
   'font-size': size,
   'font-weight': weight,
 });
+
+
+export const colors = {
+  primary : "#D5362A",
+  primaryVariant : "#EC6596",
+  secondary:"#4B2F92",
+  secondaryVariant: "#4F68DA",
+  accent: "#4ACA5D",
+}
+
+export const colorGradients = {
+  // Gradiente original (fornecido como referência)
+  primary: ["#C4352E", "#CD4640", "#D65651", "#DF6362", "#E77474"],
+
+  // Base: #EC6596 (primaryVariant)
+  primaryVariant: ["#E75B8E", "#E779A1", "#EC8DB0", "#F2A1BF", "#F6B6CE"],
+
+  // Base: #4B2F92 (secondary)
+  secondary: ["#472F83", "#553C96", "#5E41AA", "#6846BE", "#7654C9"],
+
+  // Base: #4F68DA (secondaryVariant)
+  secondaryVariant: ["#4660D2", "#6378D4", "#7588DB", "#8798E3", "#99A8EA"],
+
+  // Base: #4ACA5D (accent)
+  accent: ["#42C255", "#5EC56D", "#6FCE7D", "#7FD78C", "#90E09C"]
+};

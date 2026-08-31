@@ -1,0 +1,129 @@
+{
+  "ano": 2021,
+  "universo": 5570,
+  "semInformacao": 135,
+  "graus": [
+    {
+      "grau": 0,
+      "label": "Nenhum dos três"
+    },
+    {
+      "grau": 1,
+      "label": "Um instrumento"
+    },
+    {
+      "grau": 2,
+      "label": "Dois instrumentos"
+    },
+    {
+      "grau": 3,
+      "label": "O tripé completo"
+    }
+  ],
+  "faixas": [
+    {
+      "label": "Ensino Fundamental",
+      "base": 105,
+      "celulas": [
+        {
+          "grau": 0,
+          "n": 54,
+          "pct": 51.4
+        },
+        {
+          "grau": 1,
+          "n": 26,
+          "pct": 24.8
+        },
+        {
+          "grau": 2,
+          "n": 21,
+          "pct": 20.0
+        },
+        {
+          "grau": 3,
+          "n": 4,
+          "pct": 3.8
+        }
+      ]
+    },
+    {
+      "label": "Ensino Médio",
+      "base": 751,
+      "celulas": [
+        {
+          "grau": 0,
+          "n": 330,
+          "pct": 43.9
+        },
+        {
+          "grau": 1,
+          "n": 185,
+          "pct": 24.6
+        },
+        {
+          "grau": 2,
+          "n": 181,
+          "pct": 24.1
+        },
+        {
+          "grau": 3,
+          "n": 55,
+          "pct": 7.3
+        }
+      ]
+    },
+    {
+      "label": "Ensino Superior",
+      "base": 2224,
+      "celulas": [
+        {
+          "grau": 0,
+          "n": 931,
+          "pct": 41.9
+        },
+        {
+          "grau": 1,
+          "n": 529,
+          "pct": 23.8
+        },
+        {
+          "grau": 2,
+          "n": 537,
+          "pct": 24.1
+        },
+        {
+          "grau": 3,
+          "n": 227,
+          "pct": 10.2
+        }
+      ]
+    },
+    {
+      "label": "Pós-Graduação",
+      "base": 2355,
+      "celulas": [
+        {
+          "grau": 0,
+          "n": 995,
+          "pct": 42.3
+        },
+        {
+          "grau": 1,
+          "n": 568,
+          "pct": 24.1
+        },
+        {
+          "grau": 2,
+          "n": 510,
+          "pct": 21.7
+        },
+        {
+          "grau": 3,
+          "n": 282,
+          "pct": 12.0
+        }
+      ]
+    }
+  ]
+}

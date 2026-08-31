@@ -3,9 +3,13 @@
  *
  * The cards are vector and carry their own background, so quality is decided
  * entirely by the raster grid we ask for. `SCALE` multiplies each card's
- * viewBox: at 4x a 1368-unit card comes out 5472 px wide, which is 818 dpi
- * across the 170 mm A4 text column the charts are sized for — well past the
- * 300 dpi a press asks for, and the same width as the widest existing export.
+ * viewBox, e a resolução final depende da largura autoral de cada figura: a
+ * 4x, um cartão de 580 unidades sai com 2320 px e um de 1368, com 5472 — 347 e
+ * 818 dpi na coluna de texto de 170 mm para onde as figuras são dimensionadas.
+ *
+ * Os dois passam dos 300 dpi que a gráfica pede, mas a margem do cartão estreito
+ * é pequena: baixar `SCALE` para 3 põe as figuras de 580 unidades em 260 dpi,
+ * abaixo do exigido. Subir a escala é seguro; descer, não.
  *
  * Boots its own Vite dev server, so no build and no running server needed:
  *     node scripts/export-png.mjs [--scale 4] [--out exports]
@@ -34,24 +38,26 @@ const PAGES = [
   {
     page: '/a4.html?bg=0',
     names: [
-      'a4-cabo-de-guerra-efeito-indutor-substituicao',
-      'a4-perfil-mudanca-municipal-por-porte',
-      'a4-municipal-por-fonte-ribbon',
+      'a4-tres-esferas',
+      'a4-federal-histomap-por-fonte',
+      'a4-participacao-uniao-rcl',
+      'a4-estadual-proprio-e-repasses',
+      'a4-participacao-estados-rcl',
+      'a4-crescimento-municipal',
+      'a4-meta-rcl-municipios',
+      'a4-meta-rcl-por-regiao',
+      'a4-distribuicao-rcl-regiao',
+      'a4-concentracao-gasto-municipal',
     ],
   },
   {
     page: '/gestao.html?bg=0',
     names: [
-      'a4-tripe-institucional',
-      'a4-tripe-mapa',
-      'a4-tripe-regiao',
-      'a4-estrutura-orgao-gestor',
-      'a4-estrutura-mapa',
-      'a4-genero-titulares',
-      'a4-escolaridade-tripe',
-      'a4-execucao-aldir-blanc',
-      'a4-execucao-aldir-blanc-regiao',
-      'a4-equipamentos-culturais',
+      'a4-tripe-institucional-por-uf',
+      'a4-escolaridade-institucionalizacao',
+      'a4-agentes-territoriais',
+      'a4-agentes-por-municipio',
+      'a4-perfil-cnc',
     ],
   },
 ];
@@ -101,12 +107,19 @@ try {
       `,
     });
 
-    const charts = await page.locator('figure > div > svg').all();
-    if (charts.length !== names.length) {
-      throw new Error(`esperava ${names.length} gráficos em ${url}, encontrei ${charts.length}`);
+    // O `<svg>` mais externo de cada figura. Procurar por `figure > div > svg`
+    // amarrava o script à árvore que cada componente monta: os que desenham SVG
+    // direto e os que passam pelo `<Chart>` do design system aninham em
+    // profundidades diferentes. `querySelector` devolve o primeiro em ordem de
+    // documento, que é sempre o de fora — os `<Text>` do design system aninham
+    // os deles dentro dele.
+    const figures = await page.locator('figure').all();
+    if (figures.length !== names.length) {
+      throw new Error(`esperava ${names.length} gráficos em ${url}, encontrei ${figures.length}`);
     }
 
-    for (const [index, chart] of charts.entries()) {
+    for (const [index, figure] of figures.entries()) {
+      const chart = figure.locator('svg').first();
       // Blow the card up to the target raster size. The sheet is laid out in
       // millimetres, so the enlarged card would overflow it and get clipped —
       // hence `position: fixed`, which takes it out of that flow entirely.

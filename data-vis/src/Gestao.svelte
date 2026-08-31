@@ -8,17 +8,18 @@
    * cabeçalhos próprios — e porque o export de PNG numera as figuras pela ordem
    * em que aparecem na página, então misturar os dois eixos numa folha só
    * amarraria a nomenclatura de um à ordem do outro.
+   *
+   * A ordem é a do capítulo: primeiro onde o tripé institucional chegou, depois
+   * o que explica — e o que não explica — a distância até ele. O script de
+   * export numera os PNG pela ordem em que as figuras aparecem aqui, então
+   * mexer nesta sequência pede mexer na lista de nomes de
+   * `scripts/export-png.mjs`.
    */
-  import EquipamentosCulturaisChart from './lib/EquipamentosCulturaisChart.svelte';
-  import EscolaridadeTripeChart from './lib/EscolaridadeTripeChart.svelte';
-  import EstruturaMapaChart from './lib/EstruturaMapaChart.svelte';
-  import EstruturaOrgaoGestorChart from './lib/EstruturaOrgaoGestorChart.svelte';
-  import ExecucaoAldirBlancChart from './lib/ExecucaoAldirBlancChart.svelte';
-  import ExecucaoLabRegiaoChart from './lib/ExecucaoLabRegiaoChart.svelte';
-  import GeneroTitularesChart from './lib/GeneroTitularesChart.svelte';
-  import TripeInstitucionalChart from './lib/TripeInstitucionalChart.svelte';
-  import TripeMapaChart from './lib/TripeMapaChart.svelte';
-  import TripeRegiaoChart from './lib/TripeRegiaoChart.svelte';
+  import AgentesPorMunicipioChart from './lib/AgentesPorMunicipioChart.svelte';
+  import AgentesTerritoriaisChart from './lib/AgentesTerritoriaisChart.svelte';
+  import EscolaridadeInstitucionalizacaoChart from './lib/EscolaridadeInstitucionalizacaoChart.svelte';
+  import PerfilCncChart from './lib/PerfilCncChart.svelte';
+  import TripeUfChart from './lib/TripeUfChart.svelte';
 
   /**
    * `?bg=0` remove o fundo próprio dos cartões, que é como o export de PNG roda
@@ -37,7 +38,7 @@
   </header>
 
   <figure>
-    <TripeInstitucionalChart {background} />
+    <div><TripeUfChart {background} /></div>
   </figure>
 </div>
 
@@ -48,94 +49,41 @@
   </header>
 
   <figure>
-    <TripeMapaChart {background} />
+    <div><EscolaridadeInstitucionalizacaoChart {background} /></div>
   </figure>
 </div>
 
 <div class="sheet">
   <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>Institucionalização da política cultural nos municípios</h1>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Participação social</p>
+    <h1>A sociedade civil nas decisões sobre cultura</h1>
   </header>
 
   <figure>
-    <TripeRegiaoChart {background} />
+    <div><AgentesTerritoriaisChart {background} /></div>
+  </figure>
+</div>
+
+<!-- a contagem e a cobertura, uma folha depois da outra: as duas leituras do
+     mesmo registro, na mesma malha e no mesmo enquadramento -->
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Participação social</p>
+    <h1>A sociedade civil nas decisões sobre cultura</h1>
+  </header>
+
+  <figure>
+    <div><AgentesPorMunicipioChart {background} /></div>
   </figure>
 </div>
 
 <div class="sheet">
   <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>Institucionalização da política cultural nos municípios</h1>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Participação social</p>
+    <h1>A sociedade civil nas decisões sobre cultura</h1>
   </header>
 
   <figure>
-    <EstruturaOrgaoGestorChart {background} />
-  </figure>
-</div>
-
-<div class="sheet">
-  <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>Institucionalização da política cultural nos municípios</h1>
-  </header>
-
-  <figure>
-    <EstruturaMapaChart {background} />
-  </figure>
-</div>
-
-<div class="sheet">
-  <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>Quem comanda a política cultural municipal</h1>
-  </header>
-
-  <figure>
-    <GeneroTitularesChart {background} />
-  </figure>
-</div>
-
-<div class="sheet">
-  <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>Quem comanda a política cultural municipal</h1>
-  </header>
-
-  <figure>
-    <EscolaridadeTripeChart {background} />
-  </figure>
-</div>
-
-<div class="sheet">
-  <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>A resposta municipal à Lei Aldir Blanc</h1>
-  </header>
-
-  <figure>
-    <ExecucaoAldirBlancChart {background} />
-  </figure>
-</div>
-
-<div class="sheet">
-  <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>A resposta municipal à Lei Aldir Blanc</h1>
-  </header>
-
-  <figure>
-    <ExecucaoLabRegiaoChart {background} />
-  </figure>
-</div>
-
-<div class="sheet">
-  <header>
-    <p class="eyebrow">{eyebrow}</p>
-    <h1>Infraestrutura cultural instalada</h1>
-  </header>
-
-  <figure>
-    <EquipamentosCulturaisChart {background} />
+    <div><PerfilCncChart {background} /></div>
   </figure>
 </div>

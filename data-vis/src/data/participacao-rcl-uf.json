@@ -1,0 +1,172 @@
+{
+  "anos": [
+    2019,
+    2024
+  ],
+  "metaPnc": 1.5,
+  "unidade": "% da Receita Corrente Líquida do estado",
+  "ufs": [
+    {
+      "uf": "AC",
+      "regiao": "Norte",
+      "pctInicio": 0.34,
+      "pctFim": 0.34
+    },
+    {
+      "uf": "AL",
+      "regiao": "Nordeste",
+      "pctInicio": 0.24,
+      "pctFim": 0.22
+    },
+    {
+      "uf": "AM",
+      "regiao": "Norte",
+      "pctInicio": 1.1,
+      "pctFim": 2.05
+    },
+    {
+      "uf": "AP",
+      "regiao": "Norte",
+      "pctInicio": 0.17,
+      "pctFim": 0.78
+    },
+    {
+      "uf": "BA",
+      "regiao": "Nordeste",
+      "pctInicio": 0.5,
+      "pctFim": 0.46
+    },
+    {
+      "uf": "CE",
+      "regiao": "Nordeste",
+      "pctInicio": 0.0,
+      "pctFim": 0.74
+    },
+    {
+      "uf": "DF",
+      "regiao": "Centro-Oeste",
+      "pctInicio": 1.48,
+      "pctFim": 1.46
+    },
+    {
+      "uf": "ES",
+      "regiao": "Sudeste",
+      "pctInicio": 0.23,
+      "pctFim": 0.4
+    },
+    {
+      "uf": "GO",
+      "regiao": "Centro-Oeste",
+      "pctInicio": 0.02,
+      "pctFim": 0.18
+    },
+    {
+      "uf": "MA",
+      "regiao": "Nordeste",
+      "pctInicio": 0.09,
+      "pctFim": 0.97
+    },
+    {
+      "uf": "MG",
+      "regiao": "Sudeste",
+      "pctInicio": 0.2,
+      "pctFim": 0.15
+    },
+    {
+      "uf": "MS",
+      "regiao": "Centro-Oeste",
+      "pctInicio": 0.34,
+      "pctFim": 0.52
+    },
+    {
+      "uf": "MT",
+      "regiao": "Centro-Oeste",
+      "pctInicio": 0.26,
+      "pctFim": 0.54
+    },
+    {
+      "uf": "PA",
+      "regiao": "Norte",
+      "pctInicio": 0.68,
+      "pctFim": 0.79
+    },
+    {
+      "uf": "PB",
+      "regiao": "Nordeste",
+      "pctInicio": 0.15,
+      "pctFim": 0.25
+    },
+    {
+      "uf": "PE",
+      "regiao": "Nordeste",
+      "pctInicio": 0.64,
+      "pctFim": 0.87
+    },
+    {
+      "uf": "PI",
+      "regiao": "Nordeste",
+      "pctInicio": 0.3,
+      "pctFim": 0.38
+    },
+    {
+      "uf": "PR",
+      "regiao": "Sul",
+      "pctInicio": 0.2,
+      "pctFim": 0.19
+    },
+    {
+      "uf": "RJ",
+      "regiao": "Sudeste",
+      "pctInicio": 0.2,
+      "pctFim": 0.28
+    },
+    {
+      "uf": "RN",
+      "regiao": "Nordeste",
+      "pctInicio": 0.25,
+      "pctFim": 0.25
+    },
+    {
+      "uf": "RO",
+      "regiao": "Norte",
+      "pctInicio": 0.09,
+      "pctFim": 0.3
+    },
+    {
+      "uf": "RR",
+      "regiao": "Norte",
+      "pctInicio": 0.11,
+      "pctFim": 0.68
+    },
+    {
+      "uf": "RS",
+      "regiao": "Sul",
+      "pctInicio": 0.15,
+      "pctFim": 0.24
+    },
+    {
+      "uf": "SC",
+      "regiao": "Sul",
+      "pctInicio": 0.15,
+      "pctFim": 0.16
+    },
+    {
+      "uf": "SE",
+      "regiao": "Nordeste",
+      "pctInicio": 0.25,
+      "pctFim": 1.47
+    },
+    {
+      "uf": "SP",
+      "regiao": "Sudeste",
+      "pctInicio": 0.5,
+      "pctFim": 0.5
+    },
+    {
+      "uf": "TO",
+      "regiao": "Norte",
+      "pctInicio": 0.27,
+      "pctFim": 0.04
+    }
+  ]
+}

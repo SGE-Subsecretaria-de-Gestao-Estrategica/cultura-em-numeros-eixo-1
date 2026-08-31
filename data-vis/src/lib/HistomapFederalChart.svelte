@@ -3,12 +3,10 @@
    * O investimento federal em cultura como histomap: as oito fontes descendo
    * por 23 anos, cada uma tão larga quanto a sua participação no total do ano.
    *
-   * É a mesma tabela do `ComposicaoFederalChart` — mesma normalização, mesma
-   * ordem de empilhamento, mesmas cores — com o tempo no eixo Y e as
-   * transições suavizadas, que é o que a forma histomap pede. O que só esta
-   * leitura dá é o fluxo: a renúncia fiscal engordando até ocupar o meio da
-   * figura, a extinção do MinC como um estrangulamento da faixa azul, e as três
-   * leis de emergência entrando pela direita como bolsões vermelhos.
+   * O que só esta leitura dá é o fluxo: a renúncia fiscal engordando até
+   * ocupar o meio da figura, a extinção do MinC como um clareamento da faixa
+   * azul, e as três leis de emergência entrando pela direita como bolsões
+   * vermelhos.
    *
    * A ordem de empilhamento vem dos grupos institucionais do próprio JSON, e
    * não da ordem das chaves: execução direta à esquerda, renúncia fiscal ao
@@ -44,7 +42,7 @@
     (grupo) => (federal.grupos.composicao as Record<string, string[]>)[grupo],
   );
 
-  const cores = fonteFederalStackColors(federal.keys);
+  const cores = fonteFederalStackColors(ordem);
   const colors = ordem.map((key) => cores[key]);
 
   /** A participação é a mesma nas duas medidas; `real` é só a que já existe. */

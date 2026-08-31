@@ -78,11 +78,12 @@ figure {
   position: relative;
 }
 
-/* Charts carry an intrinsic size in SVG units and a matching viewBox, so the
-   card scales as a whole and the labels keep their size relative to it — what
-   you see here is what prints. Selecting the outer `<svg>` only: the design
-   system's `<Text>` nests one of its own per label, deeper in the tree. */
-figure > div > svg {
+/* As figuras carregam um tamanho intrínseco em unidades de SVG e um `viewBox`
+   que casa com ele, então o cartão escala inteiro e os rótulos guardam o
+   tamanho relativo — o que se vê aqui é o que imprime. Só o `<svg>` de fora:
+   os `<Text>` do design system aninham um por rótulo, e o `:not(svg svg)` os
+   deixa de fora sem depender da profundidade em que são montados. */
+figure svg:not(svg svg) {
   display: block;
   width: 100%;
   height: auto;

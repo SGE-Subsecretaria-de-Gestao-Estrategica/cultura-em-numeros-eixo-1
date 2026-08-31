@@ -1,70 +1,147 @@
 <script lang="ts">
   /**
-   * Print proof: both charts on one A4 portrait sheet, at the width they will
-   * be read at. Open `/a4.html` and print to PDF to check a real page.
+   * Prova de impressão do eixo de orçamento: um gráfico por folha A4, na
+   * largura em que serão lidos. Abrir `/a4.html` e imprimir em PDF para
+   * conferir uma página de verdade.
    *
-   * The charts are sized in SVG units and scale as a whole, so this page only
-   * has to set a physical width — everything inside keeps its proportion.
+   * As figuras carregam o seu tamanho em unidades de SVG e um `viewBox` que
+   * casa com ele, então o cartão inteiro escala junto e os rótulos guardam o
+   * tamanho relativo — o que se vê aqui é o que imprime. A folha só precisa
+   * fixar uma largura física.
+   *
+   * A ordem é a do capítulo: o panorama das três esferas, depois a União, os
+   * estados e os municípios. O script de export numera os PNG pela ordem em que
+   * as figuras aparecem aqui, então mexer nesta sequência pede mexer na lista de
+   * nomes de `scripts/export-png.mjs` — ele falha se as duas divergirem, em vez
+   * de gravar um gráfico com o nome do vizinho.
    */
-  import { BRL } from 'sniic-design-system';
-  import EfeitoIndutorMunicipalChart from './lib/EfeitoIndutorMunicipalChart.svelte';
-  import PerfilMudancaMunicipalChart from './lib/PerfilMudancaMunicipalChart.svelte';
-  import RibbonChart from './lib/RibbonChart.svelte';
-  import { A4_RIBBON, fonteColors, fonteLabels } from './lib/fontes';
-  import municipal from './data/municipal-por-fonte.json';
+  import ConcentracaoGastoChart from './lib/ConcentracaoGastoChart.svelte';
+  import CrescimentoMunicipalChart from './lib/CrescimentoMunicipalChart.svelte';
+  import DistribuicaoRclChart from './lib/DistribuicaoRclChart.svelte';
+  import EstadualFontesChart from './lib/EstadualFontesChart.svelte';
+  import HistomapFederalChart from './lib/HistomapFederalChart.svelte';
+  import MetaRclChart from './lib/MetaRclChart.svelte';
+  import MetaRclRegiaoChart from './lib/MetaRclRegiaoChart.svelte';
+  import ParticipacaoEstadosChart from './lib/ParticipacaoEstadosChart.svelte';
+  import ParticipacaoUniaoChart from './lib/ParticipacaoUniaoChart.svelte';
+  import TresEsferasChart from './lib/TresEsferasChart.svelte';
 
   /**
-   * `?bg=0` drops the cards' own background, which is how the PNG export runs —
-   * so the same URL shows exactly what gets rasterized. The sheet stays white
-   * here so the dark type is still readable while checking it.
+   * `?bg=0` remove o fundo próprio dos cartões, que é como o export de PNG roda
+   * — então a mesma URL mostra exatamente o que é rasterizado. A folha continua
+   * branca aqui para o tipo escuro seguir legível durante a conferência.
    */
   const background = new URLSearchParams(location.search).get('bg') === '0' ? null : undefined;
+
+  const eyebrow = 'Cultura em Números · Eixo 1 · Orçamento';
 </script>
 
-<!-- One chart per sheet: at the 170 mm text column the two cards are too tall to
-     share a page with each other and a heading. -->
 <div class="sheet">
   <header>
-    <p class="eyebrow">Cultura em Números · Eixo 1 · Orçamento</p>
-    <h1>Resposta orçamentária dos municípios às transferências federais</h1>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>O peso da cultura no orçamento das três esferas</h1>
   </header>
 
   <figure>
-    <EfeitoIndutorMunicipalChart {background} />
+    <div><TresEsferasChart {background} /></div>
   </figure>
 </div>
 
 <div class="sheet">
   <header>
-    <p class="eyebrow">Cultura em Números · Eixo 1 · Orçamento</p>
-    <h1>Resposta orçamentária dos municípios às transferências federais</h1>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento federal em cultura</h1>
   </header>
 
   <figure>
-    <PerfilMudancaMunicipalChart {background} />
+    <div><HistomapFederalChart {background} /></div>
   </figure>
 </div>
 
-<!-- The ribbon chart carries no card of its own — it draws only the plot, so it
-     is transparent already and the sheet header supplies the title. -->
 <div class="sheet">
   <header>
-    <p class="eyebrow">Cultura em Números · Eixo 1 · Orçamento</p>
-    <h1>Evolução do investimento cultural municipal por fonte de recurso</h1>
-    <p class="subtitle">
-      Valores empenhados, corrigidos pela inflação (IPCA, preços médios de
-      {municipal.anoBaseDeflator}) · 2019–2025
-    </p>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento federal em cultura</h1>
   </header>
 
   <figure>
-    <RibbonChart
-      data={municipal.real}
-      keys={municipal.keys}
-      labels={fonteLabels}
-      colors={fonteColors}
-      valueFormat={(v) => BRL.format(v)}
-      {...A4_RIBBON}
-    />
+    <div><ParticipacaoUniaoChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento estadual em cultura</h1>
+  </header>
+
+  <figure>
+    <div><EstadualFontesChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento estadual em cultura</h1>
+  </header>
+
+  <figure>
+    <div><ParticipacaoEstadosChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><CrescimentoMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><MetaRclChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><MetaRclRegiaoChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><DistribuicaoRclChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><ConcentracaoGastoChart {background} /></div>
   </figure>
 </div>

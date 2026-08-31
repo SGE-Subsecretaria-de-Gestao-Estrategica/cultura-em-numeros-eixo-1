@@ -1,0 +1,114 @@
+{
+  "total": 596,
+  "unidade": "agentes territoriais de cultura",
+  "ufs": [
+    {
+      "uf": "DF",
+      "valor": 4
+    },
+    {
+      "uf": "GO",
+      "valor": 20
+    },
+    {
+      "uf": "MS",
+      "valor": 12
+    },
+    {
+      "uf": "MT",
+      "valor": 18
+    },
+    {
+      "uf": "AL",
+      "valor": 11
+    },
+    {
+      "uf": "BA",
+      "valor": 43
+    },
+    {
+      "uf": "CE",
+      "valor": 22
+    },
+    {
+      "uf": "MA",
+      "valor": 23
+    },
+    {
+      "uf": "SE",
+      "valor": 6
+    },
+    {
+      "uf": "PB",
+      "valor": 15
+    },
+    {
+      "uf": "PE",
+      "valor": 24
+    },
+    {
+      "uf": "PI",
+      "valor": 18
+    },
+    {
+      "uf": "RN",
+      "valor": 11
+    },
+    {
+      "uf": "AC",
+      "valor": 5
+    },
+    {
+      "uf": "AM",
+      "valor": 11
+    },
+    {
+      "uf": "AP",
+      "valor": 5
+    },
+    {
+      "uf": "PA",
+      "valor": 21
+    },
+    {
+      "uf": "RO",
+      "valor": 6
+    },
+    {
+      "uf": "RR",
+      "valor": 5
+    },
+    {
+      "uf": "TO",
+      "valor": 11
+    },
+    {
+      "uf": "ES",
+      "valor": 9
+    },
+    {
+      "uf": "MG",
+      "valor": 73
+    },
+    {
+      "uf": "RJ",
+      "valor": 27
+    },
+    {
+      "uf": "SP",
+      "valor": 93
+    },
+    {
+      "uf": "PR",
+      "valor": 34
+    },
+    {
+      "uf": "RS",
+      "valor": 43
+    },
+    {
+      "uf": "SC",
+      "valor": 26
+    }
+  ]
+}

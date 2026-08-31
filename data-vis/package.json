@@ -8,6 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "check:fonts": "node scripts/check-fonts.mjs",
+    "build:malha-ufs": "node scripts/build_malha_ufs.mjs",
+    "build:malha-municipios": "node scripts/build_malha_municipios.mjs",
     "export:png": "node scripts/export-png.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
