@@ -1,0 +1,601 @@
+{
+  "universo": 27,
+  "ano": 2021,
+  "orgaoGestor": {
+    "categorias": [
+      "Setor Subordinado / Outros",
+      "Secretaria Conjunta",
+      "Secretaria Exclusiva / Fundação"
+    ],
+    "ondas": [
+      {
+        "label": "2014",
+        "base": 27,
+        "Setor Subordinado / Outros": 0.0,
+        "n_Setor Subordinado / Outros": 0,
+        "Secretaria Conjunta": 7.4,
+        "n_Secretaria Conjunta": 2,
+        "Secretaria Exclusiva / Fundação": 92.6,
+        "n_Secretaria Exclusiva / Fundação": 25
+      },
+      {
+        "label": "2018",
+        "base": 27,
+        "Setor Subordinado / Outros": 3.7,
+        "n_Setor Subordinado / Outros": 1,
+        "Secretaria Conjunta": 11.1,
+        "n_Secretaria Conjunta": 3,
+        "Secretaria Exclusiva / Fundação": 85.2,
+        "n_Secretaria Exclusiva / Fundação": 23
+      },
+      {
+        "label": "2021",
+        "base": 27,
+        "Setor Subordinado / Outros": 0.0,
+        "n_Setor Subordinado / Outros": 0,
+        "Secretaria Conjunta": 14.8,
+        "n_Secretaria Conjunta": 4,
+        "Secretaria Exclusiva / Fundação": 85.2,
+        "n_Secretaria Exclusiva / Fundação": 23
+      }
+    ]
+  },
+  "escolaridade": {
+    "categorias": [
+      "Ensino Médio",
+      "Ensino Superior",
+      "Pós-Graduação"
+    ],
+    "ondas": [
+      {
+        "label": "2014",
+        "base": 27,
+        "Ensino Médio": 3.7,
+        "n_Ensino Médio": 1,
+        "Ensino Superior": 40.7,
+        "n_Ensino Superior": 11,
+        "Pós-Graduação": 55.6,
+        "n_Pós-Graduação": 15
+      },
+      {
+        "label": "2018",
+        "base": 27,
+        "Ensino Médio": 11.1,
+        "n_Ensino Médio": 3,
+        "Ensino Superior": 48.1,
+        "n_Ensino Superior": 13,
+        "Pós-Graduação": 40.7,
+        "n_Pós-Graduação": 11
+      },
+      {
+        "label": "2021",
+        "base": 27,
+        "Ensino Médio": 3.7,
+        "n_Ensino Médio": 1,
+        "Ensino Superior": 51.9,
+        "n_Ensino Superior": 14,
+        "Pós-Graduação": 44.4,
+        "n_Pós-Graduação": 12
+      }
+    ]
+  },
+  "paridade": {
+    "categorias": [
+      "Não Paritário",
+      "Paritário"
+    ],
+    "ondas": [
+      {
+        "label": "2018",
+        "base": 27,
+        "Não Paritário": 25.9,
+        "n_Não Paritário": 7,
+        "Paritário": 74.1,
+        "n_Paritário": 20
+      },
+      {
+        "label": "2021",
+        "base": 27,
+        "Não Paritário": 25.9,
+        "n_Não Paritário": 7,
+        "Paritário": 74.1,
+        "n_Paritário": 20
+      }
+    ]
+  },
+  "competencia": {
+    "categorias": [
+      "Consultivo",
+      "Normativo / Fiscalizador",
+      "Deliberativo"
+    ],
+    "ondas": [
+      {
+        "label": "2018",
+        "base": 27,
+        "Consultivo": 14.8,
+        "n_Consultivo": 4,
+        "Normativo / Fiscalizador": 0.0,
+        "n_Normativo / Fiscalizador": 0,
+        "Deliberativo": 85.2,
+        "n_Deliberativo": 23
+      },
+      {
+        "label": "2021",
+        "base": 27,
+        "Consultivo": 14.8,
+        "n_Consultivo": 4,
+        "Normativo / Fiscalizador": 3.7,
+        "n_Normativo / Fiscalizador": 1,
+        "Deliberativo": 81.5,
+        "n_Deliberativo": 22
+      }
+    ]
+  },
+  "incentivo": {
+    "categorias": [
+      "Não",
+      "Sim"
+    ],
+    "ondas": [
+      {
+        "label": "2018",
+        "base": 27,
+        "Não": 63.0,
+        "n_Não": 17,
+        "Sim": 37.0,
+        "n_Sim": 10
+      },
+      {
+        "label": "2021",
+        "base": 27,
+        "Não": 66.7,
+        "n_Não": 18,
+        "Sim": 33.3,
+        "n_Sim": 9
+      }
+    ]
+  },
+  "tripe": {
+    "instrumentos": [
+      {
+        "key": "conselho",
+        "label": "Conselho Estadual",
+        "coluna": "tem_conselho",
+        "pontos": [
+          {
+            "ano": 2014,
+            "taxa": 11.1,
+            "nSim": 3,
+            "base": 27
+          },
+          {
+            "ano": 2018,
+            "taxa": 100.0,
+            "nSim": 27,
+            "base": 27
+          },
+          {
+            "ano": 2021,
+            "taxa": 100.0,
+            "nSim": 27,
+            "base": 27
+          }
+        ]
+      },
+      {
+        "key": "fundo",
+        "label": "Fundo Estadual",
+        "coluna": "tem_fundo",
+        "pontos": [
+          {
+            "ano": 2014,
+            "taxa": 88.9,
+            "nSim": 24,
+            "base": 27
+          },
+          {
+            "ano": 2018,
+            "taxa": 92.6,
+            "nSim": 25,
+            "base": 27
+          },
+          {
+            "ano": 2021,
+            "taxa": 92.6,
+            "nSim": 25,
+            "base": 27
+          }
+        ]
+      },
+      {
+        "key": "plano",
+        "label": "Plano Estadual",
+        "coluna": "tem_plano",
+        "pontos": [
+          {
+            "ano": 2014,
+            "taxa": 7.4,
+            "nSim": 2,
+            "base": 27
+          },
+          {
+            "ano": 2018,
+            "taxa": 63.0,
+            "nSim": 17,
+            "base": 27
+          },
+          {
+            "ano": 2021,
+            "taxa": 66.7,
+            "nSim": 18,
+            "base": 27
+          }
+        ]
+      }
+    ],
+    "anos": [
+      2014,
+      2018,
+      2021
+    ]
+  },
+  "patrimonio": {
+    "anos": [
+      2014,
+      2018,
+      2021
+    ],
+    "pontos": [
+      {
+        "ano": 2014,
+        "taxa": 92.6,
+        "nSim": 25,
+        "base": 27
+      },
+      {
+        "ano": 2018,
+        "taxa": 96.3,
+        "nSim": 26,
+        "base": 27
+      },
+      {
+        "ano": 2021,
+        "taxa": 100.0,
+        "nSim": 27,
+        "base": 27
+      }
+    ]
+  },
+  "transversalidade": [
+    {
+      "key": "pi_2023",
+      "label": "Arte e cultura na primeira infância",
+      "ano": 2023,
+      "n": 15,
+      "base": 27,
+      "pct": 55.6
+    },
+    {
+      "key": "pm_2023",
+      "label": "Articulação com políticas para mulheres",
+      "ano": 2023,
+      "n": 6,
+      "base": 27,
+      "pct": 22.2
+    },
+    {
+      "key": "ir_gt_2024",
+      "label": "Cultura nos GTs de igualdade racial",
+      "ano": 2024,
+      "n": 10,
+      "base": 27,
+      "pct": 37.0
+    },
+    {
+      "key": "ir_afro_2024",
+      "label": "Preservação do patrimônio afro-brasileiro",
+      "ano": 2024,
+      "n": 7,
+      "base": 27,
+      "pct": 25.9
+    },
+    {
+      "key": "ir_quilombola_2024",
+      "label": "Preservação do patrimônio quilombola",
+      "ano": 2024,
+      "n": 6,
+      "base": 27,
+      "pct": 22.2
+    }
+  ],
+  "mapas2021": {
+    "ufs": [
+      {
+        "uf": "RO",
+        "regiao": "Norte",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 0,
+        "tipoOrgao": "Secretaria Conjunta",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "AC",
+        "regiao": "Norte",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "AM",
+        "regiao": "Norte",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "RR",
+        "regiao": "Norte",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "PA",
+        "regiao": "Norte",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "AP",
+        "regiao": "Norte",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "TO",
+        "regiao": "Norte",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "MA",
+        "regiao": "Nordeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "PI",
+        "regiao": "Nordeste",
+        "statusTripe": 1,
+        "temPlano": "Não",
+        "temFundo": "Não",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "CE",
+        "regiao": "Nordeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "RN",
+        "regiao": "Nordeste",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "PB",
+        "regiao": "Nordeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "PE",
+        "regiao": "Nordeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "AL",
+        "regiao": "Nordeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "SE",
+        "regiao": "Nordeste",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "BA",
+        "regiao": "Nordeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "MG",
+        "regiao": "Sudeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 0,
+        "tipoOrgao": "Secretaria Conjunta",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "ES",
+        "regiao": "Sudeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "RJ",
+        "regiao": "Sudeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "SP",
+        "regiao": "Sudeste",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 0,
+        "tipoOrgao": "Secretaria Conjunta",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "PR",
+        "regiao": "Sul",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": true
+      },
+      {
+        "uf": "SC",
+        "regiao": "Sul",
+        "statusTripe": 2,
+        "temPlano": "Sim",
+        "temFundo": "Não",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "RS",
+        "regiao": "Sul",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "MS",
+        "regiao": "Centro-Oeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "MT",
+        "regiao": "Centro-Oeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 0,
+        "tipoOrgao": "Secretaria Conjunta",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "GO",
+        "regiao": "Centro-Oeste",
+        "statusTripe": 2,
+        "temPlano": "Não",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": false
+      },
+      {
+        "uf": "DF",
+        "regiao": "Centro-Oeste",
+        "statusTripe": 3,
+        "temPlano": "Sim",
+        "temFundo": "Sim",
+        "orgaoOrdinal": 1,
+        "tipoOrgao": "Secretaria Exclusiva / Fundação",
+        "temLeiIncentivo": true
+      }
+    ],
+    "distribuicoes": {
+      "statusTripe": {
+        "1": 1,
+        "2": 9,
+        "3": 17
+      },
+      "tipoOrgao": {
+        "Secretaria Conjunta": 4,
+        "Secretaria Exclusiva / Fundação": 23
+      },
+      "temLeiIncentivo": {
+        "False": 18,
+        "True": 9
+      }
+    }
+  }
+}
