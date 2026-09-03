@@ -153,15 +153,6 @@
      * ler ao pé da letra.
      */
     labelYears?: Record<string, number[]>;
-    /**
-     * Em que anos a participação de uma categoria pode ser escrita na faixa.
-     * Por omissão, todos — quem decide é a geometria, como nas figuras de
-     * composição: uma faixa que não contenha o próprio número fica sem ele.
-     * Uma chave presente aqui restringe aos anos listados — para o trecho em
-     * que o número seria verdadeiro só na aritmética, como os 100% do MinC
-     * antes de a renúncia ser medida.
-     */
-    shareYears?: Record<string, number[]>;
     /** Altura da linha de um ano, antes da escala de impressão. */
     rowHeight?: number;
     /**
@@ -195,7 +186,6 @@
     destaqueValueColor = cinza.titulo,
     plateau = 0.15,
     labelYears,
-    shareYears,
     rowHeight = 22,
     width = 580,
     height,
@@ -372,49 +362,17 @@
   const LABEL_PADDING = $derived(2 * k);
 
   /**
-   * O rótulo escrito dentro da faixa, do mais completo que couber: nome com a
-   * participação na mesma linha, depois só o nome, cada um em dois corpos.
-   * Quando sobra só o nome, `comShare` avisa — e a participação desce para uma
-   * segunda linha, se couber lá. Uma faixa em que nem o nome em `xs` cabe fica
-   * sem rótulo, e é a pastilha do topo que a nomeia.
+   * O rótulo escrito dentro da faixa: o nome, no corpo mais completo que
+   * couber. Uma faixa em que nem o nome em `xs` cabe fica sem rótulo, e é a
+   * pastilha do topo que a nomeia — o percentual não mora mais aqui, e sim na
+   * figura de composição, que fecha cada ano em 100% e por isso pode escrever
+   * o número como medida, não como leitura de régua sobre uma curva suavizada.
    */
-  function escolheRotulo(nome: string, share: number, largura: number) {
-    const completo = `${nome} · ${Math.round(share)}%`;
-    const opcoes: [string, number, boolean][] = [
-      [completo, type.sm, true],
-      [completo, type.xs, true],
-      [nome, type.sm, false],
-      [nome, type.xs, false],
-    ];
-    for (const [texto, size, comShare] of opcoes) {
-      if (measureLabel(texto, size, 700) <= largura) return { texto, size, comShare };
+  function escolheRotulo(nome: string, largura: number) {
+    for (const size of [type.sm, type.xs]) {
+      if (measureLabel(nome, size, 700) <= largura) return { texto: nome, size };
     }
     return null;
-  }
-
-  /**
-   * A participação que uma faixa escreve num ano — ou `null`, quando ela não
-   * cabe ou não vale: no ano do rótulo de nome (que já a traz consigo), sob
-   * uma nota pousada na mesma faixa, fora dos anos de `shareYears`, ou
-   * arredondando a zero.
-   */
-  function participacaoEm(keyIndex: number, i: number, largura: number) {
-    const fatia = fatias[i][keyIndex];
-    const rounded = Math.round(fatia.share);
-    if (rounded < 1) return null;
-
-    if (rotulos.some((r) => r.keyIndex === keyIndex && r.i === i)) return null;
-
-    const notaEmCima = anotacoes.some(
-      (a) => a.ano === anos[i] && fatia.left <= (a.x ?? 50) && (a.x ?? 50) <= fatia.right,
-    );
-    if (notaEmCima) return null;
-
-    const permitidos = shareYears?.[keys[keyIndex]];
-    if (permitidos && !permitidos.includes(anos[i])) return null;
-
-    const texto = `${rounded}%`;
-    return measureLabel(texto, type.xs, 600) <= largura ? texto : null;
   }
 
   /**
@@ -667,34 +625,12 @@
     <path d={faixaArea(pontosDe(keyIndex))} fill={cor(keyIndex)} />
   {/each}
 
-  <!-- a participação escrita em toda faixa que a comporte, como nas figuras
-       de composição: quem decide é a geometria, e o ano do rótulo de nome
-       fica de fora porque o nome já a traz consigo -->
-  {#each anos as ano, i (ano)}
-    {#each keys as key, keyIndex (key)}
-      {@const fatia = fatias[i][keyIndex]}
-      {@const largura = xScale(fatia.right) - xScale(fatia.left) - LABEL_PADDING * 2}
-      {@const texto = participacaoEm(keyIndex, i, largura)}
-      {#if texto}
-        <text
-          x={xScale((fatia.left + fatia.right) / 2)}
-          y={dentroDoPlot(yScale(ano), type.xs) + type.xs * 0.35}
-          text-anchor="middle"
-          font-size={type.xs}
-          font-weight="600"
-          fill={contraste(cor(keyIndex))}
-          font-family={fontFamily}>{texto}</text
-        >
-      {/if}
-    {/each}
-  {/each}
-
   <!-- cada faixa se nomeia onde está mais larga; a cor reforça, não carrega -->
   {#each rotulos as rotulo (`${rotulo.keyIndex}-${rotulo.i}`)}
     {@const fatia = fatias[rotulo.i][rotulo.keyIndex]}
     {@const largura = xScale(fatia.right) - xScale(fatia.left) - LABEL_PADDING * 2}
     {@const nome = labels[keys[rotulo.keyIndex]] ?? keys[rotulo.keyIndex]}
-    {@const fit = escolheRotulo(nome, fatia.share, largura)}
+    {@const fit = escolheRotulo(nome, largura)}
     {#if fit}
       {@const yRotulo = dentroDoPlot(yScale(anos[rotulo.i]), fit.size)}
       <text
@@ -706,20 +642,6 @@
         fill={contraste(cor(rotulo.keyIndex))}
         font-family={fontFamily}>{fit.texto}</text
       >
-      <!-- quando a participação não coube ao lado do nome, ela desce uma
-           linha: o número é bem mais estreito que o nome e cabe onde ele
-           não coube -->
-      {#if !fit.comShare && measureLabel(`${Math.round(fatia.share)}%`, type.xs, 600) <= largura}
-        <text
-          x={xScale((fatia.left + fatia.right) / 2)}
-          y={Math.min(yRotulo + 12 * k, plotBottom - type.xs * 0.75) + type.xs * 0.35}
-          text-anchor="middle"
-          font-size={type.xs}
-          font-weight="600"
-          fill={contraste(cor(rotulo.keyIndex))}
-          font-family={fontFamily}>{Math.round(fatia.share)}%</text
-        >
-      {/if}
     {/if}
   {/each}
 

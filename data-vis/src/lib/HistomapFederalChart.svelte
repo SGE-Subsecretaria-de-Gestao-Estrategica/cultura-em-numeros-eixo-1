@@ -52,9 +52,7 @@
    * Até 2005 o MinC divide o ano só consigo mesmo — a renúncia não era nula,
    * não era medida — então a faixa mais larga do trecho é justamente a que a
    * anotação manda não ler ao pé da letra. O nome ancora de 2006 em diante,
-   * onde a participação já é uma medida, e os percentuais anuais seguem a
-   * mesma regra: escrever "100%" três vezes sob a ressalva seria afirmar em
-   * número o que a nota acabou de negar.
+   * onde a participação já é uma medida.
    */
   const anosComRenunciaMedida = {
     'Ministério da Cultura (Órgão 42000)': federal.real
@@ -69,7 +67,6 @@
   labels={fonteFederalLabels}
   {colors}
   labelYears={anosComRenunciaMedida}
-  shareYears={anosComRenunciaMedida}
   title="Evolução do investimento federal em cultura por fonte de recurso"
   subtitle="Participação de cada fonte no gasto federal pleno, ano a ano, de cima para baixo · 2003–2025"
   anotacoes={[{ ano: 2004, texto: 'até 2005, só a execução direta é medida' }]}
