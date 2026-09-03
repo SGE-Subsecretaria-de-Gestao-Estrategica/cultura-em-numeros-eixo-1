@@ -15,6 +15,8 @@
    * nomes de `scripts/export-png.mjs` — ele falha se as duas divergirem, em vez
    * de gravar um gráfico com o nome do vizinho.
    */
+  import CaboGuerraMunicipalChart from './lib/CaboGuerraMunicipalChart.svelte';
+  import ComposicaoFederalChart from './lib/ComposicaoFederalChart.svelte';
   import ConcentracaoGastoChart from './lib/ConcentracaoGastoChart.svelte';
   import CrescimentoMunicipalChart from './lib/CrescimentoMunicipalChart.svelte';
   import DistribuicaoRclChart from './lib/DistribuicaoRclChart.svelte';
@@ -65,6 +67,17 @@
   </header>
 
   <figure>
+    <div><ComposicaoFederalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento federal em cultura</h1>
+  </header>
+
+  <figure>
     <div><ParticipacaoUniaoChart {background} /></div>
   </figure>
 </div>
@@ -99,6 +112,17 @@
 
   <figure>
     <div><CrescimentoMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><CaboGuerraMunicipalChart {background} /></div>
   </figure>
 </div>
 

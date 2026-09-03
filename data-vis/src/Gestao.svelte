@@ -17,8 +17,21 @@
    */
   import AgentesPorMunicipioChart from './lib/AgentesPorMunicipioChart.svelte';
   import AgentesTerritoriaisChart from './lib/AgentesTerritoriaisChart.svelte';
+  import AutonomiaGestorUfChart from './lib/AutonomiaGestorUfChart.svelte';
+  import CompetenciaConselhosEstadualChart from './lib/CompetenciaConselhosEstadualChart.svelte';
+  import EscolaridadeEstadualChart from './lib/EscolaridadeEstadualChart.svelte';
   import EscolaridadeInstitucionalizacaoChart from './lib/EscolaridadeInstitucionalizacaoChart.svelte';
+  import GeneroGestoresChart from './lib/GeneroGestoresChart.svelte';
+  import IncentivoEstadualChart from './lib/IncentivoEstadualChart.svelte';
+  import IncentivoFiscalUfChart from './lib/IncentivoFiscalUfChart.svelte';
+  import MaturidadeTripeUfChart from './lib/MaturidadeTripeUfChart.svelte';
+  import OrgaoGestorEstadualChart from './lib/OrgaoGestorEstadualChart.svelte';
+  import ParidadeConselhosEstadualChart from './lib/ParidadeConselhosEstadualChart.svelte';
+  import PatrimonioEstadualChart from './lib/PatrimonioEstadualChart.svelte';
   import PerfilCncChart from './lib/PerfilCncChart.svelte';
+  import RacaGestoresChart from './lib/RacaGestoresChart.svelte';
+  import TransversalidadeEstadualChart from './lib/TransversalidadeEstadualChart.svelte';
+  import TripeEstadualChart from './lib/TripeEstadualChart.svelte';
   import TripeUfChart from './lib/TripeUfChart.svelte';
 
   /**
@@ -50,6 +63,149 @@
 
   <figure>
     <div><EscolaridadeInstitucionalizacaoChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Quem gere a cultura nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><GeneroGestoresChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Quem gere a cultura nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><RacaGestoresChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>A governança da cultura nos estados</h1>
+  </header>
+
+  <figure>
+    <div><TripeEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>A governança da cultura nos estados</h1>
+  </header>
+
+  <figure>
+    <div><MaturidadeTripeUfChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>A governança da cultura nos estados</h1>
+  </header>
+
+  <figure>
+    <div><OrgaoGestorEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>A governança da cultura nos estados</h1>
+  </header>
+
+  <figure>
+    <div><AutonomiaGestorUfChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>A governança da cultura nos estados</h1>
+  </header>
+
+  <figure>
+    <div><EscolaridadeEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>Os conselhos estaduais de cultura</h1>
+  </header>
+
+  <figure>
+    <div><ParidadeConselhosEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>Os conselhos estaduais de cultura</h1>
+  </header>
+
+  <figure>
+    <div><CompetenciaConselhosEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>Marcos legais e mecenato estadual</h1>
+  </header>
+
+  <figure>
+    <div><PatrimonioEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>Marcos legais e mecenato estadual</h1>
+  </header>
+
+  <figure>
+    <div><IncentivoEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>Marcos legais e mecenato estadual</h1>
+  </header>
+
+  <figure>
+    <div><IncentivoFiscalUfChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">Cultura em Números · Eixo 1 · Gestão estadual</p>
+    <h1>Cultura transversal a outras políticas estaduais</h1>
+  </header>
+
+  <figure>
+    <div><TransversalidadeEstadualChart {background} /></div>
   </figure>
 </div>
 
