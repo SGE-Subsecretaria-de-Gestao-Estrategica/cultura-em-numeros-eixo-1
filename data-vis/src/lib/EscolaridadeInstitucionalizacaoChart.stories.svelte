@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Escolaridade e institucionalização',
+    title: 'Gestão e Participação/Gestão municipal/Escolaridade e institucionalização',
     component: EscolaridadeInstitucionalizacaoChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

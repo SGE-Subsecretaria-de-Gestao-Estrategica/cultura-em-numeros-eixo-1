@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Municipal · Cabo de guerra (indutor vs. substituição)',
+    title: 'Orçamento/Municipal/Cabo de guerra (indutor vs. substituição)',
     component: CaboGuerraMunicipalChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

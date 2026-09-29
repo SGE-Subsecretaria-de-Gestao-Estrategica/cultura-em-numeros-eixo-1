@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Órgão gestor estadual',
+    title: 'Gestão e Participação/Gestão estadual/Órgão gestor',
     component: OrgaoGestorEstadualChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Federal · Participação na RCL',
+    title: 'Orçamento/Federal/Participação na RCL',
     component: ParticipacaoUniaoChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

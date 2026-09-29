@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Paridade dos conselhos estaduais',
+    title: 'Gestão e Participação/Gestão estadual/Paridade dos conselhos',
     component: ParidadeConselhosEstadualChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

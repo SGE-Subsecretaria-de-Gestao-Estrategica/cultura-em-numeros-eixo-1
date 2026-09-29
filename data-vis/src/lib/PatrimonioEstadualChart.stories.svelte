@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Patrimônio cultural estadual',
+    title: 'Gestão e Participação/Gestão estadual/Patrimônio cultural',
     component: PatrimonioEstadualChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Competência dos conselhos estaduais',
+    title: 'Gestão e Participação/Gestão estadual/Competência dos conselhos',
     component: CompetenciaConselhosEstadualChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Mapa da maturidade do tripé estadual',
+    title: 'Gestão e Participação/Gestão estadual/Mapa da maturidade do tripé',
     component: MaturidadeTripeUfChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

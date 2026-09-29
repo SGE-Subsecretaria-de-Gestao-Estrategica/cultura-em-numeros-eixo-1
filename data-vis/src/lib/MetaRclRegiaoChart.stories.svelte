@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Municipal · Meta de 2% por região',
+    title: 'Orçamento/Municipal/Meta de 2% por região',
     component: MetaRclRegiaoChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

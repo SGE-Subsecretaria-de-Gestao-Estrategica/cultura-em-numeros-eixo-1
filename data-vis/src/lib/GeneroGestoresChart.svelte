@@ -1,15 +1,13 @@
 <script lang="ts">
   /**
-   * O sexo do titular da pasta de cultura, coluna por onda da MUNIC — o par
-   * de `RacaGestoresChart` na mesma leitura de composição.
-   *
-   * A pergunta não é "quem ocupa o cargo hoje", é a trajetória: a proporção
-   * de mulheres sobe de 2014 para 2018 e cai abaixo do ponto de partida em
-   * 2021, um recuo pequeno mas que atravessa três ondas na mesma direção do
-   * meio para o fim — o suficiente para não ser ruído de amostra.
+   * A proporção de mulheres à frente da pasta de cultura municipal, onda a
+   * onda — uma linha só, porque a segunda categoria é o complemento exato da
+   * primeira: dizer "47,7% mulheres" já diz "52,3% homens", e uma coluna 100%
+   * empilhada gastaria duas faixas para uma informação que uma linha e uma
+   * nota de rodapé carregam sozinhas.
    */
-  import ComposicaoChart, { type AnoRow } from './ComposicaoChart.svelte';
-  import { categoricaDe } from './cores';
+  import FaixaLinhasChart, { type Serie } from './FaixaLinhasChart.svelte';
+  import { rampaVermelha } from './cores';
   import dados from '../data/gestao-municipal.json';
 
   let {
@@ -20,29 +18,44 @@
     background?: string | null;
   } = $props();
 
+  const decimal = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
   const inteiro = new Intl.NumberFormat('pt-BR');
+  const pct = (v: number) => `${decimal.format(v)}%`;
 
-  const data = dados.genero.ondas as unknown as AnoRow[];
-  const colors = categoricaDe(dados.genero.categorias.length);
+  const ondas = dados.genero.ondas;
+  const anos = ondas.map((o) => Number(o.label));
+  const final = ondas[ondas.length - 1];
 
-  const primeira = dados.genero.ondas[0];
-  const ultima = dados.genero.ondas[dados.genero.ondas.length - 1];
+  const series: Serie[] = [
+    {
+      key: 'feminino',
+      cor: rampaVermelha[2],
+      pontos: ondas.map((o) => ({ ano: Number(o.label), valor: o.Feminino })),
+      rotulos: anos,
+      destaque: {
+        valor: pct(final.Feminino),
+        cor: rampaVermelha[2],
+        texto: `dos titulares da pasta de cultura municipal são mulheres, contra ${pct(final.Masculino)} homens em ${final.label}`,
+      },
+    },
+  ];
+
+  const primeira = ondas[0];
 
   const footnote =
-    `Cada coluna soma 100% sobre os titulares que declararam o próprio sexo. Ficaram de fora, por não ` +
-    `terem declarado: ${dados.genero.ondas.map((o) => `${inteiro.format(o.naoResposta)} em ${o.label}`).join(', ')} ` +
-    `— não-resposta não é evidência nem a favor nem contra o que se mede.`;
+    `Proporção de mulheres entre os titulares da pasta de cultura que declararam o próprio sexo — o restante são ` +
+    `homens, a categoria complementar. Ficaram de fora, por não terem declarado: ` +
+    `${ondas.map((o) => `${inteiro.format(o.naoResposta)} em ${o.label}`).join(', ')} — não-resposta não é ` +
+    `evidência nem a favor nem contra o que se mede.`;
 </script>
 
-<ComposicaoChart
-  {data}
-  keys={dados.genero.categorias}
-  {colors}
-  columnRatio={0.5}
+<FaixaLinhasChart
+  {series}
   title="A proporção de mulheres à frente da cultura municipal recuou entre 2014 e 2021"
-  subtitle="Sexo do titular da pasta de cultura nos municípios · MUNIC {primeira.label}, 2018 e {ultima.label}"
+  subtitle="Mulheres entre os titulares da pasta de cultura nos municípios · MUNIC {primeira.label}, 2018 e {final.label}"
+  formatValue={pct}
   {footnote}
-  source="Fonte: Elaboração própria com base na MUNIC/IBGE, ondas de {primeira.label} a {ultima.label}."
+  source="Fonte: Elaboração própria com base na MUNIC/IBGE, ondas de {primeira.label} a {final.label}."
   {background}
   bind:svgEl
 />

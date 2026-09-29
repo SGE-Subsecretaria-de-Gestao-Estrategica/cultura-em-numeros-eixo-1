@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Participação · Municípios por agente',
+    title: 'Gestão e Participação/Participação social/Municípios por agente',
     component: AgentesPorMunicipioChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Nacional · Três esferas',
+    title: 'Orçamento/Nacional/Três esferas',
     component: TresEsferasChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

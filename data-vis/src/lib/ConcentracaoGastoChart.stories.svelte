@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Municipal · Concentração do gasto',
+    title: 'Orçamento/Municipal/Concentração do gasto',
     component: ConcentracaoGastoChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

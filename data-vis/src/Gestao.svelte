@@ -18,20 +18,26 @@
   import AgentesPorMunicipioChart from './lib/AgentesPorMunicipioChart.svelte';
   import AgentesTerritoriaisChart from './lib/AgentesTerritoriaisChart.svelte';
   import AutonomiaGestorUfChart from './lib/AutonomiaGestorUfChart.svelte';
+  import BibliotecaMunicipalChart from './lib/BibliotecaMunicipalChart.svelte';
   import CompetenciaConselhosEstadualChart from './lib/CompetenciaConselhosEstadualChart.svelte';
+  import EquipamentosCulturaisChart from './lib/EquipamentosCulturaisChart.svelte';
   import EscolaridadeEstadualChart from './lib/EscolaridadeEstadualChart.svelte';
   import EscolaridadeInstitucionalizacaoChart from './lib/EscolaridadeInstitucionalizacaoChart.svelte';
+  import ExecucaoLabMunicipalChart from './lib/ExecucaoLabMunicipalChart.svelte';
   import GeneroGestoresChart from './lib/GeneroGestoresChart.svelte';
   import IncentivoEstadualChart from './lib/IncentivoEstadualChart.svelte';
   import IncentivoFiscalUfChart from './lib/IncentivoFiscalUfChart.svelte';
   import MaturidadeTripeUfChart from './lib/MaturidadeTripeUfChart.svelte';
+  import MosaicoInstitucionalizacaoMunicipalChart from './lib/MosaicoInstitucionalizacaoMunicipalChart.svelte';
   import OrgaoGestorEstadualChart from './lib/OrgaoGestorEstadualChart.svelte';
+  import OrgaoGestorMunicipalChart from './lib/OrgaoGestorMunicipalChart.svelte';
   import ParidadeConselhosEstadualChart from './lib/ParidadeConselhosEstadualChart.svelte';
   import PatrimonioEstadualChart from './lib/PatrimonioEstadualChart.svelte';
   import PerfilCncChart from './lib/PerfilCncChart.svelte';
   import RacaGestoresChart from './lib/RacaGestoresChart.svelte';
   import TransversalidadeEstadualChart from './lib/TransversalidadeEstadualChart.svelte';
   import TripeEstadualChart from './lib/TripeEstadualChart.svelte';
+  import TripeRegiaoMunicipalChart from './lib/TripeRegiaoMunicipalChart.svelte';
   import TripeUfChart from './lib/TripeUfChart.svelte';
 
   /**
@@ -52,6 +58,72 @@
 
   <figure>
     <div><TripeUfChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><TripeRegiaoMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><MosaicoInstitucionalizacaoMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><OrgaoGestorMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><BibliotecaMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><EquipamentosCulturaisChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Institucionalização da política cultural nos municípios</h1>
+  </header>
+
+  <figure>
+    <div><ExecucaoLabMunicipalChart {background} /></div>
   </figure>
 </div>
 

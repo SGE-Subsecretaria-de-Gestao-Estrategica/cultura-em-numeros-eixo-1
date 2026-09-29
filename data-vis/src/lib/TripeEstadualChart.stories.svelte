@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Tripé institucional estadual',
+    title: 'Gestão e Participação/Gestão estadual/Tripé institucional',
     component: TripeEstadualChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

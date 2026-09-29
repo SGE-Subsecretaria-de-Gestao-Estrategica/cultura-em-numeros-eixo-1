@@ -1,15 +1,11 @@
 <script lang="ts">
   /**
    * A paridade entre sociedade civil e poder público nos conselhos estaduais
-   * ativos de cultura — mesma pergunta e mesmo tratamento binário de
-   * `GeneroGestoresChart`.
-   *
-   * As 27 UFs já tinham conselho ativo em 2018 e em 2021, então a base não
-   * muda entre as duas ondas: a figura lê exatamente a mesma população nos
-   * dois anos, sem o ruído de um conselho que apareceu ou sumiu no meio da
-   * conta.
+   * ativos de cultura — uma linha só, entre 2018 e 2021: "Não Paritário" é o
+   * complemento exato de "Paritário", e a proporção não mudou nada entre as
+   * duas ondas — a linha é reta, e é isso que ela existe para mostrar.
    */
-  import ComposicaoChart, { type AnoRow } from './ComposicaoChart.svelte';
+  import FaixaLinhasChart, { type Serie } from './FaixaLinhasChart.svelte';
   import { categoricaDe } from './cores';
   import dados from '../data/estadic-governanca.json';
 
@@ -21,28 +17,45 @@
     background?: string | null;
   } = $props();
 
-  const inteiro = new Intl.NumberFormat('pt-BR');
+  const decimal = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
+  const pct = (v: number) => `${decimal.format(v)}%`;
 
-  const data = dados.paridade.ondas as unknown as AnoRow[];
-  const colors = categoricaDe(dados.paridade.categorias.length);
+  const ondas = dados.paridade.ondas;
+  const anos = ondas.map((o) => Number(o.label));
+  const final = ondas[ondas.length - 1] as unknown as Record<string, number> & { label: string };
+  const primeira = ondas[0];
+  const cor = categoricaDe(dados.paridade.categorias.length)[1];
 
-  const primeira = dados.paridade.ondas[0];
-  const ultima = dados.paridade.ondas[dados.paridade.ondas.length - 1];
+  const series: Serie[] = [
+    {
+      key: 'paritario',
+      cor,
+      pontos: ondas.map((o) => ({
+        ano: Number(o.label),
+        valor: (o as unknown as Record<string, number>)['Paritário'],
+      })),
+      rotulos: anos,
+      destaque: {
+        valor: pct(final['Paritário']),
+        cor,
+        texto: `dos conselhos estaduais de cultura ativos são paritários em ${final.label}`,
+      },
+    },
+  ];
 
   const footnote =
-    `Cada coluna soma 100% sobre os conselhos estaduais ativos — as 27 UFs em ambas as ondas. "Paritário" é o ` +
-    `conselho com representação equilibrada entre sociedade civil e poder público, segundo a própria UF.`;
+    `Cada ponto é a proporção dos conselhos estaduais ativos — as 27 UFs em ambas as ondas — com representação ` +
+    `equilibrada entre sociedade civil e poder público, segundo a própria UF. A proporção não mudou entre as ` +
+    `duas ondas.`;
 </script>
 
-<ComposicaoChart
-  {data}
-  keys={dados.paridade.categorias}
-  {colors}
-  columnRatio={0.4}
+<FaixaLinhasChart
+  {series}
   title="Quase três em cada quatro conselhos estaduais de cultura são paritários"
-  subtitle="Composição dos conselhos estaduais de cultura ativos · ESTADIC {primeira.label} e {ultima.label}"
+  subtitle="Conselhos estaduais de cultura ativos com composição paritária · ESTADIC {primeira.label} e {final.label}"
+  formatValue={pct}
   {footnote}
-  source="Fonte: Elaboração própria com base na ESTADIC/IBGE, ondas de {primeira.label} e {ultima.label}."
+  source="Fonte: Elaboração própria com base na ESTADIC/IBGE, ondas de {primeira.label} e {final.label}."
   {background}
   bind:svgEl
 />

@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Participação · Agentes territoriais',
+    title: 'Gestão e Participação/Participação social/Agentes territoriais',
     component: AgentesTerritoriaisChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

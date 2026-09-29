@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Mapa da autonomia do gestor estadual',
+    title: 'Gestão e Participação/Gestão estadual/Mapa da autonomia do gestor',
     component: AutonomiaGestorUfChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

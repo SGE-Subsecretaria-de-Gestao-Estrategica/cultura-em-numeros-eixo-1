@@ -5,45 +5,27 @@
  */
 
 import { rampaAzul, rampaRosa, rampaVermelha, sniic } from './cores';
-import { a4Scale, colorGradients } from './tokens';
+import { colorGradients } from './tokens';
 
 /**
- * As cinco fontes de recurso sub-nacionais, em três matizes da marca.
+ * As cinco fontes de recurso sub-nacionais, nas cores da implementação
+ * anterior das figuras de fita (`RibbonEstadualChart`, `RibbonMunicipalChart`)
+ * — um roxo para o recurso próprio e duas matizes verdes, lima e teal,
+ * alternando degrau a degrau nas três leis emergenciais e nas emendas.
  *
- * A matiz carrega de onde o dinheiro vem, e a luminosidade separa as fontes
- * dentro de cada origem. É a mesma lógica das figuras federais, para que a
- * coleção inteira possa ser lida com uma chave só:
- *
- * - **Azul, o orçamento do próprio ente.** O recurso próprio, a linha de base
- *   sobre a qual todo o resto entra.
- * - **Rosa, o que vem da União fora de uma lei de emergência.** As emendas
- *   parlamentares — no federal, é a matiz da renúncia fiscal, o outro dinheiro
- *   que a União move sem ser pela porta do orçamento do ente. O rosa, e não o
- *   verde, porque esta paleta convive com três vermelhos: um verde médio some
- *   ao lado de um vermelho sob protanopia e deuteranopia, e o rosa é a matiz
- *   restante que se separa dos três sob todas as formas de daltonismo.
- * - **Vermelhos, as três leis de emergência.** Do mais claro ao mais escuro na
- *   ordem em que entram: LAB 1 (2020), LPG (2023), PNAB (2024). A rampa é
- *   espaçada em luminosidade, então a ordem sobrevive à impressão em escala de
- *   cinza, e os três degraus escolhidos são os de separação máxima que ainda
- *   sustentam um traço sobre o cartão claro.
- *
- * Os 11 pontos de luminosidade entre os degraus vermelhos do meio são o que
- * resolve o único cruzamento da figura de linhas: a LPG despencando e a PNAB
- * subindo se atravessam em 2025.
- *
- * Este é o conjunto de preenchimento, para as fitas: nele as emendas ficam com
- * o degrau claro do rosa, que a 55% de opacidade ainda se lê. O pior par é
- * LAB 1 contra LPG, a ΔE 5,8 depois da opacidade — os dois degraus vermelhos
- * vizinhos —, e é por isso que a figura de fitas escreve o nome da fonte dentro
- * do segmento: aqui a cor reforça a identidade, não a carrega sozinha.
+ * É uma exceção deliberada à rampa de cinco matizes da marca que o resto da
+ * coleção usa (ver `cores.ts`): pedido para manter a leitura de cor das duas
+ * figuras de fita como ela já foi publicada, e não a paleta categórica do
+ * design system nem a rampa da marca. As cores vêm literalmente das escalas
+ * `purple`/`teal`/`lime` do `sniic-design-system`, que a implementação
+ * anterior importava.
  */
 export const fonteColors = [
-  rampaAzul[2], // Recurso próprio — o azul da marca
-  rampaRosa[4], // Emendas — o degrau claro do rosa
-  rampaVermelha[3], // LAB 1
-  rampaVermelha[2], // LPG — o vermelho da marca
-  rampaVermelha[0], // PNAB
+  '#a44c7f', // Recurso próprio — roxo do design system
+  '#c3d992', // Emendas — lima claro
+  '#95c0b7', // LAB 1 — teal claro
+  '#81a72f', // LPG — lima escuro
+  '#255c4f', // PNAB — teal escuro
 ];
 
 /**
@@ -188,48 +170,4 @@ export const fonteFederalLabels: Record<string, string> = {
   'Lei Paulo Gustavo': 'Lei Paulo Gustavo',
   'Lei Aldir Blanc 1': 'Lei Aldir Blanc 1',
   'Outros Órgãos (Cidadania/Turismo)': 'Outros órgãos',
-};
-
-/**
- * Print sizing for a figure running the full text width of A4 portrait.
- *
- * Type in an SVG is absolute, so its printed size is decided by the ratio of
- * font size to chart width, not by either alone; `a4Scale` is that ratio for a
- * card authored at this width, and lands the value labels at 9 pt.
- *
- * Widening the columns is not cosmetic: a value label is 3.94 px wide per px
- * of font, and a column is only 5.83% of the chart at `columnRatio` 0.42 —
- * so at 9 pt the labels cannot fit inside a column at any authoring size.
- * 0.6 buys the room back, at the cost of thinner ribbons.
- *
- * It stops at 0.6 on purpose. Fitting the longest labels — `R$ 12,6 bi` and
- * the `mi` values — would take 0.70 and 0.84, and past ~0.68 the ribbons are
- * slivers and the callouts stack over the columns: the chart stops being a
- * ribbon chart. The labels that miss the cut fall back to 7.9 pt, which still
- * prints legibly. Dropping `R$ ` from the in-segment values would fit every
- * one of them at 9 pt without widening anything further.
- */
-export const A4_RIBBON = {
-  responsive: false,
-  width: 1368,
-  height: 620,
-  fontScale: a4Scale(1368),
-  columnRatio: 0.6,
-  // the legend and axis grow with the type, so the gutter under the plot has to
-  margin: { bottom: 132 },
-};
-
-/**
- * The federal series runs 23 years against the sub-national seven, so it gets
- * the landscape figure: at 170 mm the year ticks alone would need more than a
- * band is wide. Same 9 pt target, measured against the 257 mm text width.
- */
-const A4_LANDSCAPE_TEXT_WIDTH_MM = 257;
-export const A4_RIBBON_LANDSCAPE = {
-  responsive: false,
-  width: 1900,
-  height: 760,
-  fontScale: (3.175 / A4_LANDSCAPE_TEXT_WIDTH_MM) * (1900 / 12),
-  columnRatio: 0.5,
-  margin: { bottom: 132 },
 };

@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Mapa da lei de incentivo estadual',
+    title: 'Gestão e Participação/Gestão estadual/Mapa da lei de incentivo',
     component: IncentivoFiscalUfChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

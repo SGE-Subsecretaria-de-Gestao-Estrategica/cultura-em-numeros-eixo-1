@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Escolaridade dos gestores estaduais',
+    title: 'Gestão e Participação/Gestão estadual/Escolaridade dos gestores',
     component: EscolaridadeEstadualChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Participação · Perfil da 4ª CNC',
+    title: 'Gestão e Participação/Participação social/Perfil da 4ª CNC',
     component: PerfilCncChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

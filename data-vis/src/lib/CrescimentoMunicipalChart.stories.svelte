@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Municipal · Crescimento por origem',
+    title: 'Orçamento/Municipal/Crescimento por origem',
     component: CrescimentoMunicipalChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

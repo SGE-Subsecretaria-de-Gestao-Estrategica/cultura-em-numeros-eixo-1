@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Transversalidade estadual',
+    title: 'Gestão e Participação/Gestão estadual/Transversalidade',
     component: TransversalidadeEstadualChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

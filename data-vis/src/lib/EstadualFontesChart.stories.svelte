@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Estadual · Próprio × repasses',
+    title: 'Orçamento/Estadual/Próprio × repasses',
     component: EstadualFontesChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

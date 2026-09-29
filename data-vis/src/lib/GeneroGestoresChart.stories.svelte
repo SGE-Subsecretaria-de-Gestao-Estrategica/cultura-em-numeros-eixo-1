@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Sexo dos gestores municipais',
+    title: 'Gestão e Participação/Gestão municipal/Sexo dos gestores',
     component: GeneroGestoresChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

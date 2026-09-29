@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Cor/raça dos gestores municipais',
+    title: 'Gestão e Participação/Gestão municipal/Cor-raça dos gestores',
     component: RacaGestoresChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

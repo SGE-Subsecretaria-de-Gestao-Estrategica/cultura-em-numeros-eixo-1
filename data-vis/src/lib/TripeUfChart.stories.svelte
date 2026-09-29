@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Gestão · Tripé por UF',
+    title: 'Gestão e Participação/Gestão municipal/Tripé por UF',
     component: TripeUfChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

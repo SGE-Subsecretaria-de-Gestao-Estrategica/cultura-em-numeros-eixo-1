@@ -17,15 +17,21 @@
    */
   import CaboGuerraMunicipalChart from './lib/CaboGuerraMunicipalChart.svelte';
   import ComposicaoFederalChart from './lib/ComposicaoFederalChart.svelte';
+  import ComposicaoMunicipalChart from './lib/ComposicaoMunicipalChart.svelte';
   import ConcentracaoGastoChart from './lib/ConcentracaoGastoChart.svelte';
   import CrescimentoMunicipalChart from './lib/CrescimentoMunicipalChart.svelte';
   import DistribuicaoRclChart from './lib/DistribuicaoRclChart.svelte';
   import EstadualFontesChart from './lib/EstadualFontesChart.svelte';
+  import FederalPorMandatoChart from './lib/FederalPorMandatoChart.svelte';
   import HistomapFederalChart from './lib/HistomapFederalChart.svelte';
   import MetaRclChart from './lib/MetaRclChart.svelte';
   import MetaRclRegiaoChart from './lib/MetaRclRegiaoChart.svelte';
   import ParticipacaoEstadosChart from './lib/ParticipacaoEstadosChart.svelte';
   import ParticipacaoUniaoChart from './lib/ParticipacaoUniaoChart.svelte';
+  import RibbonEstadualChart from './lib/RibbonEstadualChart.svelte';
+  import RibbonEstadualProprioChart from './lib/RibbonEstadualProprioChart.svelte';
+  import RibbonMunicipalChart from './lib/RibbonMunicipalChart.svelte';
+  import RibbonMunicipalProprioChart from './lib/RibbonMunicipalProprioChart.svelte';
   import TresEsferasChart from './lib/TresEsferasChart.svelte';
 
   /**
@@ -85,11 +91,44 @@
 <div class="sheet">
   <header>
     <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento federal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><FederalPorMandatoChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
     <h1>Investimento estadual em cultura</h1>
   </header>
 
   <figure>
     <div><EstadualFontesChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento estadual em cultura</h1>
+  </header>
+
+  <figure>
+    <div><RibbonEstadualChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento estadual em cultura</h1>
+  </header>
+
+  <figure>
+    <div><RibbonEstadualProprioChart {background} /></div>
   </figure>
 </div>
 
@@ -112,6 +151,39 @@
 
   <figure>
     <div><CrescimentoMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><ComposicaoMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><RibbonMunicipalChart {background} /></div>
+  </figure>
+</div>
+
+<div class="sheet">
+  <header>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>Investimento municipal em cultura</h1>
+  </header>
+
+  <figure>
+    <div><RibbonMunicipalProprioChart {background} /></div>
   </figure>
 </div>
 

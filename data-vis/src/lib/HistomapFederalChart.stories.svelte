@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Federal · Histomap por fonte',
+    title: 'Orçamento/Federal/Histomap por fonte',
     component: HistomapFederalChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },

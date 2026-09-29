@@ -5,7 +5,7 @@
   import StoryFrame from './StoryFrame.svelte';
 
   const { Story } = defineMeta({
-    title: 'Charts/Federal · Composição por fonte',
+    title: 'Orçamento/Federal/Composição por fonte',
     component: ComposicaoFederalChart,
     tags: ['autodocs'],
     parameters: { layout: 'padded' },
