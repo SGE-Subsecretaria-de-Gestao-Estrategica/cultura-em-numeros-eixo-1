@@ -47,14 +47,15 @@ eixo1/
 │   ├── data/
 │   │   ├── processed/
 │   │   └── raw/          # (Subpastas: estadual, federal, municipal)
-│   ├── documentacao/     # (Notas metodológicas)
+│   ├── documentacao/ 
 │   └── scripts/          # (Subpastas: estadual, federal, municipal)
+│   └── outputs/          # (AQUI ESTÃO OS ARQUIVOS PARA GERAR OS GRÁFICOS DO CULTURA EM NÚMEROS)
 └── gestao&participacao/
     ├── estadic/
         ├── data/
         │   ├── processed/
         │   └── raw/
-        ├── outputs/
+        ├── outputs/      
         ├── scripts/
         ├── estadic.Rproj
         └── README.md
@@ -62,10 +63,15 @@ eixo1/
         ├── data/
         │   ├── processed/
         │   └── raw/
-        ├── outputs/
+        ├── outputs/     # (AQUI ESTÃO OS ARQUIVOS PARA GERAR OS GRÁFICOS DO CULTURA EM NÚMEROS)
         ├── scripts/
         ├── munic.Rproj
         └── README.md
+    └── SNC/
+        ├── data/
+        │   └── raw/
+        ├── outputs/     # (AQUI ESTÃO OS ARQUIVOS PARA GERAR OS GRÁFICOS DO CULTURA EM NÚMEROS)
+        └── scripts/
 ```
 
 # ⚙️ Metodologia
